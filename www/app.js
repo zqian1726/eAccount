@@ -1,36 +1,35 @@
+var http = require('http')
+	, path = require('path')
+	, connect = require('connect') // express 4.0 would not include connect
+	, express = require('express')
+	, app = express()
+	, routes = require('./routes')
 
-/**
- * Module dependencies.
- */
+// access port: 3000
+app.set('port', process.env.PORT || 3000)
 
-var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
-var http = require('http');
-var path = require('path');
+// set view dir and engine
+app.set('views', path.join(__dirname, 'views'))
+app.engine('.html', require('ejs').__express)
+app.set('view engine', 'html')
 
-var app = express();
-
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+// use middlewares in connect
+app.use(connect.favicon())
+app.use(connect.logger('dev'))
+app.use(connect.json())
+app.use(connect.urlencoded())
+app.use(connect.methodOverride()) // enable RESTful requests
+// app.use(app.router)
+app.use(express.static(path.join(__dirname, 'public'))) // render CSS, JS and images
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+  app.use(connect.errorHandler())
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/', routes.index)
 
+// start server
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+  console.log('Express server listening on port ' + app.get('port'))
+})
