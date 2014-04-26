@@ -1,13 +1,11 @@
-
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
         <title>eAccount-404Page</title>
 
         <style>
             .notfound {
-              background-image: url('img/404.jpg');
+              background-image: url(img/404.jpg);
               background-position: right top, center center;
               background-repeat: no-repeat, repeat;
               background-size: cover, auto;
@@ -22,26 +20,27 @@
               line-height: 29px;
               -webkit-font-smoothing: antialiased;
               padding: 20px;
-              font-family: 'Source Sans Pro', sans-serif;
-            }
-            .notfound .wrapper .big {
-              font-size: 74px;
-              font-weight: 700;
-              line-height: 68px;
-              margin-bottom: 48px;
             }
             .notfound .wrapper a {
               color: #ffcc00;
               text-decoration: none;
               font-weight: 700;
             }
+            @media only screen and (max-width: 666px) {
+              .notfound .wrapper {
+                left: auto;
+                right: 0;
+                width: 100%;
+                max-width: 450px;
+                top: 35%;
+              }
+            }
         </style>
 
     </head>
     <body class="notfound">
         <div class="wrapper">
-            <div class="big">OOPS! YOU DON'T WANT TO BE HERE</div>
-            <div>It looks like it's time to abort mission and go <a href="index.html">Home</a>.</div>
+            <div>ops! 404 Not Found. Back <a href="index.html">Home</a>.</div>
         </div>
     </body>
 </html>
