@@ -11,7 +11,7 @@ exports.index = function(req, res) {
 
 exports.home = function(req, res) {
 	// render homepage
-	res.render('index', {
+	res.render('home', {
   	title: 'This is eAccount homepage'
   })
 }
