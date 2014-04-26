@@ -1,68 +1,68 @@
 <% include header.html %>
-<script>
-    var response = false;    
-    $().ready(function() {
-    	// validate the comment form when it is submitted
-        $.validator.addMethod(
-            "uniqueEmail",
-            function(value, element) {
-                $.ajax({
-                    type: "POST",
-                    url: "/validate",
-                    data: value,
-                    success: function(msg){
-                        response = msg.flag;
-    			    }
-                });
-                return response;
-            },
-            "Email is Already Taken"
-        );
-    	// validate signup form on keyup and submit
-    	$("#signupForm").validate({
-    		rules: {
-    			email: {
-    				required: true,
-    				email: true,
-                    uniqueEmail	:true
-    			},
-    			password: {
-    				required: true,
-    				minlength: 6
-    			},
-    			confirm_password: {
-    				required: true,
-    				minlength: 6,
-    				equalTo: "#password"
-    			}
-    			
-    		},
-    		messages: {
-                email: {
-                    required: "Please provide a email address",
-                    email: "Please enter a valid email address",
-                    uniqueEmail: "Email dupilicate. Enter another email address"
+    <script>
+        var response = false;    
+        $().ready(function() {
+        	// validate the comment form when it is submitted
+            $.validator.addMethod(
+                "uniqueEmail",
+                function(value, element) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/validate",
+                        data: value,
+                        success: function(msg){
+                            response = msg.flag;
+        			    }
+                    });
+                    return response;
                 },
-    			
-    			password: {
-    				required: "Please provide a password",
-    				minlength: "Your password must be at least 6 characters long"
-    			},
-    			confirm_password: {
-    				required: "Please provide a password",
-    				minlength: "Your password must be at least 6 characters long",
-    				equalTo: "Please enter the same password as above"
-    			}
-    			
-    			
-    		}
-    	});
+                "Email is Already Taken"
+            );
+        	// validate signup form on keyup and submit
+        	$("#signupForm").validate({
+        		rules: {
+        			email: {
+        				required: true,
+        				email: true,
+                        uniqueEmail	:true
+        			},
+        			password: {
+        				required: true,
+        				minlength: 6
+        			},
+        			confirm_password: {
+        				required: true,
+        				minlength: 6,
+        				equalTo: "#password"
+        			}
+        			
+        		},
+        		messages: {
+                    email: {
+                        required: "Please provide a email address",
+                        email: "Please enter a valid email address",
+                        uniqueEmail: "Email dupilicate. Enter another email address"
+                    },
+        			
+        			password: {
+        				required: "Please provide a password",
+        				minlength: "Your password must be at least 6 characters long"
+        			},
+        			confirm_password: {
+        				required: "Please provide a password",
+        				minlength: "Your password must be at least 6 characters long",
+        				equalTo: "Please enter the same password as above"
+        			}
+        			
+        			
+        		}
+        	});
 
-    	// propose username by combining first- and lastname
-    	
+        	// propose username by combining first- and lastname
+        	
 
-    });
-</script>
+        });
+    </script>
     <div id="main">
         <div class="row-fluid login-wrapper">
             <div class="box">
