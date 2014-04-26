@@ -45,15 +45,15 @@ input.search{
 
 /* search input */
 .navbar-inverse input.search {
-	background: url("../img/lens.png") #0f1217 no-repeat 95%;
+	background: url("../img/lens.png") #0f1217 no-repeat 88%;
 	border: 1px solid #0f1217;
 	position: relative;
 	border-radius: 4px;
-	top: 9px;
+	top: 20px;
 	padding: 3px 6px;
 	color: #000;
 	font-size: 13px;
-	margin-right: 40px;
+	margin-right: 50px;
 	-webkit-transition: all .3s linear;
     -moz-transition: all .3s linear;
     transition: all .3s linear;
@@ -519,7 +519,7 @@ input.search{
 		border-left-width: 0px;
 	}	
 }
-@media (max-width: 822px) {
+@media (max-width: 830px) {
 	.navbar-inverse input.search {display: none;}
 }
 @media (max-width: 767px) {
