@@ -38,30 +38,30 @@ if ('development' == app.get('env')) {
 // Welcome page: sign in & sign up
 app.get('/', routes.index)
 
-// Authorization:
-app.post('/signin', routes.signin)
-app.post('/signup', routes.signup)
-app.get('/signout', routes.signout)
-app.get('/validate', routes.validate)
+// // Authorization:
+// app.post('/signin', routes.signin)
+// app.post('/signup', routes.signup)
+// app.get('/signout', routes.signout)
+// app.get('/validate', routes.validate)
 
-// Home page:
-app.get('/home', routes.home)
+// // Home page:
+// app.get('/home', routes.home)
 
-// User page:
-app.get('/user', user.info)
-app.post('/user', user.update)
+// // User page:
+// app.get('/user', user.info)
+// app.post('/user', user.update)
 
-// Record page:
-app.get('/record', record.list)
-app.put('/record', record.add)
-app.post('/record/:rid', record.update)
-app.delete('/record/:rid', record.delete)
+// // Record page:
+// app.get('/record', record.list)
+// app.put('/record', record.add)
+// app.post('/record/:rid', record.update)
+// app.delete('/record/:rid', record.delete)
 
-// Category page:
-app.get('/category', category.list)
-app.put('/category', category.add)
-app.post('/category/:cid', category.update)
-app.delete('/category/:cid', category.delete)
+// // Category page:
+// app.get('/category', category.list)
+// app.put('/category', category.add)
+// app.post('/category/:cid', category.update)
+// app.delete('/category/:cid', category.delete)
 
 // start server
 http.createServer(app).listen(app.get('port'), function(){
