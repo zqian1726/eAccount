@@ -1,8 +1,8 @@
+exports.info = function(req, res) {
+	// send profile information
+	res.send({username:"", profile:{dob:"2014-4-26", gender:"Male"}})
+}
 
-/*
- * GET users listing.
- */
-
-exports.list = function(req, res){
-  res.send("respond with a resource");
-};
+exports.update = function(req, res) {
+	// update profile information
+}
