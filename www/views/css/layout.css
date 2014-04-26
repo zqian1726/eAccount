@@ -7,6 +7,11 @@ body {
 	padding: 0px;
 	/*-webkit-font-smoothing: antialiased;*/
 }
+
+img.logo{
+    width: 150;
+    height: 25px;
+}
 h1,h2,h3,h4,h5 {
 	margin: 0;
 	line-height: inherit;
@@ -49,7 +54,7 @@ input.search{
 	border: 1px solid #0f1217;
 	position: relative;
 	border-radius: 4px;
-	top: 20px;
+	top: 10px;
 	padding: 3px 6px;
 	color: #000;
 	font-size: 13px;

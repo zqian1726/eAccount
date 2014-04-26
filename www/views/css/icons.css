@@ -59,9 +59,9 @@ i.ico-phone{
 }
 i.ico-mail{
 	background: url("../img/ico-mail.png") no-repeat;
-	height:11px;
+	height:1px;
 	width: 17px;
-	margin-top: 1px;
+	margin-top: 10px;
   	*margin-right: .3em;
   	line-height: 14px;
   	vertical-align: text-top;
