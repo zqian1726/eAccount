@@ -11,6 +11,9 @@ exports.index = function(req, res) {
 
 exports.home = function(req, res) {
 	// render homepage
+	res.render('index', {
+  	title: 'This is eAccount homepage'
+  })
 }
 
 exports.signin = function(req, res) {
@@ -27,5 +30,6 @@ exports.signout = function(req, res) {
 
 exports.validate = function(req, res) {
 	// validate email address is not used
+
 	res.send({flag: true})
 }
