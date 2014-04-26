@@ -4,6 +4,8 @@ var http = require('http')
 	, express = require('express')
 	, app = express()
 	, routes = require('./routes')
+	, record = require('./routes/record')
+	, category = require('./routes/category')
 
 // access port: 3000
 app.set('port', process.env.PORT || 3000)
@@ -29,7 +31,36 @@ if ('development' == app.get('env')) {
   app.use(connect.errorHandler())
 }
 
+/*
+ * Routing
+ */
+
+// Welcome page: sign in & sign up
 app.get('/', routes.index)
+
+// Authorization:
+app.post('/signin', routes.signin)
+app.post('/signup', routes.signup)
+app.get('/signout', routes.signout)
+
+// Home page:
+app.get('/home', routes.home)
+
+// User page:
+app.get('/user', user.info)
+app.post('/user', user.update)
+
+// Record page:
+app.get('/record', record.list)
+app.put('/record', record.add)
+app.post('/record/:rid', record.update)
+app.delete('/record/:rid', record.delete)
+
+// Category page:
+app.get('/category', category.list)
+app.put('/category', category.add)
+app.post('/category/:cid', category.update)
+app.delete('/category/:cid', category.delete)
 
 // start server
 http.createServer(app).listen(app.get('port'), function(){
