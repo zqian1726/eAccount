@@ -18,18 +18,10 @@ exports.home = function(req, res) {
 
 exports.signin = function(req, res) {
 	// log in
+	res.render('signin')
 }
 
 exports.signup = function(req, res) {
 	// register
-}
-
-exports.signout = function(req, res) {
-	// log out
-}
-
-exports.validate = function(req, res) {
-	// validate email address is not used
-
-	res.send({flag: true})
+	res.render('signup')
 }

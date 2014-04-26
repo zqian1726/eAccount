@@ -3,7 +3,8 @@ var http = require('http')
 	, connect = require('connect') // express 4.0 would not include connect
 	, express = require('express')
 	, app = express()
-	, routes = require('./routes')
+	, index = require('./routes')
+	, auth = require('./routes/auth')
 	, user = require('./routes/user')
 	, record = require('./routes/record')
 	, category = require('./routes/category')
@@ -37,16 +38,20 @@ if ('development' == app.get('env')) {
  */
 
 // Welcome page: sign in & sign up
-app.get('/', routes.index)
+app.get('/', index.index)
+
+// Sign pages:
+app.get('/signin', index.signin)
+app.get('/signup', index.signup)
 
 // Authorization:
-app.post('/signin', routes.signin)
-app.post('/signup', routes.signup)
-app.get('/signout', routes.signout)
-app.get('/validate', routes.validate)
+app.post('/signin', auth.signin)
+app.post('/signup', auth.signup)
+app.post('/signout', auth.signout)
+app.get('/validate', auth.validate)
 
 // Home page:
-app.get('/home', routes.home)
+app.get('/home', index.home)
 
 // User page:
 app.get('/user', user.info)
