@@ -24,7 +24,7 @@ app.use(connect.methodOverride()) // enable RESTful requests
 // app.use(app.router)
 app.use(connect.cookieParser())
 app.use(connect.session({ secret: 'keyboard cat', key: 'sid', cookie: { secure: true }}))
-app.use(express.static(path.join(__dirname, 'public'))) // render CSS, JS and images
+app.use(express.static(path.join(__dirname, 'public/'))) // render CSS, JS and images
 
 // development only
 if ('development' == app.get('env')) {
@@ -42,6 +42,7 @@ app.get('/', routes.index)
 app.post('/signin', routes.signin)
 app.post('/signup', routes.signup)
 app.get('/signout', routes.signout)
+app.get('/validate', routes.validate)
 
 // Home page:
 app.get('/home', routes.home)
