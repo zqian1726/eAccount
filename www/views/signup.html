@@ -1,0 +1,126 @@
+<% include header.html %>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/jquery-1.9.0.js"></script>
+<script src="./js/jquery.validate.js"></script>
+<!-- bootstrap -->
+    <link href="css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="css/elements.css" />
+    <link rel="stylesheet" type="text/css" href="css/icons.css" />
+
+    <!-- libraries -->
+    <link rel="stylesheet" type="text/css" href="css/lib/font-awesome.css" />
+    
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="css/compiled/signup.css" type="text/css" media="screen" />
+
+    <!-- open sans font -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<script>
+
+var response = false;    
+$().ready(function() {
+	// validate the comment form when it is submitted
+    $.validator.addMethod(
+        "uniqueEmail",
+        function(value, element) {
+            $.ajax({
+                type: "POST",
+                url: "/validate",
+                data: value,
+                success: function(msg){
+                    response = msg.flag;
+			    }
+            });
+            return response;
+        },
+        "Email is Already Taken"
+    );
+	// validate signup form on keyup and submit
+	$("#signupForm").validate({
+		rules: {
+			email: {
+				required: true,
+				email: true,
+                uniqueEmail	:true
+			},
+			password: {
+				required: true,
+				minlength: 6
+			},
+			confirm_password: {
+				required: true,
+				minlength: 6,
+				equalTo: "#password"
+			}
+			
+		},
+		messages: {
+            email: {
+                required: "Please provide a email address",
+                email: "Please enter a valid email address",
+                uniqueEmail: "Email dupilicate. Enter another email address"
+            },
+			
+			password: {
+				required: "Please provide a password",
+				minlength: "Your password must be at least 6 characters long"
+			},
+			confirm_password: {
+				required: "Please provide a password",
+				minlength: "Your password must be at least 6 characters long",
+				equalTo: "Please enter the same password as above"
+			}
+			
+			
+		}
+	});
+
+	// propose username by combining first- and lastname
+	
+
+});
+</script>
+
+
+</head>
+<body>
+
+
+<div id="main">
+    <div class="row-fluid login-wrapper">
+        <div class="box">
+            <div class="content-wrap">
+                <h6>Sign Up</h6>
+                <form class="cmxform" id="signupForm" method="post" action="/signup" novalidate="novalidate">
+                    <label for="email">Email</label>
+			         <input id="email" name="email" type="email">
+		
+			         <label for="password">Password</label>
+			         <input id="password" name="password" type="password">
+
+			         <label for="confirm_password">Confirm password</label>
+			         <input id="confirm_password" name="confirm_password" type="password">
+		
+			         <input class="submit" type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        
+        <div class="span4 already">
+            <p>Already have an account?</p>
+            <a href="signin.html">Sign in</a>
+        </div>
+    </div>
+</div>
+
+<% include footer.html %>
