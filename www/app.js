@@ -46,10 +46,6 @@ app.post('/validate', auth.validate)
 // Welcome page: sign in & sign up
 app.get('/', index.index)
 
-// Sign pages:
-app.get('/signin', auth.unauthorized, index.signin)
-app.get('/signup', auth.unauthorized, index.signup)
-
 // Home page:
 app.get('/home', auth.authorized, index.home)
 
