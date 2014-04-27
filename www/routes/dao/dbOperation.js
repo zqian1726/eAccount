@@ -10,7 +10,7 @@ BSON = require('mongodb').pure().BSON,
 assert = require('assert');
 
 
-exports.function registerUser(email, username, password, dob, gender, callback){
+exports.registerUser = function(email, username, password, dob, gender, callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
@@ -41,7 +41,7 @@ exports.function registerUser(email, username, password, dob, gender, callback){
 //registerUser(1,2,3,4,5,function(result){console.log(result)})
 //succeed:success
 
-exports.function checkUser(email,password,callback){
+exports.checkUser = function (email,password,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
@@ -64,7 +64,7 @@ exports.function checkUser(email,password,callback){
 //true: user exist,false: user not exist
 
 
-exports.function checkEmail(email, callback){
+exports.checkEmail = function (email, callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
@@ -87,7 +87,7 @@ exports.function checkEmail(email, callback){
 //checkEmail("2",function(result){console.log(result)});
 //true: unique,false: exist
 
-exports.function addCategory(email,category,callback){
+exports.addCategory = function (email,category,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
@@ -118,7 +118,7 @@ exports.function addCategory(email,category,callback){
 //addCategory(1,"3",function(result){console.log(result)})
 //succeed:success
 
-exports.function deleteCategory(email,category,callback){
+exports.deleteCategory = function(email,category,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
@@ -149,7 +149,7 @@ exports.function deleteCategory(email,category,callback){
 //deleteCategory(1,"2",function(result){console.log(result)})
 //succeed:success
 
-exports.function getCategories(email,callback){
+exports.getCategories = function (email,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
@@ -172,7 +172,7 @@ exports.function getCategories(email,callback){
 //getCategories(1,function(result){console.log(JSON.stringify(result))})
 //succeed:success
 
-exports.function addRecord(email,amount,category,desc,dateTime,callback){
+exports.addRecord = function(email,amount,category,desc,dateTime,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
@@ -209,7 +209,7 @@ exports.function addRecord(email,amount,category,desc,dateTime,callback){
 //addRecord(1,25,"food","test","04/27/2014 14:25",function(result){console.log(result)});
 //succeed:success
 
-exports.function getRecords(email,callback){
+exports.getRecords = function(email,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
