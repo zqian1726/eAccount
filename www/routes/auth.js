@@ -29,7 +29,7 @@ exports.authorized = function (req, res, next) {
 exports.signin = function(req, res) {
 	// log in
 	db.checkUser(req.body.email, req.body.password, function(ret) {
-		if (ret == "success") {
+		if (ret) {
 			// succeed
 			req.session.user = req.body.email
 			console.log('sign up passed: ' + req.session.user)
@@ -37,6 +37,7 @@ exports.signin = function(req, res) {
 		}
 		else {
 			// failed
+			console.log('sign up passed: ' + req.session.user)
 			res.redirect('/')
 		}
 	})

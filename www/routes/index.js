@@ -16,20 +16,6 @@ exports.home = function(req, res) {
   })
 }
 
-exports.signin = function(req, res) {
-	// log in
-	res.render('signin', {
-    title: ''
-  })
-}
-
-exports.signup = function(req, res) {
-	// register
-	res.render('signup', {
-    title: ''
-  })
-}
-
 exports._404 = function(req, res) {
 	res.status(404)
 	// respond with html page
