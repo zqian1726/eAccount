@@ -3,31 +3,54 @@
     <link rel="stylesheet" href="css/compiled/signin.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/compiled/signup.css" type="text/css" media="screen" /> -->
     <script>
-        var response = false;    
+        var response = false; 
+        function returnTrue(){
+            return true;
+        }
+        function returnFalse(){
+            return false;
+        }
         $().ready(function() {
         	// validate the comment form when it is submitted
-            $.validator.addMethod(
-                "uniqueEmail",
-                function(value, element) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/validate",
-                        data: value,
-                        success: function(msg){
-                            response = msg.flag;
-        			    }
-                    });
-                    return response;
-                },
-                "Email is Already Taken"
-            );
+            /*$.validator.addMethod(
+			        "uniqueEmail", 
+			        function (value, element) {
+                        //var res = "cheng";
+                        
+			            $.ajax({
+			                type: "POST",
+			                url: "/validate",
+			                data: {
+                                "email": value
+                            },
+			                dataType:"json",
+			                success: function(msg)
+			                {
+                                
+			                    response = msg.flag;
+                                alert(response);
+                                
+			                }
+			             });
+			            return response;
+			        },
+			        "Email is Already Taken"
+			    ); */
         	// validate signup form on keyup and submit
         	$("#signupForm").validate({
         		rules: {
         			email: {
         				required: true,
         				email: true,
-                        uniqueEmail	:true
+                        remote: {
+                            url: "/validate",
+                            type: "POST",
+                            data:{
+                                email: function(){
+                                    return $("#email").val();
+                                }
+                            }
+                        }
         			},
         			password: {
         				required: true,
@@ -44,7 +67,7 @@
                     email: {
                         required: "Please provide a email address",
                         email: "Please enter a valid email address",
-                        uniqueEmail: "Email dupilicate. Enter another email address"
+                        remote: "Email dupilicate. Enter another email address"
                     },
         			
         			password: {
