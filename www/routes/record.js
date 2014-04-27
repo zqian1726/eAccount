@@ -1,5 +1,5 @@
 exports.list = function(req, res) {
-	// send record list
+	// get record list
 }
 
 exports.add = function(req, res) {
@@ -12,4 +12,11 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
 	// delete a record
+}
+
+exports.index = function(req, res) {
+	// render record page
+	res.render('record', {
+		title: 'Record'
+	})
 }

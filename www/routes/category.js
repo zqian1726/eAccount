@@ -1,5 +1,5 @@
 exports.list = function(req, res) {
-	// send category list
+	// get category list
 }
 
 exports.add = function(req, res) {
@@ -12,4 +12,11 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
 	// delete a category
+}
+
+exports.index = function(req, res) {
+	// render category page
+	res.render('category', {
+		title: 'Category'
+	})
 }
