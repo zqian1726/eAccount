@@ -67,6 +67,6 @@ exports.signout = function(req, res) {
 exports.validate = function(req, res) {
 	// validate email address is not used
 	// db.checkEmail(req.body.email, function(ret) {
-		res.send({flag: true})
+		res.send(true)
 	// })
 }
