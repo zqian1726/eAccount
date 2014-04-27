@@ -5,14 +5,14 @@
 
 exports.index = function(req, res) {
   res.render('index', {
-  	title: 'This is eAccount homepage'
+  	title: ''
   })
 }
 
 exports.home = function(req, res) {
 	// render homepage
 	res.render('home', {
-  	title: 'This is eAccount homepage'
+		title: 'Home'
   })
 }
 

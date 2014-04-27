@@ -1,46 +1,51 @@
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
             <li class="active">
+                <% if (title == "Home") { %>
                 <div class="pointer">
                     <div class="arrow"></div>
                     <div class="arrow_border"></div>
                 </div>
+                <% } %>
                 <a href="/home">
                     <i class="icon-home"></i>
                     <span>Home</span>
                 </a>
             </li>            
             <li>
-                <a class="dropdown-toggle" href="/record">
+                <% if (title == "Record") { %>
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <% } %>
+                <a href="/record">
                     <i class="icon-edit"></i>
                     <span>Record</span>
-                    <i class="icon-chevron-down"></i>
                 </a>
-                <ul class="submenu">
-                    <li><a href="#">Add Record</a></li>
-                    <li><a href="#">History List</a></li>
-                </ul>
             </li>
             <li>
-                <a class="dropdown-toggle" href="/category">
+                <% if (title == "Category") { %>
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <% } %>
+                <a href="/record">
                     <i class="icon-tags"></i>
                     <span>Category</span>
-                    <i class="icon-chevron-down"></i>
                 </a>
-                <ul class="submenu">
-                    <li><a href="#">Add Category</a></li>
-                    <li><a href="#">Category List</a></li>
-                </ul>
             </li>
             <li>
-                <a class="dropdown-toggle" href="/statistic">
+                <a class="dropdown-toggle" href="#">
                     <i class="icon-signal"></i>
                     <span>Statistic</span>
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="#">Graphics</a></li>
-                    <li><a href="#">Alert</a></li>
+                    <li><a href="#">Alert Line</a></li>
+                    <li><a href="#">Monthly Report</a></li>
+                    <li><a href="#">Yearly Report</a></li>
                 </ul>
             </li>
             <li>
