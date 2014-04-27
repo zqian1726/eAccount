@@ -123,5 +123,5 @@ function deleteCategory(email,category,callback){
 	});
 }
 //demo
-deleteCategory(1,"2",function(result){console.log(result)})
+//deleteCategory(1,"2",function(result){console.log(result)})
 //succeed:success
