@@ -76,21 +76,21 @@ function addCategory(email,category,callback){
 				"email" : email
 			},
 			{
-				$push : {
+				$addToSet : {
 					categories : category
 				}
-			}, 
+			},
 			function(err, doc) {
-			mongoclient.close();
-			if(err){
-				callback(err);
-			}else{
-				callback("success");
-			}
-				
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					callback("success");
+				}
 		});
 		
 	});
 }
-
-addCategory(1,"1",function(result){console.log(result)})
+//demo
+//addCategory(1,"2",function(result){console.log(result)})
+//succeed:success
