@@ -94,3 +94,34 @@ function addCategory(email,category,callback){
 //demo
 //addCategory(1,"2",function(result){console.log(result)})
 //succeed:success
+
+function deleteCategory(email,category,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.update(
+			{
+				"email" : email
+			},
+			{
+				$pull : {
+					categories : category
+				}
+			},
+			function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					callback("success");
+				}
+		});
+		
+	});
+}
+//demo
+deleteCategory(1,"2",function(result){console.log(result)})
+//succeed:success
