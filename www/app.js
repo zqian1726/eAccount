@@ -8,6 +8,7 @@ var http = require('http')
 	, user = require('./routes/user')
 	, record = require('./routes/record')
 	, category = require('./routes/category')
+	, statistic = require('./routes/statistic')
 
 // access port: 3000
 app.set('port', process.env.PORT || 3000)
@@ -67,6 +68,9 @@ app.post('/category', auth.authorized, category.add)
 app.put('/category/:cid', auth.authorized, category.update)
 app.del('/category/:cid', auth.authorized, category.delete)
 app.get('/category', auth.authorized, category.list)
+
+// statistic page:
+app.get('/statistic', auth.authorized, statistic.index)
 
 // 404
 app.get('*', index._404)

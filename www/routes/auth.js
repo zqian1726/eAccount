@@ -4,21 +4,23 @@ var db = require('./dao/dbOperation')
  * Middlewares: check authorization
  */
 exports.unauthorized = function (req, res, next) {
-	if (req.session.user) {
-		res.redirect('/home')
-	}
-	else {
-		next()
-	}
+	// if (req.session.user) {
+	// 	res.redirect('/home')
+	// }
+	// else {
+	// 	next()
+	// }
+	next()
 }
 
 exports.authorized = function (req, res, next) {
-	if (req.session.user) {
-		next()
-	}
-	else {
-		res.redirect('/signin')
-	}
+	// if (req.session.user) {
+	// 	next()
+	// }
+	// else {
+	// 	res.redirect('/signin')
+	// }
+	next()
 }
 
 /*
