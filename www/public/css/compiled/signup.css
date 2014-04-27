@@ -20,9 +20,9 @@ body {
   text-align: center;
   padding-top: 28px; }
 
-.login-wrapper {
-  position: absolute;
-  text-align: center; }
+  .login-wrapper {
+    display:inline;
+   }
   .login-wrapper .logo {
     margin-bottom: 45px;
     position: relative;

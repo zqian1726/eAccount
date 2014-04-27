@@ -1,3 +1,113 @@
 <% include header.html %>
+    <!-- this page specific styles
+    <link rel="stylesheet" href="css/compiled/signin.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/compiled/signup.css" type="text/css" media="screen" /> -->
+    <script>
+        var response = false;    
+        $().ready(function() {
+        	// validate the comment form when it is submitted
+            $.validator.addMethod(
+                "uniqueEmail",
+                function(value, element) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/validate",
+                        data: value,
+                        success: function(msg){
+                            response = msg.flag;
+        			    }
+                    });
+                    return response;
+                },
+                "Email is Already Taken"
+            );
+        	// validate signup form on keyup and submit
+        	$("#signupForm").validate({
+        		rules: {
+        			email: {
+        				required: true,
+        				email: true,
+                        uniqueEmail	:true
+        			},
+        			password: {
+        				required: true,
+        				minlength: 6
+        			},
+        			confirm_password: {
+        				required: true,
+        				minlength: 6,
+        				equalTo: "#password"
+        			}
+        			
+        		},
+        		messages: {
+                    email: {
+                        required: "Please provide a email address",
+                        email: "Please enter a valid email address",
+                        uniqueEmail: "Email dupilicate. Enter another email address"
+                    },
+        			
+        			password: {
+        				required: "Please provide a password",
+        				minlength: "Your password must be at least 6 characters long"
+        			},
+        			confirm_password: {
+        				required: "Please provide a password",
+        				minlength: "Your password must be at least 6 characters long",
+        				equalTo: "Please enter the same password as above"
+        			}
+        			
+        			
+        		}
+        	});
 
+        	// propose username by combining first- and lastname
+        	
+
+        });
+    </script>
+    
+    <div class="container">
+
+            <div id="signup" class="row-fluid login-wrapper">
+                <div class="span3 box">
+                    <div class="content-wrap">
+                        <h6>Sign Up</h6>
+                        <form class="cmxform" id="signupForm" method="post" action="/signup" novalidate="novalidate">
+                            <label for="email">Email</label>
+    			             <input id="email" name="email" type="email">
+    		
+    			             <label for="password">Password</label>
+    			             <input id="password" name="password" type="password">
+
+    			             <label for="confirm_password">Confirm password</label>
+    			             <input id="confirm_password" name="confirm_password" type="password">
+    			             <input class="submit" type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="signin" class="row-fluid login-wrapper">
+                <div class="span3 box">
+                    <div class="content-wrap">
+                        <h6>Log in</h6>
+                        <form action="/login" method="post" id="loginForm">
+                            <input name = "email" class="span12" type="text" placeholder="E-mail address" />
+                            <input name = "password" class="span12" type="password" placeholder="Your password" />
+                            <input class="submit" type="submit" value="Submit">
+                            <a href="#" class="forgot">Forgot password?</a>
+                            <div class="remember">
+                                <input id="remember-me" type="checkbox" />
+                                <label for="remember-me">Remember me</label>
+                            </div>
+                        </form>
+                
+                    </div>
+                </div>
+            </div>
+    </div>
+    
+    
+    
 <% include footer.html %>
