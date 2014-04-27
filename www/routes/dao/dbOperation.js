@@ -51,9 +51,9 @@ exports.checkUser = function (email,password,callback){
 		collection.findOne({"email" : email,"password" : password}, function(err, doc) {
 			mongoclient.close();
 			if(doc==null)		
-			  	return callback(false); 	
+			  callback(false); 	
 			else
-				return callback(true);
+				callback(true);
 				
 		});
 		
