@@ -92,7 +92,7 @@ function addCategory(email,category,callback){
 	});
 }
 //demo
-//addCategory(1,"2",function(result){console.log(result)})
+//addCategory(1,"3",function(result){console.log(result)})
 //succeed:success
 
 function deleteCategory(email,category,callback){
@@ -124,4 +124,27 @@ function deleteCategory(email,category,callback){
 }
 //demo
 //deleteCategory(1,"2",function(result){console.log(result)})
+//succeed:success
+
+function getCategories(email,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.findOne({"email" : email},function(err, doc) {
+			mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					callback(doc.categories);
+				}
+			 
+		  });
+		
+	});
+}
+//demo
+//getCategories(1,function(result){console.log(JSON.stringify(result))})
 //succeed:success
