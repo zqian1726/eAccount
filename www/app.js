@@ -25,9 +25,10 @@ app.use(connect.json())
 app.use(connect.urlencoded())
 app.use(connect.methodOverride()) // enable RESTful requests
 // app.use(app.router)
-app.use(connect.cookieParser())
-app.use(connect.session({ secret: '#This%is%eAcount%secret#', key: 'sid', cookie: { secure: true }}))
 app.use(express.static(path.join(__dirname, 'public/'))) // render CSS, JS and images
+app.use(connect.cookieParser())
+app.use(connect.session({ secret: '#This%is%eAcount%secret#', key: 'sid', cookie: { secure: true, path: '/', expires: false }}))
+
 
 // development only
 if ('development' == app.get('env')) {
@@ -40,11 +41,11 @@ if ('development' == app.get('env')) {
 // Authorization:
 app.post('/signin', auth.unauthorized, auth.signin)
 app.post('/signup', auth.unauthorized, auth.signup)
-app.post('/signout', auth.authorized, auth.signout)
+app.get('/signout', auth.authorized, auth.signout)
 app.post('/validate', auth.validate)
 
 // Welcome page: sign in & sign up
-app.get('/', index.index)
+app.get('/', auth.unauthorized, index.index)
 
 // Home page:
 app.get('/home', auth.authorized, index.home)
