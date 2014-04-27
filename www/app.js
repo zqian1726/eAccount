@@ -68,6 +68,9 @@ app.put('/category/:cid', auth.authorized, category.update)
 app.del('/category/:cid', auth.authorized, category.delete)
 app.get('/category', auth.authorized, category.list)
 
+// 404
+app.get('*', index._404)
+
 // start server
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'))
