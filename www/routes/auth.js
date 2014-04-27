@@ -37,8 +37,8 @@ exports.signin = function(req, res) {
 	db.checkUser(req.body.email, req.body.password, function(ret) {
 		if (ret) {
 			// succeed
-			res.cookie('user', req.body.email, { maxAge: 1000 * 60 * 60 * 24 })
-			res.cookie('passport', sha1(req.body.email + "#This%is%eAcount%secret#"), { maxAge: 1000 * 60 * 60 * 24 })
+			res.cookie('user', req.body.email, { maxAge: 1000 * 60 * 60 * 2 })
+			res.cookie('passport', sha1(req.body.email + "#This%is%eAcount%secret#"), { maxAge: 1000 * 60 * 60 * 2 })
 			res.redirect('/home')
 		}
 		else {
@@ -53,8 +53,8 @@ exports.signup = function(req, res, next) {
 	db.registerUser(req.body.email, req.body.username, req.body.password, req.body.dob, req.body.gender,function(ret) {
 		if (ret == "success") {
 			// succeed
-			res.cookie('user', req.body.email, { maxAge: 1000 * 60 * 60 * 24 })
-			res.cookie('passport', sha1(req.body.email + "#This%is%eAcount%secret#"), { maxAge: 1000 * 60 * 60 * 24 })
+			res.cookie('user', req.body.email, { maxAge: 1000 * 60 * 60 * 2 })
+			res.cookie('passport', sha1(req.body.email + "#This%is%eAcount%secret#"), { maxAge: 1000 * 60 * 60 * 2 })
 			res.redirect('/home')
 		}
 		else {
