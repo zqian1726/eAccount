@@ -40,7 +40,7 @@ if ('development' == app.get('env')) {
 app.post('/signin', auth.unauthorized, auth.signin)
 app.post('/signup', auth.unauthorized, auth.signup)
 app.post('/signout', auth.authorized, auth.signout)
-app.get('/validate', auth.validate)
+app.post('/validate', auth.validate)
 
 // Welcome page: sign in & sign up
 app.get('/', index.index)

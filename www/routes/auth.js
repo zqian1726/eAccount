@@ -59,10 +59,12 @@ exports.signup = function(req, res, next) {
 exports.signout = function(req, res) {
 	// log out
 	req.session.destroy()
-	res.redirect('/')
+	res.redirect()
 }
 
 exports.validate = function(req, res) {
 	// validate email address is not used
-	res.send({flag: true})
+	db.checkEmail(req.body.email, function(ret) {
+		res.send({flag: ret})
+	})
 }
