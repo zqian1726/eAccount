@@ -25,7 +25,7 @@ app.use(connect.urlencoded())
 app.use(connect.methodOverride()) // enable RESTful requests
 // app.use(app.router)
 app.use(connect.cookieParser())
-app.use(connect.session({ secret: 'keyboard cat', key: 'sid', cookie: { secure: true }}))
+app.use(connect.session({ secret: '#This%is%eAcount%secret#', key: 'sid', cookie: { secure: true, maxAge: 3600000 }}))
 app.use(express.static(path.join(__dirname, 'public/'))) // render CSS, JS and images
 
 // development only
@@ -36,38 +36,37 @@ if ('development' == app.get('env')) {
 /*
  * Routing
  */
+// Authorization:
+app.post('/signin', auth.unauthorized, auth.signin)
+app.post('/signup', auth.unauthorized, auth.signup)
+app.post('/signout', auth.authorized, auth.signout)
+app.get('/validate', auth.validate)
 
 // Welcome page: sign in & sign up
 app.get('/', index.index)
 
 // Sign pages:
-app.get('/signin', index.signin)
-app.get('/signup', index.signup)
-
-// Authorization:
-app.post('/signin', auth.signin)
-app.post('/signup', auth.signup)
-app.post('/signout', auth.signout)
-app.get('/validate', auth.validate)
+app.get('/signin', auth.unauthorized, index.signin)
+app.get('/signup', auth.unauthorized, index.signup)
 
 // Home page:
-app.get('/home', index.home)
+app.get('/home', auth.authorized, index.home)
 
 // User page:
-app.get('/user', user.info)
-app.post('/user', user.update)
+app.put('/user', auth.authorized, user.update)
+app.get('/user', auth.authorized, user.info)
 
 // Record page:
-app.get('/record', record.list)
-app.put('/record', record.add)
-app.post('/record/:rid', record.update)
-app.delete('/record/:rid', record.delete)
+app.post('/record', auth.authorized, record.add)
+app.put('/record/:rid', auth.authorized, record.update)
+app.del('/record/:rid', auth.authorized, record.delete)
+app.get('/record', auth.authorized, record.list)
 
 // Category page:
-app.get('/category', category.list)
-app.put('/category', category.add)
-app.post('/category/:cid', category.update)
-app.delete('/category/:cid', category.delete)
+app.post('/category', auth.authorized, category.add)
+app.put('/category/:cid', auth.authorized, category.update)
+app.del('/category/:cid', auth.authorized, category.delete)
+app.get('/category', auth.authorized, category.list)
 
 // start server
 http.createServer(app).listen(app.get('port'), function(){
