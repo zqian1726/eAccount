@@ -1,7 +1,12 @@
 <% include header.html %>
-    <!-- this page specific styles
-    <link rel="stylesheet" href="css/compiled/signin.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="css/compiled/signup.css" type="text/css" media="screen" /> -->
+    <!-- this page specific styles -->
+    
+    <link rel="stylesheet" href="css/compiled/signup.css" type="text/css" media="screen" />
+    <style>
+        body {
+            background-image: url('img/bgs/landscape.jpg')
+        }
+    </style>
     <script>
         var response = false; 
         function returnTrue(){
@@ -83,17 +88,67 @@
         			
         		}
         	});
-
+            
+            $('#loginForm').validate({
+                rules: {
+                    email: {
+        				required: true,
+        				email: true
+        			},
+        			password: {
+        				required: true,
+        				minlength: 6
+        			}
+                },
+                message: {
+                    email: {
+                        required: "Please provide a email address",
+                        email: "Please enter a valid email address"
+                    },
+        			
+        			password: {
+        				required: "Please provide a password",
+        				minlength: "Your password must be at least 6 characters long"
+        			}
+                }
+            })
+            
         	// propose username by combining first- and lastname
         	
 
         });
+        $(function(){
+            $(".changeToSignIn").click(function(){
+                $('#signup').addClass('hide');
+                $('#signin').removeClass('hide');
+            });
+            $(".changeToSignUp").click(function(){
+                $('#signin').addClass('hide');
+                $('#signup').addClass('transform');
+                $('#signup').removeClass('hide');
+            });
+        })
+        
     </script>
-    
+    <style>
+        #signup {
+            position:relative;
+            margin-top: 8%;
+            margin-left: 30%;
+        }
+        #signin {
+            position:relative;
+            margin-top: 8%;
+            margin-left: 30%;
+        }
+        .hide{
+            display:none;
+        }
+        
+    </style>
     <div class="container">
-
             <div id="signup" class="row-fluid login-wrapper">
-                <div class="span3 box">
+                <div class="span4 box">
                     <div class="content-wrap">
                         <h6>Sign Up</h6>
                         <form class="cmxform" id="signupForm" method="post" action="/signup" novalidate="novalidate">
@@ -108,28 +163,37 @@
     			             <input class="submit" type="submit" value="Submit">
                         </form>
                     </div>
+                    <div class="already">
+                        <p>Already have an account?
+                        <button class="changeToSignIn">Sign in</button></p>
+                    </div>              
                 </div>
             </div>
-
-            <div id="signin" class="row-fluid login-wrapper">
+            
+            <div id="signin" class="hide row-fluid login-wrapper">
                 <div class="span3 box">
                     <div class="content-wrap">
                         <h6>Log in</h6>
                         <form action="/login" method="post" id="loginForm">
-                            <input name = "email" class="span12" type="text" placeholder="E-mail address" />
-                            <input name = "password" class="span12" type="password" placeholder="Your password" />
+                            <input id="email" name = "email" class="span12" type="text" placeholder="E-mail address" />
+                            <input id="pass" name = "password" class="span12" type="password" placeholder="Your password" />
                             <input class="submit" type="submit" value="Submit">
                             <a href="#" class="forgot">Forgot password?</a>
                             <div class="remember">
                                 <input id="remember-me" type="checkbox" />
                                 <label for="remember-me">Remember me</label>
                             </div>
-                        </form>
-                
+                        </form>                        
+                    </div>
+                    <div class="no-account">
+                        <p>Don't have an account?
+                        <button class="changeToSignUp">Sign up</button></p>
                     </div>
                 </div>
+                
             </div>
     </div>
+            
     
     
     
