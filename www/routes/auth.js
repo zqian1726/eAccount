@@ -18,7 +18,7 @@ exports.authorized = function (req, res, next) {
 	// 	next()
 	// }
 	// else {
-	// 	res.redirect('/signin')
+	// 	res.redirect('/')
 	// }
 	next()
 }
@@ -28,15 +28,16 @@ exports.authorized = function (req, res, next) {
  */
 exports.signin = function(req, res) {
 	// log in
-	db.signin(req.body.email, req.body.password, function(error) {
-		if (!error) {
+	db.checkUser(req.body.email, req.body.password, function(ret) {
+		if (ret == "success") {
 			// succeed
-			req.session.user = auth[req.body.email]
+			req.session.user = req.body.email
+			console.log('sign up passed: ' + req.session.user)
 			res.redirect('/home')
 		}
 		else {
 			// failed
-			res.redirect('/signin')
+			res.redirect('/')
 		}
 	})
 }
@@ -44,16 +45,17 @@ exports.signin = function(req, res) {
 exports.signup = function(req, res, next) {
 	// register
 	console.log(req.body.email)
-	db.registerUser(req.body.email, req.body.username, req.body.password, req.body.dob, req.body.gender,function(error) {
-		if (!error) {
+	db.registerUser(req.body.email, req.body.username, req.body.password, req.body.dob, req.body.gender,function(ret) {
+		if (ret == "success") {
 			// succeed
-			req.session.user = auth[req.body.email]
+			req.session.user = req.body.email
+			console.log('sign up passed: ' + req.session.user)
 			res.redirect('/home')
 		}
 		else {
 			// failed
-			console.log(error)
-			res.redirect('/signup')
+			console.log('sign up failed: ' + ret)
+			res.redirect('/')
 		}
 	})
 }
