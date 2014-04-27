@@ -23,7 +23,7 @@ exports.registerUser = function(email, username, password, dob, gender, callback
 			"password" : password,
 			"dob" : dob,
 			"gender" : gender,
-			"categories" : [],
+			"categories" : ['shopping',"food","rent"],
 			"records" : []
 		},function(err, result) {
 			mongoclient.close();
@@ -51,9 +51,9 @@ exports.checkUser = function (email,password,callback){
 		collection.findOne({"email" : email,"password" : password}, function(err, doc) {
 			mongoclient.close();
 			if(doc==null)		
-			  	return callback(false); 	
+			  callback(false); 	
 			else
-				return callback(true);
+				callback(true);
 				
 		});
 		
@@ -87,7 +87,7 @@ exports.checkEmail = function (email, callback){
 //checkEmail("2",function(result){console.log(result)});
 //true: unique,false: exist
 
-exports.addCategory = function (email,category,callback){
+var addCategory = function (email,category,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
@@ -114,11 +114,12 @@ exports.addCategory = function (email,category,callback){
 		
 	});
 }
+exports.addCategory=addCategory;
 //demo
 //addCategory(1,"3",function(result){console.log(result)})
 //succeed:success
 
-exports.deleteCategory = function(email,category,callback){
+var deleteCategory = function(email,category,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
@@ -145,6 +146,7 @@ exports.deleteCategory = function(email,category,callback){
 		
 	});
 }
+exports.deleteCategory=deleteCategory;
 //demo
 //deleteCategory(1,"2",function(result){console.log(result)})
 //succeed:success
@@ -205,8 +207,9 @@ exports.addRecord = function(email,amount,category,desc,dateTime,callback){
 		
 	});
 }
+
 //demo
-//addRecord(1,25,"food","test","04/27/2014 14:25",function(result){console.log(result)});
+//addRecord("1@1.com",25,"food","test","04/27/2014 14:25",function(result){console.log(result)});
 //succeed:success
 
 exports.getRecords = function(email,callback){
@@ -237,4 +240,27 @@ exports.getRecords = function(email,callback){
 //getRecords(1,function(result){console.log(JSON.stringify(result))})
 //succeed:success
 
-//registerUser("1@1.com",2,3,4,5,function(result){console.log(result)})
+editCategory = function(eamil,NewCategories,oldCategory,newCatogory,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.findOne(
+			{
+				"email" : email,
+				"categories": {$in:[category]}
+			},
+			function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					callback("success");
+					deleteCategory(email,ca)
+				}
+		});
+		
+	});
+}

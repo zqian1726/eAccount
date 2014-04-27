@@ -4,9 +4,6 @@
     <div class="content">
         <div class="container-fluid">
              <div id="pad-wrapper">
-                
-                <!-- products table-->
-                <!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
                 <div class="table-wrapper products-table">
                     <div class="row-fluid head">
                         <div class="span12">
@@ -38,7 +35,7 @@
                                         width: 416px;
                                         padding-left: 0px;
                                         padding-right: 10px;">
-                                       <div class="slider slider-sample2"></div>
+                                       <div class="slider sliderTotal"></div>
                                     </th>
                             </thead>
                         </table>
@@ -54,54 +51,49 @@
                                 <!-- row -->
                                 <tr class="first">
                                     <td><span id="catename" contenteditable="true">Food</span></td>
-                                    <td><div class="slider success slider-sample3"></div></td>
+                                    <td><div class="slider success sliderCate"></div></td>
                                     <td>
                                         <ul class="actions">
-                                            <li><a href="#">Edit</a></li>
-                                            <li class="last"><a href="#">Delete</a></li>
+                                            <li class="last"><i class="icon-remove-sign" style="color: #d5393e;"></i></li>
                                         </ul>
                                     </td>
                                 </tr>
                                 <!-- row -->
                                 <tr>
                                     <td><span id="catename" contenteditable="true">Rent</span></td>
-                                    <td><div class="slider success slider-sample3"></div></td>
+                                    <td><div class="slider success sliderCate"></div></td>
                                     <td>
                                         <ul class="actions">
-                                            <li><a href="#">Edit</a></li>
-                                            <li class="last"><a href="#">Delete</a></li>
+                                            <li class="last"><i class="icon-remove-sign" style="color: #d5393e;"></i></li>
                                         </ul>
                                     </td>
                                 </tr>
                                 <!-- row -->
                                 <tr>
                                     <td><span id="catename" contenteditable="true">Shopping</span></td>
-                                    <td><div class="slider success slider-sample3"></div></td>
+                                    <td><div class="slider success sliderCate"></div></td>
                                     <td>
                                         <ul class="actions">
-                                            <li><a href="#">Edit</a></li>
-                                            <li class="last"><a href="#">Delete</a></li>
+                                            <li class="last"><i class="icon-remove-sign" style="color: #d5393e;"></i></li>
                                         </ul>
                                     </td>
                                 </tr>
                                 <!-- row -->
                                 <tr>
                                     <td><span id="catename" contenteditable="true">Pet</span></td>
-                                    <td><div class="slider success slider-sample3"></div></td>
+                                    <td><div class="slider success sliderCate"></div></td>
                                     <td>
                                         <ul class="actions">
-                                            <li><a href="#">Edit</a></li>
-                                            <li class="last"><a href="#">Delete</a></li>
+                                            <li class="last"><i class="icon-remove-sign" style="color: #d5393e;"></i></li>
                                         </ul>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><span id="catename" contenteditable="true">Emergency</span></td>
-                                    <td><div class="slider success slider-sample3"></div></td>
+                                    <td><div class="slider success sliderCate"></div></td>
                                     <td>
                                         <ul class="actions">
-                                            <li><a href="#">Edit</a></li>
-                                            <li class="last"><a href="#">Delete</a></li>
+                                            <li class="last"><i class="icon-remove-sign" style="color: #d5393e;"></i></li>
                                         </ul>
                                     </td>
                                 </tr>
@@ -111,45 +103,29 @@
                 </div>
             </div>
         </div>
-    <div>
-        <!-- scripts -->
+    </div>
+    <!-- scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-ui-1.10.2.custom.min.js"></script>
     <script src="js/bootstrap.datepicker.js"></script>
 
-    <!-- call all plugins -->
-    <script src="js/theme.js"></script>
 
     <!-- initialize this page scripts -->
     <script type="text/javascript">
         $(function () {
-
-            // Inline datepicker
-            $("#inline-datepicker").datepicker();
-
-
-
-            // jQuery UI Sliders
-            $(".slider-sample1").slider({
-                value: 100,
-                min: 1,
-                max: 500
-            });
-            $(".slider-sample2").slider({
+            $(".sliderTotal").slider({
                 range: "min",
                 value: 130,
                 min: 1,
                 max: 500
             });
-            $(".slider-sample3").slider({
+            $(".sliderCate").slider({
                 range: true,
                 min: 0,
                 max: 500,
                 values: [ 40, 170 ],
             });
-
-
 
             // Switch slide buttons
             $('.slider-button').click(function() {
