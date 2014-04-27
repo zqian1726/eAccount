@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="css/compiled/signup.css" type="text/css" media="screen" />
     <style>
         body {
-            background-image: url('img/bgs/landscape.jpg')
+            background: url('img/bgs/landscape.jpg') no-repeat fixed center;
+            background-size:cover
         }
     </style>
     <script>
@@ -144,6 +145,10 @@
         .hide{
             display:none;
         }
+        .changeToSignIn {
+            border-style:hidden;
+            
+        }
         
     </style>
     <div class="container">
@@ -153,19 +158,19 @@
                         <h6>Sign Up</h6>
                         <form class="cmxform" id="signupForm" method="post" action="/signup" novalidate="novalidate">
                             <label for="email">Email</label>
-    			             <input id="email" name="email" type="email">
+    			             <input class="span12" id="email" name="email" type="email" placeholder="E-mail address">
     		
     			             <label for="password">Password</label>
-    			             <input id="password" name="password" type="password">
+    			             <input class="span12" id="password" name="password" type="password" placeholder="password">
 
     			             <label for="confirm_password">Confirm password</label>
-    			             <input id="confirm_password" name="confirm_password" type="password">
+    			             <input class="span12" id="confirm_password" name="confirm_password" type="password" placeholder="confirm password"><br>
     			             <input class="submit" type="submit" value="Submit">
                         </form>
                     </div>
                     <div class="already">
                         <p>Already have an account?
-                        <button class="changeToSignIn">Sign in</button></p>
+                        <a class="forgot changeToSignIn">Sign in</a></p>
                     </div>              
                 </div>
             </div>
@@ -179,16 +184,16 @@
                             <input id="email" name = "email" class="span12" type="text" placeholder="E-mail address" />
                             <input id="pass" name = "password" class="span12" type="password" placeholder="Your password" />
                             <input class="submit" type="submit" value="Submit">
-                            <a href="#" class="forgot">Forgot password?</a>
+                            <a class="forgot">Forgot password?</a>
                             <div class="remember">
-                                <input id="remember-me" type="checkbox" />
-                                <label for="remember-me">Remember me</label>
+                                <label for="remember-me"><input id="remember-me" type="checkbox" />
+                                Remember me</label>
                             </div>
                         </form>                        
                     </div>
                     <div class="already">
                         <p>Don't have an account?
-                        <button class="changeToSignUp">Sign up</button></p>
+                        <a class="forgot changeToSignUp">Sign up</a></p>
                     </div>
                 </div>
                 
