@@ -26,7 +26,7 @@ app.use(connect.urlencoded())
 app.use(connect.methodOverride()) // enable RESTful requests
 // app.use(app.router)
 app.use(connect.cookieParser())
-app.use(connect.session({ secret: '#This%is%eAcount%secret#', key: 'sid', cookie: { secure: true, maxAge: 3600000 }}))
+app.use(connect.session({ secret: '#This%is%eAcount%secret#', key: 'sid', cookie: { secure: true }}))
 app.use(express.static(path.join(__dirname, 'public/'))) // render CSS, JS and images
 
 // development only
@@ -45,10 +45,6 @@ app.post('/validate', auth.validate)
 
 // Welcome page: sign in & sign up
 app.get('/', index.index)
-
-// Sign pages:
-app.get('/signin', auth.unauthorized, index.signin)
-app.get('/signup', auth.unauthorized, index.signup)
 
 // Home page:
 app.get('/home', auth.authorized, index.home)

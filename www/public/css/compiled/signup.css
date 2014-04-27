@@ -21,7 +21,8 @@ body {
   padding-top: 28px; }
 
   .login-wrapper {
-    display:inline;
+    margin-left:50
+    
    }
   .login-wrapper .logo {
     margin-bottom: 45px;
@@ -39,6 +40,7 @@ body {
     -o-box-shadow: rgba(0, 0, 0, 0.4) 0 1px 3px, rgba(0, 0, 0, 0.35) 0 0 1px;
     box-shadow: rgba(0, 0, 0, 0.4) 0 1px 3px, rgba(0, 0, 0, 0.35) 0 0 1px;
     background: #fff;
+    opacity:0.85;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     -ms-border-radius: 6px;
