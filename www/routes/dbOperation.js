@@ -18,13 +18,13 @@ function registerUser(email, username, password, dob, gender, callback){
 		var db = mongoclient.db("eAccount");
 		var collection = db.collection("user");
 		collection.insert({
-		"email" : email,
-		"username" : username,
-		"password" : password,
-		"dob" : dob,
-		"gender" : gender,
-		"categories" : null,
-		"records" : null
+			"email" : email,
+			"username" : username,
+			"password" : password,
+			"dob" : dob,
+			"gender" : gender,
+			"categories" : [],
+			"records" : []
 		},function(err, result) {
 			mongoclient.close();
 			if(err){
@@ -64,3 +64,33 @@ function checkEmail(email, callback){
 //checkEmail("2",function(result){console.log(result)});
 //true: unique,false: exist
 
+function addCategory(email,category,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.update(
+			{
+				"email" : email
+			},
+			{
+				$push : {
+					categories : category
+				}
+			}, 
+			function(err, doc) {
+			mongoclient.close();
+			if(err){
+				callback(err);
+			}else{
+				callback("success");
+			}
+				
+		});
+		
+	});
+}
+
+addCategory(1,"1",function(result){console.log(result)})
