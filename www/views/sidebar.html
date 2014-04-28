@@ -38,15 +38,16 @@
                 </a>
             </li>
             <li>
-                <a class="dropdown-toggle" href="#">
+                <% if (title == "Statistic") { %>
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <% } %>
+                <a href="/statistic">
                     <i class="icon-signal"></i>
                     <span>Statistic</span>
-                    <i class="icon-chevron-down"></i>
                 </a>
-                <ul class="submenu">
-                    <li><a href="#">Monthly Report</a></li>
-                    <li><a href="#">Yearly Report</a></li>
-                </ul>
             </li>
              <li>
                 <a class="dropdown-toggle" href="#">
