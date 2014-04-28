@@ -9,6 +9,7 @@ var http = require('http')
 	, record = require('./routes/record')
 	, category = require('./routes/category')
 	, statistic = require('./routes/statistic')
+	, func = require('./routes/func')
 
 // access port: 3000
 app.set('port', process.env.PORT || 3000)
@@ -72,6 +73,10 @@ app.get('/category', auth.authorized, category.index)
 
 // statistic page:
 app.get('/statistic', auth.authorized, statistic.index)
+
+// map page:
+app.get('/map', auth.authorized, func.map)
+app.get('/calendar', auth.authorized, func.calendar)
 
 // 404
 app.get('*', index._404)
