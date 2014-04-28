@@ -22,16 +22,18 @@
                                 </select>
                             </div>
                             <input type="text" class="search" x-webkit-speech="x-webkit-speech" />
-                            <a class="btn-flat success new-product" href="#addRecord" data-toggle="modal">+ Add Record</a>
+                            <a class="btn-flat success new-product" role="button" href="#addRecord" data-toggle="modal">+ Add Record</a>
                             <script>
-                                $(function(){
-                                    $("#my-checkbox1").bootstrapSwitch();
-                                    $("#my-checkbox2").bootstrapSwitch();
-                                    $("#datePicker1").appendDtpicker();
-                                    $("#datePicker2").appendDtpicker();
-                                });
+                                $('#addRecord').ready(function() {
+                                    $("#my-checkbox1").bootstrapSwitch()
+                                    $("#datePicker1").appendDtpicker()
+                                })
+                                $('#editRecord').ready(function() {
+                                    $("#my-checkbox2").bootstrapSwitch()
+                                    $("#datePicker2").appendDtpicker()
+                                })
                             </script>
-                            <div id="addRecord" class="modal fade">
+                            <div id="addRecord" class="modal hide fade" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -117,7 +119,7 @@
                                     	<ul class="actions">
                                             <li>
                                                 <a href="#editRecord" data-toggle="modal">Edit</a>
-                                                <div id="editRecord" class="modal fade">
+                                                <div id="editRecord" class="modal hide fade">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -163,7 +165,7 @@
                                                 </div>
                                             </li>
                                             <li class="last"><a href="#deleteRecord" data-toggle="modal">Delete</a>
-                                                <div id="deleteRecord" class="modal fade">
+                                                <div id="deleteRecord" class="modal hide fade">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
