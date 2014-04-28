@@ -54,7 +54,12 @@
                                                     </div>
                                                    <div class="field-box">
                                                     <label>Datepicker:</label>
-                                                    <input type="text" value="03/29/2014" class="input-large datepicker" />
+                                                    <input type="text" id="datePicker"name="date" value="">
+                                                    <script type="text/javascript">
+                                                                $(function(){
+                                                                    $("#datePicker").appendDtpicker();
+                                                                });
+                                                            </script>
                                                 </div>
                                                    
                                                 </form>
