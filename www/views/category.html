@@ -15,8 +15,8 @@
                         <div class="pull-right" style ="padding-bottom: 20px">
                             <div class="ui-select">
                                 <select>
-                                  <option />Filter category
-                                  <option />Filter amount
+                                  <option>Filter category</option>
+                                  <option>Filter amount</option>
                                 </select>
                             </div>
                             <input type="text" class="search" />
@@ -43,7 +43,7 @@
                             <thead>
                                 <tr>
                                     <th class="span2">Category</th>
-                                    <th class="span5"><span class="line"></span>Amount Alert</th>
+                                    <th class="span5"><span class="line">Amount Alert</span></th>
                                     <th class="span1"><span class="line"></span></th>
                                 </tr>
                             </thead>
@@ -105,10 +105,8 @@
         </div>
     </div>
     <!-- scripts -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-ui-1.10.2.custom.min.js"></script>
-    <script src="js/bootstrap.datepicker.js"></script>
+    <!-- // <script src="js/bootstrap.datepicker.js"></script> -->
 
 
     <!-- initialize this page scripts -->
@@ -137,8 +135,7 @@
             });
 
         });
-    </script>
-    <script>
+        
         var editable = document.getElementById('catename');
         
         addEvent(editable, 'blur', function () {
@@ -153,8 +150,7 @@
         if (localStorage.getItem('catename')) {
           editable.innerHTML = localStorage.getItem('catename');
         }
-
-</script>
+	</script>
 
 
 <% include footer.html %>
