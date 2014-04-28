@@ -2,15 +2,16 @@ var db = require('./dao/dbOperation')
 
 exports.list = function(req, res) {
 	// get category list
-	db.getCategories(req.cookies.user, function(ret) {
-		if (ret == "error") {
-			console.log(req.cookies.user + "get categories failed!")
-			res.send({error: true})
-		}
-		else {
-			res.send({error: false, categoryList: ret})
-		}
-	})
+	// db.getCategories(req.cookies.user, function(ret) {
+	// 	if (ret == "error") {
+	// 		console.log(req.cookies.user + "get categories failed!")
+	// 		res.send({error: true})
+	// 	}
+	// 	else {
+	// 		res.send({error: false, categoryList: ret})
+	// 	}
+	// })
+	res.send({error: false, categoryList: ["Food", "Shopping", "Rent", "Pet", "Emergency"]})
 }
 
 exports.add = function(req, res) {
