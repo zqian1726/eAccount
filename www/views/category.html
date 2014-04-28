@@ -27,15 +27,13 @@
                     <div class="row-fluid">
                         <table class="table table-hover">
                                 <tr>
-                                    <th class="span2" style="border-top-width: 0px;">TOTAL</th>
-                                    <th class="span4" style="
-                                        border-top-width: 0px;
-                                        padding-bottom: 0px;
-                                        padding-top: 15px;
-                                        width: 416px;
-                                        padding-left: 0px;
-                                        padding-right: 10px;">
-                                       <div class="slider sliderTotal"></div>
+                                    <th class="span2"><h3>Total:</h3></th>
+                                    <th class="span2">
+                                        <input type="text" id="totalAmount" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
+                                    </th>
+                                    <th class="span4">
+                                       <div class="tooltip"></div> 
+                                       <div class="sliderTotal"></div>
                                     </th>
                             </thead>
                         </table>
@@ -43,7 +41,8 @@
                             <thead>
                                 <tr>
                                     <th class="span2">Category</th>
-                                    <th class="span5"><span class="line">Amount Alert</span></th>
+                                    <th class="span2">Amount</th>
+                                    <th class="span5"><span class="line">Alert Setting</span></th>
                                     <th class="span1"><span class="line"></span></th>
                                 </tr>
                             </thead>
@@ -51,7 +50,10 @@
                                 <!-- row -->
                                 <tr class="first">
                                     <td><span id="catename" contenteditable="true">Food</span></td>
-                                    <td><div class="slider success sliderCate"></div></td>
+                                    <td>
+                                        <input type="text" id="food" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
+                                    </td>
+                                    <td><div class="success sliderFood"></div></td>
                                     <td>
                                         <ul class="actions">
                                             <li class="last"><i class="icon-remove-sign" style="color: #d5393e;"></i></li>
@@ -61,7 +63,10 @@
                                 <!-- row -->
                                 <tr>
                                     <td><span id="catename" contenteditable="true">Rent</span></td>
-                                    <td><div class="slider success sliderCate"></div></td>
+                                    <td>
+                                        <input type="text" id="rent" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
+                                    </td>
+                                    <td><div class="success sliderRent"></div></td>
                                     <td>
                                         <ul class="actions">
                                             <li class="last"><i class="icon-remove-sign" style="color: #d5393e;"></i></li>
@@ -71,7 +76,10 @@
                                 <!-- row -->
                                 <tr>
                                     <td><span id="catename" contenteditable="true">Shopping</span></td>
-                                    <td><div class="slider success sliderCate"></div></td>
+                                    <td>
+                                        <input type="text" id="shopping" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
+                                    </td>
+                                    <td><div class="success sliderShopping"></div></td>
                                     <td>
                                         <ul class="actions">
                                             <li class="last"><i class="icon-remove-sign" style="color: #d5393e;"></i></li>
@@ -81,7 +89,10 @@
                                 <!-- row -->
                                 <tr>
                                     <td><span id="catename" contenteditable="true">Pet</span></td>
-                                    <td><div class="slider success sliderCate"></div></td>
+                                    <td>
+                                        <input type="text" id="pet" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
+                                    </td>
+                                    <td><div class="slider success sliderPet"></div></td>
                                     <td>
                                         <ul class="actions">
                                             <li class="last"><i class="icon-remove-sign" style="color: #d5393e;"></i></li>
@@ -90,7 +101,10 @@
                                 </tr>
                                 <tr>
                                     <td><span id="catename" contenteditable="true">Emergency</span></td>
-                                    <td><div class="slider success sliderCate"></div></td>
+                                    <td>
+                                        <input type="text" id="emergency" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
+                                    </td>
+                                    <td><div class="success sliderEmergency"></div></td>
                                     <td>
                                         <ul class="actions">
                                             <li class="last"><i class="icon-remove-sign" style="color: #d5393e;"></i></li>
@@ -107,22 +121,101 @@
     <!-- scripts -->
     <script src="js/jquery-ui-1.10.2.custom.min.js"></script>
     <!-- // <script src="js/bootstrap.datepicker.js"></script> -->
-
-
+    
+    <style>
+        .tooltip {
+/*            position: absolute;*/
+            display: block;
+            width: 35px;
+            height: 20px;
+            color: #fff;
+            text-align: center;
+            font: 10pt Tahoma, Arial, sans-serif ;
+            border-radius: 3px;
+            border: 1px solid #333;
+            -webkit-box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);
+            box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            background: -moz-linear-gradient(top,  rgba(69,72,77,0.5) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,0.5)), color-stop(100%,rgba(0,0,0,0.5))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* IE10+ */
+            background: linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* W3C */
+        }
+    </style>
     <!-- initialize this page scripts -->
     <script type="text/javascript">
         $(function () {
+            var slider  = $('.sliderTotal'),
+				tooltip = $('.tooltip');
+
+			//Hide the Tooltip at first
+			tooltip.hide();
+
             $(".sliderTotal").slider({
                 range: "min",
                 value: 130,
                 min: 1,
-                max: 500
+                max: 500,
+                start: function(event,ui) {
+				    tooltip.fadeIn('fast');
+				},
+				slide: function(event, ui) {
+					var value  = slider.slider('value');
+					tooltip.css('left', value).text(ui.value);  //Adjust the tooltip accordingly                
+                    $("#totalAmount").val("$" + ui.value);
+				},
+				stop: function(event,ui) {
+				    tooltip.fadeOut('fast');
+				},
             });
-            $(".sliderCate").slider({
+            $(".sliderFood").slider({
                 range: true,
                 min: 0,
                 max: 500,
                 values: [ 40, 170 ],
+                slide: function(event, ui) {
+                    $("#food").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
+            });
+            $(".sliderRent").slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [ 10, 100 ],
+                slide: function(event, ui) {
+                    $("#rent").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
+            });
+            $(".sliderShopping").slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [ 10, 100 ],
+                slide: function(event, ui) {
+                    $("#shopping").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
+            });
+            $(".sliderPet").slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [ 10, 100 ],
+                slide: function(event, ui) {
+                    $("#pet").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
+            });
+            $(".sliderEmergency").slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [ 10, 100 ],
+                slide: function(event, ui) {
+                    $("#emergency").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
             });
 
             // Switch slide buttons
