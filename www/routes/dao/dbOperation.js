@@ -222,7 +222,7 @@ exports.getRecords = function(email,callback){
 		collection.findOne({"email" : email},function(err, doc) {
 			mongoclient.close();
 				if(err){
-					callback(err);
+					callback("error");
 				}else{
 					if(doc.records.length>0){
 						doc.records.forEach(function(element){

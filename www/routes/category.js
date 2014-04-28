@@ -4,8 +4,8 @@ exports.list = function(req, res) {
 	// get category list
 	db.getCategories(req.cookies.user, function(ret) {
 		if (ret == "error") {
-			console.log(req.cookies.user + "gets category failed!")
-			res.send({error: true, categoryList: ret})
+			console.log(req.cookies.user + "get categories failed!")
+			res.send({error: true})
 		}
 		else {
 			res.send({error: false, categoryList: ret})
@@ -21,7 +21,7 @@ exports.add = function(req, res) {
 			res.send({error: true})
 		}
 		else {
-			console.log(req.cookies.user + "adds category failed!")
+			console.log(req.cookies.user + "add category failed!")
 			res.send({error: false})
 		}
 	})
@@ -40,7 +40,7 @@ exports.delete = function(req, res) {
 			res.send({error: false})
 		}
 		else {
-			console.log(req.cookies.user + "adds category failed!")
+			console.log(req.cookies.user + "delete category failed!")
 			res.send({error: true})
 		}
 	})
