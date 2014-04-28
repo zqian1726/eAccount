@@ -240,7 +240,7 @@ exports.getRecords = function(email,callback){
 //getRecords(1,function(result){console.log(JSON.stringify(result))})
 //succeed:success
 
-editCategory = function(email,newCategories,oldCategory,newCatogory,callback){
+exports.editCategory = function(email,newCategories,oldCategory,newCatogory,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
