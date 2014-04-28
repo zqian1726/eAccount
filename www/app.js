@@ -10,6 +10,7 @@ var http = require('http')
 	, category = require('./routes/category')
 	, statistic = require('./routes/statistic')
 	, func = require('./routes/func')
+	, validate = require('./routes/validate')
 
 // access port: 3000
 app.set('port', process.env.PORT || 3000)
@@ -43,7 +44,10 @@ if ('development' == app.get('env')) {
 app.post('/signin', auth.unauthorized, auth.signin)
 app.post('/signup', auth.unauthorized, auth.signup)
 app.get('/signout', auth.authorized, auth.signout)
-app.post('/validate', auth.validate)
+
+// Validation
+app.post('/validate/email', validate.email)
+app.post('/validate/category', validate.category)
 
 // Welcome page: sign in & sign up
 app.get('/', auth.unauthorized, index.index)
