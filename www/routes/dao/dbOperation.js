@@ -270,7 +270,31 @@ exports.editCategory = function(email,newCategories,oldCategory,newCatogory,call
 }
 
 updateCategoryInRecords = function(email,oldCategory,newCatogory,callback){
-	
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.update(
+			{},
+			{
+				$set:
+				{
+					categories : newCategories
+				}
+			},
+			function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					callback("success");
+					
+				}
+		});
+		
+	});
 }
 /*
 editCategory("1@1.com",['food','rent'],1,2,function(result){
