@@ -3,6 +3,8 @@
    
 <link rel="stylesheet" href="js/map.js" type="text/css" media="screen" />
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+<script src="js/map.js"></script>
+    
 <title>Map</title>
     <div class="content">
          <div class="container-fluid">
@@ -22,10 +24,26 @@
     </div>
     
     <style type="text/css">
+        @media (min-width: 1200px) {
             #map-canvas { 
-                width: 800px; 
+                width: 1000px; 
                 height:600px;
                 margin-top:5px;
             }
+        }
+        @media (min-width: 768px) and (max-width: 979px) {
+            #map-canvas { 
+                width: 700px; 
+                height:500px;
+                margin-top:5px;
+            }
+        }
+        @media (max-width: 767px) {
+            #map-canvas { 
+                width: 400px; 
+                height:350px;
+                margin-top:5px;
+            }
+        }
     </style>
 <% include footer.html %>
