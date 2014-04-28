@@ -161,7 +161,7 @@ exports.getCategories = function (email,callback){
 		collection.findOne({"email" : email},function(err, doc) {
 			mongoclient.close();
 				if(err){
-					callback(err);
+					callback("error");
 				}else{
 					callback(doc.categories);
 				}
