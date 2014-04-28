@@ -25,54 +25,9 @@
                             <input type="text" class="search" x-webkit-speech="x-webkit-speech" />
                             
                           <a class="btn-flat success new-product" href="#addRecord" data-toggle="modal">+ Add Category</a>
-							<div id="addRecord" class="modal fade">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                            <h4 class="modal-title">Add Record</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                           <div class="span8 column">
-                                                <form>
-                                                    <div class="field-box">
-                                                        <label>Description:</label>
-                                                        <input class="span8" type="text" />
-                                                    </div>
-                                                    <div class="field-box">
-                                                        <label>Amount:</label>
-                                                        <input class="span3" type="text" />$
-                                                    </div>
-                                                    <div class="field-box">
-                                                        <label>Select:</label>
-                                                        <div class="ui-select">
-                                                            <select>
-                                                                <option selected="">Category</option>
-                                                                <option>food</option>
-                                                                <option>shopping</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                   <div class="field-box">
-                                                    <label>Datepicker:</label>
-                                                    <input type="text" id="datePicker"name="date" value="">
-                                                    <script type="text/javascript">
-                                                                $(function(){
-                                                                    $("#datePicker").appendDtpicker();
-                                                                });
-                                                            </script>
-                                                </div>
-                                                   
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" >Cancel</button>
-                                            <button type="button" class="btn btn-primary">Submit</button>
-                                        </div>
-                                </div>
-                              </div>
-                            </div>
+							
                         </div>
+
                     </div>
 
                     <div class="row-fluid">
@@ -124,6 +79,54 @@
                         </table>
                     </div>
                     <div class="row-fluid filter-block">
+                         <div id="addRecord" class="modal fade">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                            <h4 class="modal-title">Add Record</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                           <div class="span8 column">
+                                                <form>
+                                                    
+                                                    <div class="field-box">
+                                                        <label>Amount:</label>
+                                                        <input class="span3" type="text" />$
+                                                    </div>
+                                                    <div class="field-box">
+                                                        <label>Select:</label>
+                                                        <div class="ui-select">
+                                                            <select>
+                                                                <option selected="">Category</option>
+                                                                <option>food</option>
+                                                                <option>shopping</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                   <div class="field-box">
+                                                    <label>Datepicker:</label>
+                                                    <input type="text" id="datePicker"name="date" value="">
+                                                    <script type="text/javascript">
+                                                                $(function(){
+                                                                    $("#datePicker").appendDtpicker();
+                                                                });
+                                                            </script>
+                                                </div>
+                                                <div class="field-box">
+                                                        <label>Description:</label>
+                                                        <input class="span8" type="text" />
+                                                    </div>
+                                                   
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-primary">Submit</button>
+                                        </div>
+                                </div>
+                              </div>
+                            </div>
                     <div id="editRecord" class="modal fade">
                               <div class="modal-dialog">
                                 <div class="modal-content">
@@ -133,10 +136,7 @@
                                         <div class="modal-body">
                                            <div class="span8 column">
                                                 <form>
-                                                    <div class="field-box">
-                                                        <label>Description:</label>
-                                                        <input class="span8" type="text" />
-                                                    </div>
+                                                    
                                                     <div class="field-box">
                                                         <label>Amount:</label>
                                                         <input class="span3" type="text" />$
@@ -160,19 +160,21 @@
                                                                 });
                                                             </script>
                                                 </div>
+                                                <div class="field-box">
+                                                        <label>Description:</label>
+                                                        <input class="span8" type="text" />
+                                                    </div>
                                                    
                                                 </form>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" >Cancel</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
                                             <button type="button" class="btn btn-primary">Submit</button>
                                         </div>
                                 </div>
                               </div>
                             </div>
-                        </div>
-                    <div class="row-fluid filter-block">
                     <div id="deleteRecord" class="modal fade">
                               <div class="modal-dialog">
                                 <div class="modal-content">
@@ -185,13 +187,14 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" >Cancel</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
                                             <button type="button" class="btn btn-primary">Yes</button>
                                         </div>
                                 </div>
                               </div>
                             </div>
                         </div>
+                    
                 </div>
             </div>
         </div>
