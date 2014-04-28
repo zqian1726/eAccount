@@ -110,6 +110,7 @@ body {
       display: inline-block;
       color: #222; }
     .login-wrapper .already a {
+      cursor: pointer;
       color: #222;
       margin-left: 7px;
       border-bottom: 1px solid;
