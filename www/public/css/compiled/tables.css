@@ -41,7 +41,7 @@
   .table-wrapper .table ul.actions {
     margin: 5px 0 0 0;
     padding: 0;
-    float: right; }
+    /*float: right;*/ }
     .table-wrapper .table ul.actions li {
       display: inline;
       padding: 5px 6px 0px 3px; }
@@ -132,3 +132,7 @@
     float: left;
     margin: 0;
     width: 55%; } }
+    .table-wrapper .pagination{
+  float: right;
+  margin-top: 35px;
+    }
