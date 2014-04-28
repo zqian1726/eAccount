@@ -16,11 +16,19 @@
                         <i class="icon-lightbulb"></i>
                         Please use this page to updat your personal information
                     </div>
+                   
                     <h5 class="personal-title">Personal info
-                    <input type="button" id="cgender" class="btn-glow primary" value="Change Gender" />
-                    <input type="button" id="cdob" class="btn-glow primary" value="Change DoB" />
-                    <input type="button" id="cusername" class="btn-glow primary" value="Change Username" />
-                    <input type="button" id="cpassword" class="btn-glow primary" value="Change Password" /></h5>
+                        <div class="btn-group">
+                            <button class="btn glow">Drop Down Select</button>
+                            <button class="btn glow dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><input type="button" id="cinfo" class="btn-flat white" value="Reset Info"/></li>
+                                <li><input type="button" id="cpassword" class="btn-flat white" value="Reset Password"/></li>
+                            </ul>
+                        </div>
+                    </h5>
                     <form action="/user" method="post" id="userForm">
                        
                         <div id="gender" class="field-box">
@@ -31,6 +39,10 @@
                                     <option value="femail" />Female
                                 </select>
                             </div>
+                            <label>Date of Birth:</label>
+                            <input id="dob" name="dob" class="span5 inline-input" type="text" />
+                            <label>Username:</label>
+                            <input class="span5 inline-input" type="text" />
                         </div>
                         <div id="dob" class="hide field-box">
                             <label>Date of Birth:</label>
@@ -75,22 +87,10 @@
 	<!-- scripts -->
     <script>
         $(function(){
-            $('#cgender').click(function(){
+            $('#cinfo').click(function(){
                 $('#gender').removeClass('hide');
-                $('#dob').addClass('hide');
-                $('#username').addClass('hide');
-                $('#password').addClass('hide');
-            });
-            $('#cdob').click(function(){
-                $('#gender').addClass('hide');
                 $('#dob').removeClass('hide');
-                $('#username').addClass('hide');
-                $('#password').addClass('hide');
-            });
-            $('#cusername').click(function(){
-                $('#gender').addClass('hide');
-                $('#dob').addClass('hide');
-                $('#username').removeClass('hide');
+//                $('#username').removeClass('hide');
                 $('#password').addClass('hide');
             });
             $('#cpassword').click(function(){
