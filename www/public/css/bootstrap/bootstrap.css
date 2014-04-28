@@ -6162,3 +6162,6 @@ a.badge:focus {
 .dollar:before{
   content: '$';
 }
+.dollar{
+  font-weight: normal;
+}
