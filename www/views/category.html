@@ -211,7 +211,7 @@
 
             $(".sliderTotal").slider({
                 range: "min",
-                value: 130,
+                value: 230,
                 min: 1,
                 max: 500,
                 start: function(event,ui) {
@@ -227,57 +227,48 @@
 				},
             });
             $(".sliderFood").slider({
-                range: true,
+                range: "min",
                 min: 0,
                 max: 500,
-                values: [ 40, 170 ],
+                value: 130,
                 slide: function(event, ui) {
-                    $("#food").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    $("#food").val("$" + ui.value);
                 }
             });
             $(".sliderRent").slider({
-                range: true,
+                range: "min",
                 min: 0,
                 max: 500,
-                values: [ 10, 100 ],
+                value: 100,
                 slide: function(event, ui) {
-                    $("#rent").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    $("#rent").val("$" + ui.value);
                 }
             });
             $(".sliderShopping").slider({
-                range: true,
+                range: "min",
                 min: 0,
                 max: 500,
-                values: [ 10, 100 ],
+                value: 400,
                 slide: function(event, ui) {
-                    $("#shopping").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    $("#shopping").val("$" + ui.value);
                 }
             });
             $(".sliderPet").slider({
-                range: true,
+                range: "min",
                 min: 0,
                 max: 500,
-                values: [ 10, 100 ],
+                value: 245,
                 slide: function(event, ui) {
-                    $("#pet").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    $("#pet").val("$" + ui.value);
                 }
             });
             $(".sliderEmergency").slider({
-                range: true,
+                range: "min",
                 min: 0,
                 max: 500,
-                values: [ 10, 100 ],
+                value: 130,
                 slide: function(event, ui) {
-                    $("#emergency").val("$" + ui.values[0] + " - $" + ui.values[1]);
-                }
-            });
-
-            // Switch slide buttons
-            $('.slider-button').click(function() {
-                if ($(this).hasClass("on")) {
-                    $(this).removeClass('on').html($(this).data("off-text"));   
-                } else {
-                    $(this).addClass('on').html($(this).data("on-text"));
+                    $("#emergency").val("$" + ui.value);
                 }
             });
 
