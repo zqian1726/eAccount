@@ -4,31 +4,30 @@
     <link rel="stylesheet" href="css/compiled/personal-info.css" type="text/css" media="screen" />
 
 	<!-- main container .wide-content is used for this layout without sidebar :)  -->
-    <div class="content wide-content">
         <div class="container-fluid">
-           
+            
             <div class="settings-wrapper" id="pad-wrapper">
                 <!-- avatar column -->
-                <input type="button" id="cgender" class="btn-glow primary" value="Change Gender" />
-                <input type="button" id="cdob" class="btn-glow primary" value="Change DoB" />
-                <input type="button" id="cusername" class="btn-glow primary" value="Change Username" />
-                <input type="button" id="cpassword" class="btn-glow primary" value="Change Password" />
+                
                 <!-- edit form column -->
                 <div class="span7 personal-info">
                     <div class="alert alert-info">
                         <i class="icon-lightbulb"></i>
-                        <span>Please use this page to update your personal information</span>
+                        Please use this page to updat your personal information
                     </div>
-                    <h5 class="personal-title">Personal info</h5>
-
+                    <h5 class="personal-title">Personal info
+                    <input type="button" id="cgender" class="btn-glow primary" value="Change Gender" />
+                    <input type="button" id="cdob" class="btn-glow primary" value="Change DoB" />
+                    <input type="button" id="cusername" class="btn-glow primary" value="Change Username" />
+                    <input type="button" id="cpassword" class="btn-glow primary" value="Change Password" /></h5>
                     <form action="/user" method="post" id="userForm">
                        
-                        <div id="gender" class="hide field-box">
+                        <div id="gender" class="field-box">
                             <label>Gender:</label>
                             <div class="ui-select">
                                 <select id="gender" name="user[gender]">
-                                    <option value="mail">Male</option>
-                                    <option value="femail">Female</option>
+                                    <option value="mail" />Male
+                                    <option value="femail" />Female
                                 </select>
                             </div>
                         </div>
@@ -54,6 +53,7 @@
                                 <input class="span5 inline-input" type="password" />
                             </div>
                         </div>
+                        
                         <div class="span6 field-box actions">
                             <input type="button" class="btn-glow primary" value="Save Changes" />
                             <span>OR</span>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
     <!-- end main container -->
 
     <style>
