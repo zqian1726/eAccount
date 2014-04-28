@@ -1,5 +1,6 @@
 <% include header.html %>
 <% include sidebar.html %>
+ 
     <div class="content">
         <div class="container-fluid">
             <div id="pad-wrapper">
@@ -22,65 +23,68 @@
                                 </select>
                             </div>
                             <input type="text" class="search" x-webkit-speech="x-webkit-speech" />
-                            
+                        
                           <a class="btn-flat success new-product" href="#addRecord" data-toggle="modal">+ Add Category</a>
-							<div id="addRecord" class="modal fade">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                            <h4 class="modal-title">Add Record</h4>
-                                    </div>
-                                        <div class="modal-body">
-                                           <div class="span8 column">
-                                                <form>
-                                                    <div class="field-box">
-                                                        <label>Amount:</label>
-                                                        <input class="span3" type="text" />$
+                          <div id="addRecord" class="modal fade">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title">Add Record</h4>
                                                     </div>
-                                                    <div class="field-box">
-                                                        <label>in/out:</label>
-                                                        <div class="span12">  
-                                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" />
-                                                                <span for="optionsRadios1">income</span>
-                                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
-                                                                <span for="optionsRadios2">expand</span>
-                                                        </div>                                
-                                                    </div>
-                                                    <div class="field-box">
-                                                        <label>Select:</label>
-                                                        <div class="ui-select">
-                                                            <select>
-                                                                <option selected="">Category</option>
-                                                                <option>food</option>
-                                                                <option>shopping</option>
-                                                            </select>
+                                                    <div class="modal-body">
+                                                       <div class="span8 column">
+                                                            <form>
+                                                                
+                                                                <div class="field-box">
+                                                                    <label>Amount:</label>
+                                                                    <input class="span3" type="text" />$
+
+                                                                </div>
+                                                                <div class="field-box">
+                                                                    <input type="checkbox" id="my-checkbox1" checked>
+                                                                    <script type="text/javascript">
+                                                                    $("#my-checkbox1").bootstrapSwitch();
+                                                                    </script>
+                                                                </div>
+
+                                                                <div class="field-box">
+                                                                    <label>Select:</label>
+                                                                    <div class="ui-select">
+                                                                        <select>
+                                                                            <option selected="">Category</option>
+                                                                            <option>food</option>
+                                                                            <option>shopping</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                 <script type="text/javascript">           
+                                                                             $(function(){
+                                                                             $("#datePicker1").appendDtpicker();
+                                                                             });
+                                                                </script>
+                                                               <div class="field-box">
+                                                                <label>Datepicker:</label>
+                                                                <input type="text" id="datePicker1"name="date" value=""/>
+                                                                
+                                                            </div>
+                                                            <div class="field-box">
+                                                                    <label>Description:</label>
+                                                                    <input class="span" type="text" />
+                                                                </div>
+                                                               
+                                                            </form>
                                                         </div>
                                                     </div>
-                                                   <div class="field-box">
-                                                    <label>Datepicker:</label>
-                                                    <input type="text" id="datePicker"name="date" value="">
-                                                    <script type="text/javascript">
-                                                                $(function(){
-                                                                    $("#datePicker").appendDtpicker();
-                                                                });
-                                                    </script>
-                                                </div>
-                                                <div class="field-box">
-                                                        <label>Description:</label>
-                                                        <input class="span8" type="text" />
-                                                </div>   
-                                                </form>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
+                                                        <button type="button" class="btn btn-primary">Submit</button>
+                                                    </div>
                                             </div>
+                                          </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary">Submit</button>
-                                        </div>
-                                </div>
-                              </div>
-                            </div>
+                            
                         </div>
-
                     </div>
                    
 
@@ -124,85 +128,139 @@
                                     <td>
                                     	<ul class="actions">
                                             <li><a href="#editRecord" data-toggle="modal">Edit</a>
-                              <div id="editRecord" class="modal fade">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                            <h4 class="modal-title">Edit Record</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                           <div class="span8 column">
-                                                <form>
-                                                    
-                                                    <div class="field-box">
-                                                        <label>Amount:</label>
-                                                        <input class="span3" type="text" />$
-
+                                                <div id="editRecord" class="modal fade">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title">Edit Record</h4>
                                                     </div>
-                                                    <div class="field-box">
-                                                        <input type="checkbox" name="my-checkbox" checked>
-                                                        <script type="text/javascript">
-                                                        $("[name='my-checkbox']").bootstrapSwitch();
-                                                        </script>
-                                                    </div>
+                                                    <div class="modal-body">
+                                                       <div class="span8 column">
+                                                            <form>
+                                                                
+                                                                <div class="field-box">
+                                                                    <label>Amount:</label>
+                                                                    <input class="span3" type="text" />$
 
-                                                    <div class="field-box">
-                                                        <label>Select:</label>
-                                                        <div class="ui-select">
-                                                            <select>
-                                                                <option selected="">Category</option>
-                                                                <option>food</option>
-                                                                <option>shopping</option>
-                                                            </select>
+                                                                </div>
+                                                                <div class="field-box">
+                                                                    <input type="checkbox" id="my-checkbox2" checked>
+                                                                    <script type="text/javascript">
+                                                                    $("#my-checkbox2").bootstrapSwitch();
+                                                                    </script>
+                                                                </div>
+
+                                                                <div class="field-box">
+                                                                    <label>Select:</label>
+                                                                    <div class="ui-select">
+                                                                        <select>
+                                                                            <option selected="">Category</option>
+                                                                            <option>food</option>
+                                                                            <option>shopping</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                 <script type="text/javascript">           
+                                                                             $(function(){
+                                                                             $("#datePicker2").appendDtpicker();
+                                                                             });
+                                                                </script>
+                                                               <div class="field-box">
+                                                                <label>Datepicker:</label>
+                                                                <input type="text" id="datePicker2"name="date" value=""/>
+                                                                
+                                                            </div>
+                                                            <div class="field-box">
+                                                                    <label>Description:</label>
+                                                                    <input class="span" type="text" />
+                                                                </div>
+                                                               
+                                                            </form>
                                                         </div>
                                                     </div>
-                                                   <div class="field-box">
-                                                    <label>Datepicker:</label>
-                                                    <input type="text" id="datePicker2"name="date" value=""/>
-                                                    <script type="text/javascript">
-                                                                $(function(){
-                                                                    $("#datePicker2").appendDtpicker();
-                                                                });
-                                                            </script>
-                                                </div>
-                                                <div class="field-box">
-                                                        <label>Description:</label>
-                                                        <input class="span" type="text" />
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
+                                                        <button type="button" class="btn btn-primary">Submit</button>
                                                     </div>
-                                                   
-                                                </form>
                                             </div>
+                                          </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                                            <button type="button" class="btn btn-primary">Submit</button>
-                                        </div>
-                                </div>
-                              </div>
-                            </div>
                                             </li>
-                                            
                                             <li class="last"><a href="#deleteRecord" data-toggle="modal">Delete</a>
                                                 <div id="deleteRecord" class="modal fade">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                            <h4 class="modal-title">Delete Record</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                           <div class="span8 column">
-                                                <p>Are you sure you want delete this record</p>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                                            <button type="button" class="btn btn-primary">Yes</button>
-                                        </div>
-                                </div>
-                              </div>
-                            </div>
+                                                  <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                      <div class="modal-header">
+                                                                <h4 class="modal-title">Delete Record</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                               <div class="span8 column">
+                                                                    <p>Are you sure you want delete this record</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
+                                                                <button type="button" class="btn btn-primary">Yes</button>
+                                                            </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
                                             </li>
                                         </ul>
+                                          <!-- <div id="editRecord" class="modal fade">
+                                          <div class="modal-dialog">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title">Edit Record</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                       <div class="span8 column">
+                                                            <form>
+                                                                
+                                                                <div class="field-box">
+                                                                    <label>Amount:</label>
+                                                                    <input class="span3" type="text" />$
+
+                                                                </div>
+                                                                <div class="field-box">
+                                                                    <input type="checkbox" name="my-checkbox" checked>
+                                                                    <script type="text/javascript">
+                                                                    $("[name='my-checkbox']").bootstrapSwitch();
+                                                                    </script>
+                                                                </div>
+
+                                                                <div class="field-box">
+                                                                    <label>Select:</label>
+                                                                    <div class="ui-select">
+                                                                        <select>
+                                                                            <option selected="">Category</option>
+                                                                            <option>food</option>
+                                                                            <option>shopping</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                               <div class="field-box">
+                                                                <label>Datepicker:</label>
+                                                                <input type="text" id="datePicker2"name="date" value=""/>
+                                                                
+                                                            </div>
+                                                            <div class="field-box">
+                                                                    <label>Description:</label>
+                                                                    <input class="span" type="text" />
+                                                                </div>
+                                                               
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
+                                                        <button type="button" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                            </div>
+                                          </div>
+                                        </div> -->
                                     </td>
                                 </tr>
                                 <!-- row -->
@@ -210,6 +268,7 @@
                         </table>
 
                     </div>
+                   
                     <!-- <div class="row-fluid filter-block">
                          <div id="addRecord" class="modal fade">
                               <div class="modal-dialog">
@@ -335,11 +394,13 @@
                                 </div>
                               </div>
                             </div>
-                        </div> -->
+                    </div> -->
                     
                 </div>
             </div>
         </div>
     </div>
+
+
 
 <% include footer.html %>
