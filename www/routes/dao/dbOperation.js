@@ -23,8 +23,9 @@ exports.registerUser = function(email, username, password, dob, gender, callback
 			"password" : password,
 			"dob" : dob,
 			"gender" : gender,
-			"categories" : ['shopping',"food","rent"],
-			"records" : []
+			"categories" : ['income','shopping',"food","rent"],
+			"records" : [],
+			"balace" : 0
 		},function(err, result) {
 			mongoclient.close();
 			if(err){
@@ -40,6 +41,92 @@ exports.registerUser = function(email, username, password, dob, gender, callback
 //demo
 //registerUser(1,2,3,4,5,function(result){console.log(result)})
 //succeed:success
+
+exports.changePassword = function(email,newPassword,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.update(
+			{
+				"email" : email
+			},
+			{
+				$set : {
+					password : newPassword
+				}
+			},
+			function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					callback("success");
+				}
+		});
+		
+	});
+}
+//demo
+//changePassword("1@1.com","xs",function(result){console.log(result)});
+//succeed:success or error message
+
+exports.getUserInfor = function(email,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.findOne({"email" : email}, {_id:0, username:1, dob:1, gender:1}, function(err, doc) {
+			mongoclient.close();
+			if(err)		
+			  callback("error"); 	
+			else
+			  callback(doc);
+		});
+		
+	});
+}
+//demo
+//getUserInfor("1@1.com",function(result){console.log(JSON.stringify(result))});
+//retun"error" means error..if null means not found, or it will return like {"dob":2,"gender":3,"username":123}
+
+
+exports.updateUserInfo = function(email,newUsername,newDob,newGender,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.update(
+			{
+				"email" : email
+			},
+			{
+				$set : {
+					username : newUsername,
+					dob : newDob,
+					gender : newGender
+				}
+			},
+			function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					callback("success");
+				}
+		});
+		
+	});
+}
+//demo
+//updateUserInfo("1@1.com","test","04/28/2014","man",function(result){console.log(result)});
+//succeed:success 
 
 exports.checkUser = function (email,password,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
