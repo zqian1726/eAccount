@@ -1,5 +1,7 @@
 <% include header.html %>
 <% include sidebar.html %>
+<link href="css/lib/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
+ <script src="js/bootstrap-datetimepicker.js"></script>
     <div class="content">
         <div class="container-fluid">
             <div id="pad-wrapper">
@@ -28,11 +30,27 @@
                             <script>
                                 $('#addRecord').ready(function() {
                                     $("#my-checkbox1").bootstrapSwitch()
-                                    $("#datePicker1").appendDtpicker()
+                                    $('#datePicker1').datetimepicker({
+                                                    weekStart: 1,
+                                                    todayBtn:  1,
+                                                    autoclose: 1,
+                                                    todayHighlight: 1,
+                                                    startView: 2,
+                                                    forceParse: 0,
+                                                    showMeridian: 1
+                                                });
                                 })
                                 $('#editRecord').ready(function() {
                                     $("#my-checkbox2").bootstrapSwitch()
-                                    $("#datePicker2").appendDtpicker()
+                                    $('#datePicker2').datetimepicker({
+                                                    weekStart: 1,
+                                                    todayBtn:  1,
+                                                    autoclose: 1,
+                                                    todayHighlight: 1,
+                                                    startView: 2,
+                                                    forceParse: 0,
+                                                    showMeridian: 1
+                                                });
                                 })
                             </script>
                             <div id="addRecord" class="modal hide fade" role="dialog">
@@ -63,7 +81,7 @@
                                                     </div>
                                                     <div class="field-box">
                                                         <label>Pick a date and time:</label>
-                                                        <input type="text" id="datePicker1" name="datetime" value=""/>
+                                                        <input type="text" id="datePicker1" value="" />
                                                     </div>
                                                     <div class="field-box">
                                                         <label>Description:</label>
@@ -155,7 +173,7 @@
                                                                         </div>
                                                                         <div class="field-box">
                                                                             <label>Pick a date and time:</label>
-                                                                            <input type="text" id="datePicker2" name="datetime" value=""/>
+                                                                            <input type="text" id="datePicker2" value="" />
                                                                         </div>
                                                                         <div class="field-box">
                                                                             <label>Description:</label>
