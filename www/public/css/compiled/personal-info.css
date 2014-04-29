@@ -25,6 +25,13 @@
     margin: 0 0 50px 50px;
     color: #696d73;
     font-style: italic; }
+  .settings-wrapper .personal-info li.personal-title {
+    font-size: 15px;
+    color: #696d73;
+    font-weight: bold; }
+  .settings-wrapper .personal-info div.infotab{
+    margin-left: 50px;
+  }
   .settings-wrapper .personal-info form {
     margin-left: 50px; }
   .settings-wrapper .personal-info .field-box {
@@ -71,6 +78,10 @@
     margin-top: 40px; }
     .settings-wrapper .personal-info h5.personal-title {
       margin-left: 0; }
+    .settings-wrapper .personal-info div.infotab{
+    margin-left: 0;
+  }
+
     .settings-wrapper .personal-info .field-box {
       margin-left: 0; }
     .settings-wrapper .personal-info .ui-select {

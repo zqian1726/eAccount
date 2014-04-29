@@ -347,7 +347,7 @@
   background-repeat: no-repeat; }
   .ui-select select {
     line-height: inherit;
-    width: 135%;
+    width: 150%;
     font-family: "Open Sans", Arial;
     font-size: 12px;
     border: none;
@@ -357,6 +357,7 @@
     color: #737f8d;
     text-shadow: 1px 1px 1px #fff;
     background: transparent; }
+
 
 /* jQuery UI Slider overrides */
 .ui-slider {

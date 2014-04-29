@@ -1,37 +1,34 @@
 <% include header.html %>
 <% include sidebar.html %>
+    <!-- libraries -->
+    <link href="css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet" />
     <!-- this page specific styles -->
     <link rel="stylesheet" href="css/compiled/personal-info.css" type="text/css" media="screen" />
+    <script src="js/bootstrap.datepicker.js"></script>
+
 
 	<!-- main container .wide-content is used for this layout without sidebar :)  -->
     <div class="content">
         <div class="container-fluid">
             
             <div class="settings-wrapper" id="pad-wrapper">
-                <!-- avatar column -->
                 
-                <!-- edit form column -->
-                <div class="span7 personal-info">
+                <div class="span8 personal-info">
                     <div class="alert alert-info">
                         <i class="icon-lightbulb"></i>
                         Please use this page to updat your personal information
                     </div>
                    
-                    <h5 class="personal-title">Personal info
-                        <div class="btn-group">
-                            <button class="btn glow">Drop Down Select</button>
-                            <button class="btn glow dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><input type="button" id="cinfo" class="btn-flat white" value="Reset Info"/></li>
-                                <li><input type="button" id="cpassword" class="btn-flat white" value="Reset Password"/></li>
-                            </ul>
-                        </div>
-                    </h5>
-                    <form action="/user" method="post" id="userForm">
-                       
-                        <div id="gender" class="field-box">
+                    <h5 class="personal-title">Personal info</h5>
+                    <div class="infotab">
+                    <ul class="nav nav-tabs">
+                        <li class="active personal-title" ><a data-toggle="tab" href="#sectionA">Change Basic Information</a></li>
+                        <li class="personal-title"><a data-toggle="tab" href="#sectionB">Change Password</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="sectionA" class="tab-pane fade in active">
+                        <form action="/user" method="post" id="userForm1">
+                         <div id="gender" class="field-box">
                             <label>Gender:</label>
                             <div class="ui-select">
                                 <select id="gender" name="user[gender]">
@@ -39,20 +36,40 @@
                                     <option value="femail" />Female
                                 </select>
                             </div>
+                            
+                        </div>
+                        <div id="dob" class="field-box">
                             <label>Date of Birth:</label>
-                            <input id="dob" name="dob" class="span5 inline-input" type="text" />
+                            <input class="span5 inline-input" id="dobin"  value="" type="text" />
+                        </div>
+                        <script>
+                                $('#dob').ready(function() {
+                                             
+                                                $('#dobin').datepicker({
+                                                        weekStart: 1,
+                                                        todayBtn:  1,
+                                                        autoclose: 1,
+                                                        todayHighlight: 1,
+                                                        startView: 2,
+                                                        forceParse: 0,
+                                                        showMeridian: 1
+                                                    });
+                                            })
+                        </script>
+                        <div id="username" class="field-box">
                             <label>Username:</label>
                             <input class="span5 inline-input" type="text" />
                         </div>
-                        <div id="dob" class="hide field-box">
-                            <label>Date of Birth:</label>
-                            <input id="dob" name="dob" class="span5 inline-input" type="text" />
+                        <div class="span6 field-box actions">
+                            <input type="submit" class="btn-glow primary" value="Save Changes" />
+                            <span>OR</span>
+                            <input type="reset" value="Cancel" class="reset" />
                         </div>
-                        <div id="username" class="hide field-box">
-                            <label>Username:</label>
-                            <input class="span5 inline-input" type="text" />
-                        </div>
-                        <div id="password" class="hide">
+                     </form>
+                     </div>
+                        <div id="sectionB" class="tab-pane fade">
+                            <form action="/user" method="post" id="userForm2">
+                            <div id="password">
                             <div class="field-box">
                                 <label>Old Password:</label>
                                 <input class="span5 inline-input" type="password" />
@@ -66,39 +83,20 @@
                                 <input class="span5 inline-input" type="password" />
                             </div>
                         </div>
-                        
                         <div class="span6 field-box actions">
                             <input type="submit" class="btn-glow primary" value="Save Changes" />
                             <span>OR</span>
                             <input type="reset" value="Cancel" class="reset" />
-                        </div>
+                    </div>
                     </form>
+                    </div>    
+                    </div>
+                  </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- end main container -->
 
-    <style>
-        .hide{
-            display:none;
-        }
-    </style>
-	<!-- scripts -->
-    <script>
-        $(function(){
-            $('#cinfo').click(function(){
-                $('#gender').removeClass('hide');
-                $('#dob').removeClass('hide');
-//                $('#username').removeClass('hide');
-                $('#password').addClass('hide');
-            });
-            $('#cpassword').click(function(){
-                $('#gender').addClass('hide');
-                $('#dob').addClass('hide');
-                $('#username').addClass('hide');
-                $('#password').removeClass('hide');
-            });
-        });
-    </script>
+
 <% include footer.html %>
