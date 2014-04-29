@@ -1,10 +1,12 @@
 <% include header.html %>
 <% include sidebar.html %>
     <!-- libraries -->
-    <link href="css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet" />
+    <!-- <link href="css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet" /> -->
+    <link href="css/lib/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
     <!-- this page specific styles -->
     <link rel="stylesheet" href="css/compiled/personal-info.css" type="text/css" media="screen" />
-    <script src="js/bootstrap.datepicker.js"></script>
+    <!-- // <script src="js/bootstrap.datepicker.js"></script> -->
+    <script src="js/bootstrap-datetimepicker.js"></script>
 
 
 	<!-- main container .wide-content is used for this layout without sidebar :)  -->
@@ -40,19 +42,19 @@
                         </div>
                         <div id="dob" class="field-box">
                             <label>Date of Birth:</label>
-                            <input class="span5 inline-input" id="dobin"  value="" type="text" />
+                            <input class="span5 inline-input" id="dobin" data-date-format="mm-dd-yyyy" value="" type="text" />
                         </div>
                         <script>
                                 $('#dob').ready(function() {
                                              
-                                                $('#dobin').datepicker({
+                                                $('#dobin').datetimepicker({
                                                         weekStart: 1,
                                                         todayBtn:  1,
                                                         autoclose: 1,
                                                         todayHighlight: 1,
-                                                        startView: 2,
-                                                        forceParse: 0,
-                                                        showMeridian: 1
+                                                        startView: 4,
+                                                        minView: 2,
+                                                        forceParse: 0
                                                     });
                                             })
                         </script>
