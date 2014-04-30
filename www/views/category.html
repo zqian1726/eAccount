@@ -32,14 +32,14 @@
                                                 <form>
                                                     <div class="field-box">
                                                         <label>category name:</label>
-                                                        <input class="span3" type="text" />
+                                                        <input class="span3 addcategory-name" type="text" />
                                                     </div>   
                                                 </form>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-primary">ADD</button>
+                                            <button type="button" class="btn btn-primary addcategory-button">ADD</button>
                                         </div>
                                 </div>
                               </div>
@@ -69,9 +69,10 @@
                                     <th class="span1"><span class="line"></span></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="category-table">
                                 <!-- row -->
-                                <tr class="first">
+                                <!--
+                                <tr>
                                     <td><span id="catename" contenteditable="true">Food</span></td>
                                     <td>
                                         <input type="text" id="food" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
@@ -86,61 +87,7 @@
                                         </ul>
                                     </td>
                                 </tr>
-                                <!-- row -->
-                                <tr>
-                                    <td><span id="catename" contenteditable="true">Rent</span></td>
-                                    <td>
-                                        <input type="text" id="rent" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
-                                    </td>
-                                    <td><div class="success sliderRent"></div></td>
-                                    <td>
-                                        <ul class="actions">
-                                            <li class="last"><a href="#deleteCate" data-toggle="modal" class="icon-remove-sign" style="color: #d5393e;">
-                                                </a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <!-- row -->
-                                <tr>
-                                    <td><span id="catename" contenteditable="true">Shopping</span></td>
-                                    <td>
-                                        <input type="text" id="shopping" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
-                                    </td>
-                                    <td><div class="success sliderShopping"></div></td>
-                                    <td>
-                                        <ul class="actions">
-                                            <li class="last"><a href="#deleteCate" data-toggle="modal" class="icon-remove-sign" style="color: #d5393e;">
-                                                </a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <!-- row -->
-                                <tr>
-                                    <td><span id="catename" contenteditable="true">Pet</span></td>
-                                    <td>
-                                        <input type="text" id="pet" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
-                                    </td>
-                                    <td><div class="slider success sliderPet"></div></td>
-                                    <td>
-                                        <ul class="actions">
-                                            <li class="last"><a href="#deleteCate" data-toggle="modal" class="icon-remove-sign" style="color: #d5393e;">
-                                                </a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span id="catename" contenteditable="true">Emergency</span></td>
-                                    <td>
-                                        <input type="text" id="emergency" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
-                                    </td>
-                                    <td><div class="success sliderEmergency"></div></td>
-                                    <td>
-                                        <ul class="actions">
-                                            <li class="last"><a href="#deleteCate" data-toggle="modal" class="icon-remove-sign" style="color: #d5393e;">
-                                                </a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
+                                -->
                             </tbody>
                         </table>
                     </div>
@@ -162,7 +109,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                                    <button type="button" class="btn btn-primary">Yes</button>
+                                    <button type="button" class="btn btn-primary delete-confirm">Yes</button>
                                 </div>
                             </div>
                         </div>
@@ -176,56 +123,120 @@
     <script src="js/jquery-ui-1.10.2.custom.min.js"></script>
     <!-- // <script src="js/bootstrap.datepicker.js"></script> -->
     
-    <style>
-        .tooltip {
-/*            position: absolute;*/
-            display: block;
-            width: 35px;
-            height: 20px;
-            color: #fff;
-            text-align: center;
-            font: 10pt Tahoma, Arial, sans-serif ;
-            border-radius: 3px;
-            border: 1px solid #333;
-            -webkit-box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);
-            box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-            background: -moz-linear-gradient(top,  rgba(69,72,77,0.5) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,0.5)), color-stop(100%,rgba(0,0,0,0.5))); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* IE10+ */
-            background: linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* W3C */
-        }
-    </style>
     <!-- initialize this page scripts -->
-    <script type="text/javascript">
+    <script type="text/javascript" class="dd">
         $(function () {
-            var slider  = $('.sliderTotal'),
-				tooltip = $('.tooltip');
-
-			//Hide the Tooltip at first
-			tooltip.hide();
-
-            $(".sliderTotal").slider({
-                range: "min",
-                value: 130,
-                min: 1,
-                max: 500,
-                start: function(event,ui) {
-				    tooltip.fadeIn('fast');
-				},
-				slide: function(event, ui) {
-					var value  = slider.slider('value');
-					tooltip.css('left', value).text(ui.value);  //Adjust the tooltip accordingly                
-                    $("#totalAmount").val("$" + ui.value);
-				},
-				stop: function(event,ui) {
-				    tooltip.fadeOut('fast');
-				},
-            });
+            //get catigories from server
+            $.ajax({
+                type: "GET",
+                url: "/category/list",
+                dataType: "json",
+                success:function(msg){
+                    if(msg.error){
+                        alert("db error");
+                    }else{
+                        
+                        var content;
+                        for(var i = 0; i < msg.categoryList.length; i++){
+                            content += "<tr><td><span id= '"+msg.categoryList[i]+"name' contenteditable='true'>"+msg.categoryList[i]+"</span></td><td><input type='text' id='"+msg.categoryList[i]+"' disabled style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i]+"'></div></td><td><ul class='actions'><li><button href='#deleteCate' id='delete-"+msg.categoryList[i]+"' data-toggle='modal' class='icon-remove-sign deleteCate' style='color: #d5393e;'></button></li></ul></td></tr>"                      
+                        }
+                        $('.category-table').html(content);
+                        
+                        var slider  = $('.sliderTotal'),
+				        tooltip = $('.tooltip');
+                        //Hide the Tooltip at first
+                        tooltip.hide();
+                        $(".sliderTotal").slider({
+                            range: "min",
+                            value: 40,
+                            min: 0,
+                            max: 500,
+                            start: function(event,ui) {
+				                tooltip.fadeIn('fast');
+				            },
+				            slide: function(event, ui) {
+					           var value  = slider.slider('value');
+					           tooltip.css('left', value).text(ui.value);  //Adjust the tooltip accordingly            
+                               $("#totalAmount").val("$" + ui.value);
+				            },
+				            stop: function(event,ui) {
+				                tooltip.fadeOut('fast');
+				            },
+                        });
+                        
+                        for(var i = 0; i < msg.categoryList.length; i++){
+                            
+                            $(".slider"+msg.categoryList[i]).slider({
+                                range: "min",
+                                min: 0,
+                                max: 500,
+                                value: 40,
+                                slide: function(event, ui) {
+                                    $("#"+msg.categoryList[i]).val("$" + ui.value);
+                                    //console.log(ele);
+                                }
+                            });
+                        }
+                        // Switch slide buttons
+                        $('.slider-button').click(function() {
+                            if ($(this).hasClass("on")) {
+                                $(this).removeClass('on').html($(this).data("off-text"));   
+                            } else {
+                                $(this).addClass('on').html($(this).data("on-text"));
+                            }
+                        });
+                        //add category
+                        $('.addcategory-button').click(function(){
+                            if($('.addcategory-name').val() == ''){
+                                $('.field-box').append('Please enter a category name');
+                            }
+                            else{
+                                for(var i = 0; i < msg.categoryList.length; i++){
+                                    if($('.addcategory-name').val() == msg.categoryList[i]){
+                                        $('.field-box').append('You have already set this category');
+                                        break;
+                                    }else{
+                                        if(i == msg.categoryList.length-1){
+                                            $.ajax({
+                                                type: "POST",
+                                                url: "/category/add",
+                                                data: {category:$('.addcategory-name').val()},
+                                                dataType: "json",
+                                                success: function(msg){
+                                                    if(msg == true){
+                                                        location.reload();
+                                                    }
+                                                }
+                                            })
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        
+                        //delete category
+                        $('.deleteCate').click(function(){
+                            var temp = $(this).attr('id').split('-');
+                            var name = temp[1];
+                            $('.delete-confirm').click(function(){
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/category/delete",
+                                    data: {category: name},
+                                    datatype: "json",
+                                    success:function(msg){
+                                        if(msg == true){
+                                            location.reload();
+                                        }
+                                    }
+                                })
+                            })
+                            console.log(name);
+                        })
+                    }
+                }
+            })
+            /*
             $(".sliderFood").slider({
                 range: "min",
                 min: 0,
@@ -271,7 +282,27 @@
                     $("#emergency").val("$" + ui.value);
                 }
             });
-
+            
+            
+            
+            $(".sliderTotal").slider({
+                range: "min",
+                value: totalValue,
+                min: 0,
+                max: 500,
+                start: function(event,ui) {
+				    tooltip.fadeIn('fast');
+				},
+				slide: function(event, ui) {
+					var value  = slider.slider('value');
+					tooltip.css('left', value).text(ui.value);  //Adjust the tooltip accordingly                
+                    $("#totalAmount").val("$" + ui.value);
+				},
+				stop: function(event,ui) {
+				    tooltip.fadeOut('fast');
+				},
+            });
+            
             // Switch slide buttons
             $('.slider-button').click(function() {
                 if ($(this).hasClass("on")) {
@@ -280,9 +311,9 @@
                     $(this).addClass('on').html($(this).data("on-text"));
                 }
             });
-
+            */
         });
-        
+        /*
         var editable = document.getElementById('catename');
         
         addEvent(editable, 'blur', function () {
@@ -296,8 +327,31 @@
 
         if (localStorage.getItem('catename')) {
           editable.innerHTML = localStorage.getItem('catename');
-        }
+        }*/
 	</script>
-
+    <style>
+        .tooltip {
+/*            position: absolute;*/
+            display: block;
+            width: 35px;
+            height: 20px;
+            color: #fff;
+            text-align: center;
+            font: 10pt Tahoma, Arial, sans-serif ;
+            border-radius: 3px;
+            border: 1px solid #333;
+            -webkit-box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);
+            box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            background: -moz-linear-gradient(top,  rgba(69,72,77,0.5) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,0.5)), color-stop(100%,rgba(0,0,0,0.5))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* IE10+ */
+            background: linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* W3C */
+        }
+    </style>
 
 <% include footer.html %>
