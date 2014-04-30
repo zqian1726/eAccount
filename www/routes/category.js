@@ -19,11 +19,11 @@ exports.add = function(req, res) {
 	var item = req.body.name
 	db.addCategory(req.cookies.user, item, function(ret) {
 		if (ret == "success") {
-			res.send({error: true})
+			res.send({error: false})
 		}
 		else {
 			console.log(req.cookies.user + "add category failed!")
-			res.send({error: false})
+			res.send({error: true})
 		}
 	})
 }
