@@ -29,3 +29,16 @@ exports.update = function(req, res) {
 		}
 	})
 }
+
+exports.reset = function(req, res) {
+	// reset password
+	db.changePassword(req.cookies.user, req.body.newpass, function(ret) {
+		if (ret == "success") {
+			res.send({error: false})
+		}
+		else {
+			console.log(req.cookies.user + " reset pass failed!")
+			res.send({error: true})
+		}
+	})
+}

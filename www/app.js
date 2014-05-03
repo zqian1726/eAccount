@@ -58,6 +58,7 @@ app.get('/home', auth.authorized, index.home)
 // User page:
 app.put('/user', auth.authorized, user.update)
 app.get('/user', auth.authorized, user.info)
+app.post('/user/reset', auth.authorized, user.reset)
 
 // Record CRUD:
 app.post('/record/new', auth.authorized, record.add)
