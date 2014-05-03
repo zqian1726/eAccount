@@ -2,7 +2,7 @@ var db = require('./dao/dbOperation')
 
 exports.list = function(req, res) {
 	// get record list
-	db.getRecords(req.cookies.user, function() {
+	db.getRecords(req.cookies.user, function(ret) {
 		if (ret == "error") {
 			console.log(req.cookies.user + "get records failed!")
 			res.send({error: true})

@@ -30,7 +30,17 @@ exports.add = function(req, res) {
 
 exports.update = function(req, res) {
 	// update a category
-
+	// var newItem = req.body.name
+	// 	, oldItem = req.body.old
+	// db.editCategory(req.cookies.user, newItem, oldItem, function(ret) {
+	// 	if (ret == "success") {
+	// 		res.send({error: false})
+	// 	}
+	// 	else {
+	// 		console.log(req.cookies.user + "edit category failed!")
+	// 		res.send({error: true})
+	// 	}
+	// })
 }
 
 exports.delete = function(req, res) {
