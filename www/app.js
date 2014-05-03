@@ -71,7 +71,7 @@ app.get('/record', auth.authorized, record.index)
 // Record CRUD:
 app.post('/category/new', auth.authorized, category.add)
 app.put('/category/:tag', auth.authorized, category.update)
-app.del('/category/:tag', auth.authorized, category.delete)
+app.del('/category', auth.authorized, category.delete)
 app.get('/category/list', auth.authorized, category.list)
 // Record page:
 app.get('/category', auth.authorized, category.index)
