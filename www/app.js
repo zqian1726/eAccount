@@ -47,7 +47,6 @@ app.get('/signout', auth.authorized, auth.signout)
 
 // Validation
 app.post('/validate/email', validate.email)
-app.post('/validate/category', validate.category)
 
 // Welcome page: sign in & sign up
 app.get('/', auth.unauthorized, index.index)

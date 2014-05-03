@@ -1,4 +1,5 @@
 var db = require('./dao/dbOperation')
+	, validator = require('./validate')
   , sha1 = require('sha1')
   , default_cookie_time = 1000 * 60 * 60 * 2; // 2 hour
 
@@ -27,6 +28,8 @@ exports.authorized = function (req, res, next) {
  * Handlers
  */
 exports.signin = function(req, res) {
+	// validate
+
 	// log in
 	db.checkUser(req.body.email, sha1(req.body.password), function(ret) {
 		if (ret) {

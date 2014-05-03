@@ -1,5 +1,6 @@
 var db = require('./dao/dbOperation')
-
+  , sha1 = require('sha1')
+  
 exports.info = function(req, res) {
 	// send profile information
 	db.getUserInfor(req.cookies.user, function(ret) {
@@ -32,7 +33,7 @@ exports.update = function(req, res) {
 
 exports.reset = function(req, res) {
 	// reset password
-	db.changePassword(req.cookies.user, req.body.newPass, function(ret) {
+	db.changePassword(req.cookies.user, sha1(req.body.newPass), function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
 		}
