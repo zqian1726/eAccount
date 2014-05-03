@@ -244,7 +244,7 @@
                             var cat = temp[1];
                             $('.delete-confirm').click(function(){
                                 $.ajax({
-                                    type: "POST",
+                                    type: "DELETE",
                                     url: "/category",
                                     data: {_method:"delete", name: cat},
                                     datatype: "json",
