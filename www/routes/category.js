@@ -11,7 +11,7 @@ exports.list = function(req, res) {
 	// 		res.send({error: false, categoryList: ret})
 	// 	}
 	// })
-	res.send({error: false, categoryList: ["Food", "Shopping", "Rent", "Pet", "Emergency"]})
+	res.send({error: false, categoryList: ["food", "shopping", "rent", "pet", "emergency"]})
 }
 
 exports.add = function(req, res) {
