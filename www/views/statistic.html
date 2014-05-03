@@ -1,13 +1,5 @@
 <% include header.html %>
 <% include sidebar.html %>
-    <style>
-        @media (min-width: 768px) and (max-width: 979px) {
-            
-        }
-        @media (max-width: 767px) {
-            
-        }
-    </style>
     <div class="content">
         <div class="container-fluid">
             <div id="pad-wrapper">
@@ -24,10 +16,10 @@
                     <div class="span12" id="sectionWeek">
                         <div id="statsChart"></div>
                     </div>
-                    <div class="span12" id="sectionMonth">
+                    <div class="span12 hide" id="sectionMonth">
                         <div id="statsChartMonth"></div>
                     </div>
-                    <div class="span12" id="sectionYear">
+                    <div class="span12 hide" id="sectionYear">
                         <div id="statsChartYear"></div>
                     </div>
                  
@@ -69,25 +61,25 @@
             $("#weekbtn").addClass("active");
             $("#monthbtn").removeClass("active");
             $("#yearbtn").removeClass("active");
-            $("#sectionWeek").show();
-            $("#sectionMonth").hide();
-            $("#sectionYear").hide();
+            $("#sectionWeek").removeClass("hide");
+            $("#sectionMonth").addClass("hide");
+            $("#sectionYear").addClass("hide");
         });
         $("#monthbtn").click(function(){
             $("#weekbtn").removeClass("active");
             $("#monthbtn").addClass("active");
             $("#yearbtn").removeClass("active");
-            $("#sectionWeek").hide();
-            $("#sectionMonth").show();
-            $("#sectionYear").hide();
+            $("#sectionWeek").addClass("hide");
+            $("#sectionMonth").removeClass("hide");
+            $("#sectionYear").addClass("hide");
         });
         $("#yearbtn").click(function(){
             $("#weekbtn").removeClass("active");
             $("#monthbtn").removeClass("active");
             $("#yearbtn").addClass("active");
-            $("#sectionWeek").hide();
-            $("#sectionMonth").hide();
-            $("#sectionYear").show();
+            $("#sectionWeek").addClass("hide");
+            $("#sectionMonth").addClass("hide");
+            $("#sectionYear").removeClass("hide");
         });
     </script>
     
