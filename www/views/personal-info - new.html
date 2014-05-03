@@ -1,0 +1,105 @@
+<% include header.html %>
+<% include sidebar.html %>
+    <!-- libraries -->
+    <!-- <link href="css/lib/bootstrap.datepicker.css" type="text/css" rel="stylesheet" /> -->
+    <link href="css/lib/bootstrap-datetimepicker.css" type="text/css" rel="stylesheet" />
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="css/compiled/personal-info.css" type="text/css" media="screen" />
+    <!-- // <script src="js/bootstrap.datepicker.js"></script> -->
+    <script src="js/bootstrap-datetimepicker.js"></script>
+
+
+	<!-- main container .wide-content is used for this layout without sidebar :)  -->
+    <div class="content">
+        <div class="container-fluid">
+            
+            <div class="settings-wrapper" id="pad-wrapper">
+                
+                <div class="span8 personal-info">
+                    <div class="alert alert-info">
+                        <i class="icon-lightbulb"></i>
+                        Please use this page to update your personal information
+                    </div>
+                   
+                    <h5 class="personal-title">Personal info</h5>
+                    <div class="infotab">
+                    <ul class="nav nav-tabs">
+                        <li class="active personal-title" ><a data-toggle="tab" href="#sectionA">Change Basic Information</a></li>
+                        <li class="personal-title"><a data-toggle="tab" href="#sectionB">Change Password</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="sectionA" class="tab-pane fade in active">
+                        <form action="/user" method="post" id="userForm1">
+                         <div id="gender" class="field-box">
+                            <label>Gender:</label>
+                            <div class="ui-select">
+                                <select id="gender" name="user[gender]">
+                                    <option value="mail" />Male
+                                    <option value="femail" />Female
+                                    <option value="femail" />other
+                                </select>
+                            </div>
+                            
+                        </div>
+                        <div id="dob" class="field-box">
+                            <label>Date of Birth:</label>
+                            <input class="span5 inline-input" id="dobin" data-date-format="mm-dd-yyyy" value="" type="text" />
+                        </div>
+                        <script>
+                                $('#dob').ready(function() {
+                                             
+                                                $('#dobin').datetimepicker({
+                                                        weekStart: 1,
+                                                        todayBtn:  1,
+                                                        autoclose: 1,
+                                                        todayHighlight: 1,
+                                                        startView: 4,
+                                                        minView: 2,
+                                                        forceParse: 0
+                                                    });
+                                            })
+                        </script>
+                        <div id="username" class="field-box">
+                            <label>Username:</label>
+                            <input class="span5 inline-input" type="text" />
+                        </div>
+                        <div class="span6 field-box actions">
+                            <input type="submit" class="btn-glow primary" value="Save Changes" />
+                            <span>OR</span>
+                            <input type="reset" value="Cancel" class="reset" />
+                        </div>
+                     </form>
+                     </div>
+                        <div id="sectionB" class="tab-pane fade">
+                            <form action="/user" method="post" id="userForm2">
+                            <div id="password">
+                            <div class="field-box">
+                                <label>Old Password:</label>
+                                <input class="span5 inline-input" type="password" />
+                            </div>   
+                            <div class="field-box">
+                                <label>New Password:</label>
+                                <input class="span5 inline-input" type="password" />
+                            </div>
+                            <div class="field-box">
+                                <label>Confirm new password:</label>
+                                <input class="span5 inline-input" type="password" />
+                            </div>
+                        </div>
+                        <div class="span6 field-box actions">
+                            <input type="submit" class="btn-glow primary" value="Save Changes" />
+                            <span>OR</span>
+                            <input type="reset" value="Cancel" class="reset" />
+                    </div>
+                    </form>
+                    </div>    
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main container -->
+
+
+<% include footer.html %>
