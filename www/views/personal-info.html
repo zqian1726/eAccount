@@ -8,7 +8,39 @@
     <!-- // <script src="js/bootstrap.datepicker.js"></script> -->
     <script src="js/bootstrap-datetimepicker.js"></script>
 
+    <script>
+     $().ready(function() {
+    $("#userForm2").validate({
+                rules: {
+                    newPass: {
+                        required: true,
+                        minlength: 6
+                    },
+                    renewPass: {
+                        required: true,
+                        minlength: 6,
+                        equalTo: "#newPass"
+                    }
+                    
+                },
+                messages: {
+                    newPass: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 6 characters long"
+                    },
+                    renewPass: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 6 characters long",
+                        equalTo: "Please enter the same password as above"
+                    }
+                    
+                    
+                }
+            });
+    
+});
 
+    </script>
 	<!-- main container .wide-content is used for this layout without sidebar :)  -->
     <div class="content">
         <div class="container-fluid">
@@ -18,7 +50,7 @@
                 <div class="span8 personal-info">
                     <div class="alert alert-info">
                         <i class="icon-lightbulb"></i>
-                        Please use this page to updat your personal information
+                        Please use this page to update your personal information
                     </div>
                    
                     <h5 class="personal-title">Personal info</h5>
@@ -36,6 +68,7 @@
                                 <select id="gender" name="user[gender]">
                                     <option value="mail" />Male
                                     <option value="femail" />Female
+                                    <option value="femail" />other
                                 </select>
                             </div>
                             
@@ -58,9 +91,9 @@
                                                     });
                                             })
                         </script>
-                        <div id="username" class="field-box">
+                        <div class="field-box">
                             <label>Username:</label>
-                            <input class="span5 inline-input" type="text" />
+                            <input id="username" class="span5 inline-input" type="text" />
                         </div>
                         <div class="span6 field-box actions">
                             <input type="submit" class="btn-glow primary" value="Save Changes" />
@@ -70,23 +103,25 @@
                      </form>
                      </div>
                         <div id="sectionB" class="tab-pane fade">
-                            <form action="/user" method="post" id="userForm2">
-                            <div id="password">
+                            <form action="/changePassword" method="post" id="userForm2">
+                            <div>
                             <div class="field-box">
                                 <label>Old Password:</label>
                                 <input class="span5 inline-input" type="password" />
                             </div>   
+                          
+                                <label style="width: 770px;"for="newPass">New Password:</label>
+                                <input class="span5 inline-input" name = "newPass" id ="newPass" type="password" />
+                                
+                               
+                           
                             <div class="field-box">
-                                <label>New Password:</label>
-                                <input class="span5 inline-input" type="password" />
-                            </div>
-                            <div class="field-box">
-                                <label>Confirm new password:</label>
-                                <input class="span5 inline-input" type="password" />
+                                <label  style="width:770px;"for="renewPass">Confirm new password: </label>
+                                <input class="span5 inline-input" name = "renewPass"id ="renewPass"type="password" />  
                             </div>
                         </div>
                         <div class="span6 field-box actions">
-                            <input type="submit" class="btn-glow primary" value="Save Changes" />
+                            <input type="submit" class="btn-glow primary"  value="Save Changes" />
                             <span>OR</span>
                             <input type="reset" value="Cancel" class="reset" />
                     </div>
