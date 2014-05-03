@@ -138,7 +138,7 @@
                         
                         var content;
                         for(var i = 0; i < msg.categoryList.length; i++){
-                            content += "<tr><td><span id= '"+msg.categoryList[i]+"name' contenteditable='true'>"+msg.categoryList[i]+"</span></td><td><input type='text' id='"+msg.categoryList[i]+"' disabled style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i]+"'></div></td><td><ul class='actions'><li><button href='#deleteCate' id='delete-"+msg.categoryList[i]+"' data-toggle='modal' class='icon-remove-sign deleteCate' style='color: #d5393e;'></button></li></ul></td></tr>"                      
+                            content += "<tr><td><span id= '"+msg.categoryList[i]+"name' contenteditable='true'>"+msg.categoryList[i]+"</span></td><td><input type='text' id='"+msg.categoryList[i]+"' disabled style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i]+"'></div></td><td><ul class='actions'><li><a href='#deleteCate' id='delete-"+msg.categoryList[i]+"' data-toggle='modal' class='icon-remove-sign deleteCate' style='color: #d5393e;'></a></li></ul></td></tr>"                      
                         }
                         $('.category-table').html(content);
                         
@@ -241,12 +241,12 @@
                         //delete category
                         $('.deleteCate').click(function(){
                             var temp = $(this).attr('id').split('-');
-                            var name = temp[1];
+                            var cat = temp[1];
                             $('.delete-confirm').click(function(){
                                 $.ajax({
-                                    type: "DEL",
-                                    url: "/category/"+name,
-                                    data: name,
+                                    type: "POST",
+                                    url: "/category",
+                                    data: {_method:"delete", name: cat},
                                     datatype: "json",
                                     success:function(msg){
                                         if(msg.error == false){
