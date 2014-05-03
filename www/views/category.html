@@ -149,7 +149,8 @@
                         
                         var totleValue = 40*msg.categoryList.length;
                         var totleMax = 0;
-                        var diff;
+                        var start;
+                        var stop;
                         for(var i = 0; i < msg.categoryList.length; i++){
                             var ele = msg.categoryList[i];
                             (function(ele){
@@ -166,12 +167,13 @@
                                         //console.log(ele);
                                     },
                                     start: function(event, ui){
-                                        diff = ui.value;
+                                        start = ui.value;
                                     },
                                     stop: function(event, ui){
-                                        diff = ui.value - diff;
+                                        stop = ui.value;
+                                        var diff = stop-start;
                                         totleValue+=diff;
-                                        $("#totalAmount").val(diff);
+                                        $("#totalAmount").val("$" + totleValue);
                                     }
                                 });
                             }(ele))                            
