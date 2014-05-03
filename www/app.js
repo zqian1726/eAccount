@@ -83,6 +83,7 @@ app.get('/map', auth.authorized, func.map)
 app.get('/calendar', auth.authorized, func.calendar)
 
 // 404
+app.get('/404', index._404)
 app.get('*', index._404)
 
 // start server
