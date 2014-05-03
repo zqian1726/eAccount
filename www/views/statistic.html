@@ -7,31 +7,24 @@
                 <div class="row-fluid section">
                     <h4 class="title">
                         <div class="btn-group pull-right">
-                            <button class="glow left">WEEK</button>
-                            <button class="glow middle active">MONTH</button>
-                            <button class="glow right">YEAR</button>
+                            <button class="glow left" id="weekbtn">WEEK</button>
+                            <button class="glow middle" id="monthbtn">MONTH</button>
+                            <button class="glow right" id="yearbtn">YEAR</button>
                         </div>
                     </h4>
                     <div class="span12">
-                        <div id="statsChart"></div>
+                        <div id="sectionWeek">
+                            <div id="statsChart"></div>
+                        </div>
+                        <div id="sectionMonth">
+                            <div id="hero-area" style="height: 250px;"></div>
+                        </div>
+                        <div id="sectionYear">
+                            <div id="hero-graph" style="height: 250px;"></div>
+                        </div>
                     </div>
                 </div>
-                <!-- morris stacked chart -->
-                <div class="row-fluid">
-                    <div class="span12">
-                       
-                        <br />
-                        <div id="hero-area" style="height: 250px;"></div>
-                    </div>
-                </div>
-
-                <!-- morris graph chart -->
-                <div class="row-fluid section">
-                    <div class="span12 chart">                        
-                        <div id="hero-graph" style="height: 230px;"></div>
-                    </div>
-                </div>
-
+               
                
 
                 <!-- morris bar & donut charts -->
@@ -63,8 +56,48 @@
     <script src="js/morris.min.js"></script>
 
   
-
-    <!-- build the charts -->
+    <script type="text/javascript">
+        $("#weekbtn").click(function(){
+            $("#sectionWeek").show();
+            $("#sectionMonth").hide();
+            $("#sectionYear").hide();
+        });
+        $("#monthbtn").click(function(){
+            $("#sectionWeek").hide();
+            $("#sectionMonth").show();
+            $("#sectionYear").hide();
+        });
+        $("#yearbtn").click(function(){
+            $("#sectionWeek").hide();
+            $("#sectionMonth").hide();
+            $("#sectionYear").show();
+        });
+    </script>
+    
+    <script type="text/javascript">
+        function displayWeek(){
+            // Morris Bar Chart
+            Morris.Bar({
+                element: 'hero-bar',
+                data: [
+                    {device: '1', sells: 136},
+                    {device: '3G', sells: 1037},
+                    {device: '3GS', sells: 275},
+                    {device: '4', sells: 380},
+                    {device: '4S', sells: 655},
+                    {device: '5', sells: 1571}
+                ],
+                xkey: 'device',
+                ykeys: ['sells'],
+                labels: ['Sells'],
+                barRatio: 0.4,
+                xLabelMargin: 10,
+                hideHover: 'auto',
+                barColors: ["#3d88ba"]
+            });
+        }
+    </script>
+    
     <script type="text/javascript">
         // Morris Bar Chart
         Morris.Bar({
@@ -236,6 +269,4 @@
             }
         });
     </script>
-   
-
 <% include footer.html %>
