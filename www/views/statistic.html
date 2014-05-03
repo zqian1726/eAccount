@@ -7,7 +7,7 @@
                 <div class="row-fluid section">
                     <h4 class="title">
                         <div class="btn-group pull-right">
-                            <button class="glow left" id="weekbtn">WEEK</button>
+                            <button class="glow left active" id="weekbtn">WEEK</button>
                             <button class="glow middle" id="monthbtn">MONTH</button>
                             <button class="glow right" id="yearbtn">YEAR</button>
                         </div>
@@ -16,10 +16,10 @@
                         <div id="sectionWeek">
                             <div id="statsChart"></div>
                         </div>
-                        <div id="sectionMonth">
+                        <div id="sectionMonth" class = 'hide'>
                             <div id="hero-area" style="height: 250px;"></div>
                         </div>
-                        <div id="sectionYear">
+                        <div id="sectionYear" class = 'hide'>
                             <div id="hero-graph" style="height: 250px;"></div>
                         </div>
                     </div>
@@ -55,22 +55,35 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="js/morris.min.js"></script>
 
-  
+    <style>
+        .hide{
+            display: none;
+        }
+    </style>
     <script type="text/javascript">
         $("#weekbtn").click(function(){
-            $("#sectionWeek").show();
-            $("#sectionMonth").hide();
-            $("#sectionYear").hide();
+            $("#weekbtn").addClass("active");
+            $("#monthbtn").removeClass("active");
+            $("#yearbtn").removeClass("active");
+            $("#sectionWeek").removeClass('hide');
+            $("#sectionMonth").addClass('hide');
+            $("#sectionYear").addClass('hide');
         });
         $("#monthbtn").click(function(){
-            $("#sectionWeek").hide();
-            $("#sectionMonth").show();
-            $("#sectionYear").hide();
+            $("#weekbtn").removeClass("active");
+            $("#monthbtn").addClass("active");
+            $("#yearbtn").removeClass("active");
+            $("#sectionWeek").addClass('hide');
+            $("#sectionMonth").removeClass('hide');
+            $("#sectionYear").addClass('hide');
         });
         $("#yearbtn").click(function(){
-            $("#sectionWeek").hide();
-            $("#sectionMonth").hide();
-            $("#sectionYear").show();
+            $("#weekbtn").removeClass("active");
+            $("#monthbtn").removeClass("active");
+            $("#yearbtn").addClass("active");
+            $("#sectionWeek").addClass('hide');
+            $("#sectionMonth").addClass('hide');
+            $("#sectionYear").removeClass('hide');
         });
     </script>
     
