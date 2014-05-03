@@ -6,10 +6,8 @@
                  <!-- jQuery flot chart -->
                 <div class="row-fluid section">
                     <h4 class="title">
-                        jQuery Flot <small>Monthly growth</small>
                         <div class="btn-group pull-right">
-<!--                            <span class="fc-button fc-button-agendaWeek fc-state-default" unselectable="on">week</span>-->
-                            <button class="glow left">DAY</button>
+                            <button class="glow left">WEEK</button>
                             <button class="glow middle active">MONTH</button>
                             <button class="glow right">YEAR</button>
                         </div>
@@ -20,9 +18,8 @@
                 </div>
                 <!-- morris stacked chart -->
                 <div class="row-fluid">
-                    <h4 class="title">Morris.js stacked</h4>
                     <div class="span12">
-                        <h5>Quarterly Apple iOS device unit sales</h5>
+                       
                         <br />
                         <div id="hero-area" style="height: 250px;"></div>
                     </div>
@@ -30,7 +27,6 @@
 
                 <!-- morris graph chart -->
                 <div class="row-fluid section">
-                    <h4 class="title">Morris.js <small>Monthly growth</small></h4>
                     <div class="span12 chart">                        
                         <div id="hero-graph" style="height: 230px;"></div>
                     </div>
@@ -70,7 +66,6 @@
 
     <!-- build the charts -->
     <script type="text/javascript">
-
         // Morris Bar Chart
         Morris.Bar({
             element: 'hero-bar',
@@ -92,18 +87,6 @@
         });
 
 
-        // Morris Donut Chart
-        Morris.Donut({
-            element: 'hero-donut',
-            data: [
-                {label: 'Direct', value: 25 },
-                {label: 'Referrals', value: 40 },
-                {label: 'Search engines', value: 25 },
-                {label: 'Unique visitors', value: 10 }
-            ],
-            colors: ["#30a1ec", "#76bdee", "#c4dafe"],
-            formatter: function (y) { return y + "%" }
-        });
 
 
         // Morris Line Chart
@@ -127,7 +110,19 @@
         });
 
 
-
+        
+        // Morris Donut Chart
+        Morris.Donut({
+            element: 'hero-donut',
+            data: [
+                {label: 'Direct', value: 25 },
+                {label: 'Referrals', value: 40 },
+                {label: 'Search engines', value: 25 },
+                {label: 'Unique visitors', value: 10 }
+            ],
+            colors: ["#30a1ec", "#76bdee", "#c4dafe"],
+            formatter: function (y) { return y + "%" }
+        });
         // Morris Area Chart
         Morris.Area({
             element: 'hero-area',
@@ -241,5 +236,6 @@
             }
         });
     </script>
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+   
+
 <% include footer.html %>
