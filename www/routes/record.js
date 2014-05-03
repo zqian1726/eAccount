@@ -1,4 +1,5 @@
 var db = require('./dao/dbOperation')
+	, validator = require('./validate')
 
 exports.list = function(req, res) {
 	// get record list
@@ -15,7 +16,7 @@ exports.list = function(req, res) {
 
 exports.add = function(req, res) {
 	// add a record
-	db.addRecord(req.cookies.user, req.body.amount, req.body.category, req.body.desc, req.body.datetime, function(ret) {
+	db.addRecord(req.cookies.user, validator.striptags(req.body.amount), req.body.category, validator.striptags(req.body.desc), req.body.datetime, function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
 		}

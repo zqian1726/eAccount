@@ -23,3 +23,11 @@ exports.isEmail = function(value) {
 exports.isInt = function(value) {
 	return validator.isInt(value)
 }
+
+exports.striptags = function(value) {
+	if (typeof value == 'undefined')
+		return ""
+	var text = value.toString()
+	console.log(text)
+	return text.replace(/(<([^>]+)>)/ig,"")
+}

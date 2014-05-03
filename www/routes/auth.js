@@ -47,7 +47,7 @@ exports.signin = function(req, res) {
 
 exports.signup = function(req, res, next) {
 	// register
-	db.registerUser(req.body.email, req.body.username, sha1(req.body.password), req.body.dob, req.body.gender,function(ret) {
+	db.registerUser(req.body.email, validator.striptags(req.body.username), sha1(req.body.password), req.body.dob, validator.striptags(req.body.gender), function(ret) {
 		if (ret == "success") {
 			// succeed
 			res.cookie('user', req.body.email, { maxAge: default_cookie_time })
