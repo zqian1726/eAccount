@@ -286,7 +286,7 @@ $.extend($.validator, {
 		date: "Please enter a valid date.",
 		dateISO: "Please enter a valid date (ISO).",
 		number: "Please enter a valid number.",
-		digits: "Please enter only digits.",
+		digits: "Please enter only digits and characters.",
 		creditcard: "Please enter a valid credit card number.",
 		equalTo: "Please enter the same value again.",
 		maxlength: $.validator.format("Please enter no more than {0} characters."),
@@ -1038,7 +1038,7 @@ $.extend($.validator, {
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/digits
 		digits: function( value, element ) {
-			return this.optional(element) || /^\d+$/.test(value);
+			return this.optional(element) || /^(\d|[a-zA-Z])+$/.test(value);
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/creditcard
