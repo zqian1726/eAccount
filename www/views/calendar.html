@@ -3,45 +3,20 @@
     <div class="content">
         <div class="container-fluid">
              <div class="content" style="margin-left: 0px;">
-                <div class="container-fluid">
-                    <div id="pad-wrapper">
-                        <div class="row-fluid calendar-wrapper">
-                            <div class="span12">
-
-                                <!-- div that fullcalendar plugin uses  -->
-                                <div id='calendar'></div>
-
-                                <!-- edit image pop up -->
-<!--
-                                <div class="new-event popup">
-                                    <div class="pointer">
-                                        <div class="arrow"></div>
-                                        <div class="arrow_border"></div>
-                                    </div>
-                                    <i class="close-pop table-delete"></i>
-                                    <h5>New event popup example</h5>
-                                    <div class="field">
-                                        Date: 
-                                        <span class="date">Thu, 18 April</span>
-                                    </div>
-                                    <div class="field">
-                                        Event:
-                                        <input type="text" class="event-input" />
-                                    </div>
-                                    <input type="submit" value="Create" class="btn-glow primary" />
-                                </div>
--->
-                            </div>
+                <div id="pad-wrapper">
+                    <div class="row-fluid calendar-wrapper">
+                        <div class="span12">
+                            <div id='calendar'></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src='js/fullcalendar.min.js'></script>
 
+    <script src='js/fullcalendar.min.js'></script>
+    <script src='js/gcal.js'></script>
+    <script src="js/jquery-ui.custom.min.js"></script>
 
     <!-- builds fullcalendar example -->
     <script>
@@ -52,7 +27,7 @@
             var m = date.getMonth();
             var y = date.getFullYear();
             
-            $('#calendar').fullCalendar({
+            var cal = $('#calendar').fullCalendar({
                 header: {
                     left: 'month,agendaWeek,agendaDay',
                     center: 'title',
@@ -60,62 +35,33 @@
                 },
                 selectable: true,
                 selectHelper: true,
+                select: function(start, end, allDay) {
+                    var title = prompt('Event Title:');
+                    if (title) {
+                        cal.fullCalendar('renderEvent',
+                            {
+                                title: title,
+                                start: start,
+                                end: end,
+                                allDay: allDay
+                            },
+                            true // make the event "stick"
+                        );
+                    }
+                    cal.fullCalendar('unselect');
+                },
                 editable: true,
-//                events: [
-//                    {
-//                        title: 'All Day Event',
-//                        start: new Date(y, m, 1)
-//                    },
-//                    {
-//                        title: 'Long Event',
-//                        start: new Date(y, m, d-5),
-//                        end: new Date(y, m, d-2)
-//                    },
-//                    {
-//                        id: 999,
-//                        title: 'Repeating Event',
-//                        start: new Date(y, m, d-3, 16, 0),
-//                        allDay: false
-//                    },
-//                    {
-//                        id: 999,
-//                        title: 'Repeating Event',
-//                        start: new Date(y, m, d+4, 16, 0),
-//                        allDay: false
-//                    },
-//                    {
-//                        title: 'Meeting',
-//                        start: new Date(y, m, d, 10, 30),
-//                        allDay: false
-//                    },
-//                    {
-//                        title: 'Lunch',
-//                        start: new Date(y, m, d, 12, 0),
-//                        end: new Date(y, m, d, 14, 0),
-//                        allDay: false
-//                    },
-//                    {
-//                        title: 'Birthday Party',
-//                        start: new Date(y, m, d+1, 19, 0),
-//                        end: new Date(y, m, d+1, 22, 30),
-//                        allDay: false
-//                    },
-//                    {
-//                        title: 'Click for Google',
-//                        start: new Date(y, m, 28),
-//                        end: new Date(y, m, 29),
-//                        url: 'http://google.com/'
-//                    }
-//                ],
+                events: 'http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic',
+                eventClick: function(event) {
+                    // opens events in a popup window
+                    window.open(event.url, 'gcalevent', 'width=700,height=600');
+                    return false;
+                },
                 eventBackgroundColor: '#278ccf'
             });
             
-            // handler to close the new event popup just for displaying purposes
-            // more documentation for fullcalendar on http://arshaw.com/fullcalendar/
-            $(".popup .close-pop").click(function () {
-                $(".new-event").fadeOut("fast");
-            });
+         
         });
     </script>
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+
 <% include footer.html %>
