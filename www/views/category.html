@@ -146,37 +146,56 @@
 				        tooltip = $('.tooltip');
                         //Hide the Tooltip at first
                         tooltip.hide();
-                        $(".sliderTotal").slider({
-                            range: "min",
-                            value: 40,
-                            min: 0,
-                            max: 500,
-                            start: function(event,ui) {
-				                tooltip.fadeIn('fast');
-				            },
-				            slide: function(event, ui) {
-					           var value  = slider.slider('value');
-					           tooltip.css('left', value).text(ui.value);  //Adjust the tooltip accordingly            
-                               $("#totalAmount").val("$" + ui.value);
-				            },
-				            stop: function(event,ui) {
-				                tooltip.fadeOut('fast');
-				            },
-                        });
                         
+                        var totleValue = 40*msg.categoryList.length;
+                        var totleMax = 0;
+                        var diff;
                         for(var i = 0; i < msg.categoryList.length; i++){
-                            
-                            $(".slider"+msg.categoryList[i]).slider({
-                                range: "min",
-                                min: 0,
-                                max: 500,
-                                value: 40,
-                                slide: function(event, ui) {
-                                    $("#"+msg.categoryList[i]).val("$" + ui.value);
-                                    //console.log(ele);
-                                }
-                            });
+                            var ele = msg.categoryList[i];
+                            (function(ele){
+                                $(".slider"+msg.categoryList[i]).slider({
+                                    range: "min",
+                                    min: 0,
+                                    max: 500,
+                                    value: 40,
+                                    slide: function(event, ui) {
+                                        $("#"+ele).val("$" + ui.value);
+                                        
+                                        //totleMax+=ui.max;
+                                        
+                                        //console.log(ele);
+                                    },
+                                    start: function(event, ui){
+                                        diff = ui.value;
+                                    },
+                                    stop: function(event, ui){
+                                        diff = ui.value - diff;
+                                        totleValue+=diff;
+                                        $("#totalAmount").val(diff);
+                                    }
+                                });
+                            }(ele))                            
                         }
+                        /*
+                                            console.log(totleValue)
+                                            $(".sliderTotal").slider({
+                                                range: "min",
+                                                value: totleValue,
+                                                min: 0,
+                                                max: totleMax,
+                                                start: function(event,ui) {
+                                                    tooltip.fadeIn('fast');
+				                                },
+				                                slide: function(event, ui) {
+                                                    var value  = slider.slider('value');
+                                                    tooltip.css('left', value).text(ui.value);  //Adjust the tooltip accordingly
+                                                    $("#totalAmount").val("$" + ui.value);
+				                                },
+				                                stop: function(event,ui) {
+				                                    tooltip.fadeOut('fast');
+				                                },
+                                            });*/
+                        
                         // Switch slide buttons
                         $('.slider-button').click(function() {
                             if ($(this).hasClass("on")) {
@@ -199,11 +218,14 @@
                                         if(i == msg.categoryList.length-1){
                                             $.ajax({
                                                 type: "POST",
-                                                url: "/category/add",
-                                                data: {category:$('.addcategory-name').val()},
+                                                url: "/category/new",
+                                                data: {name:$('.addcategory-name').val()},
                                                 dataType: "json",
                                                 success: function(msg){
-                                                    if(msg == true){
+                                                    alert(msg.error);
+                                                    if(msg.error){
+                                                        
+                                                    }else{
                                                         location.reload();
                                                     }
                                                 }
@@ -220,12 +242,12 @@
                             var name = temp[1];
                             $('.delete-confirm').click(function(){
                                 $.ajax({
-                                    type: "POST",
-                                    url: "/category/delete",
-                                    data: {category: name},
+                                    type: "DEL",
+                                    url: "/category/"+name,
+                                    data: name,
                                     datatype: "json",
                                     success:function(msg){
-                                        if(msg == true){
+                                        if(msg.error == false){
                                             location.reload();
                                         }
                                     }
