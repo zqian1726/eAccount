@@ -12,17 +12,10 @@
                         </div>
                     </div>
                     <div class="row-fluid filter-block">
-
-
                         <div class="pull-right" >
                             <div class="ui-select">
-                                <select>
-                                  <option>All Category</option>
-                                  <option>Income</option>
-                                  <option>Shopping</option>
-                                  <option>Transfer</option>
-                                  <option>Groceries</option>
-                                  <option>Pharmacy</option>
+                                <select name="category-selector" class = "category-selector">
+                                  
                                 </select>
                             </div>
                             <input type="text" class="search" x-webkit-speech="x-webkit-speech" />
@@ -65,7 +58,7 @@
                                                 <form action="/record/new" method="post">
                                                     <div class="field-box">
                                                         <label>Amount:</label>
-                                                        $<input class="span3" type="text" name="amount" />
+                                                        $<input class="span3 add-amount" type="text" name="add-amount" />
                                                     </div>
                                                     <div class="field-box">
                                                         <input type="checkbox" id="my-checkbox1" name="type" checked />
@@ -73,26 +66,25 @@
                                                     <div class="field-box">
                                                         <label>Select:</label>
                                                         <div class="ui-select">
-                                                            <select>
-                                                                <option selected>food</option>
-                                                                <option>shopping</option>
+                                                            <select name="add-record-category" class = "add-record-category">
+                                                                
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="field-box">
                                                         <label>Pick a date and time:</label>
-                                                        <input type="text" id="datePicker1" value="" />
+                                                        <input type="text" id="datePicker1" class = "add-record-datepicker" value="" />
                                                     </div>
                                                     <div class="field-box">
                                                         <label>Description:</label>
-                                                        <input class="span" type="text" name="desc" />
+                                                        <input class="span add-record-desc" type="text" name="desc" />
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                                            <button type="button" class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn btn-primary add-record-submit">Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +115,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="record-content">
                                 <!-- row -->
                                 <tr class="first">
                                     <td>
@@ -145,165 +137,76 @@
                                     	<ul class="actions">
                                             <li>
                                                 <a href="#editRecord" title ="Edit" data-toggle="modal"><i class="table-edit"></i></a>
-                                                <div id="editRecord" class="modal hide fade">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                <h4 class="modal-title">Add Record</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="span8 column">
-                                                                    <form action="/record/new" method="post">
-                                                                        <div class="field-box">
-                                                                            <label>Amount:</label>
-                                                                            $<input class="span3" type="text" name="amount" />
-                                                                        </div>
-                                                                        <div class="field-box">
-                                                                            <input type="checkbox" id="my-checkbox2" name="type" checked />
-                                                                        </div>
-                                                                        <div class="field-box">
-                                                                            <label>Select:</label>
-                                                                            <div class="ui-select">
-                                                                                <select>
-                                                                                    <option selected>food</option>
-                                                                                    <option>shopping</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="field-box">
-                                                                            <label>Pick a date and time:</label>
-                                                                            <input type="text" id="datePicker2" value="" />
-                                                                        </div>
-                                                                        <div class="field-box">
-                                                                            <label>Description:</label>
-                                                                            <input class="span" type="text" name="desc" />
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                                                                <button type="button" class="btn btn-primary">Submit</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </li>
                                             <li class="last"><a href="#deleteRecord" title="delete" data-toggle="modal"><i class="table-delete"></i></a>
-                                                <div id="deleteRecord" class="modal hide fade">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Delete Record</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="span8 column">
-                                                                    <p>Are you sure you want delete this record</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                                                                <button type="button" class="btn btn-primary">Yes</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <!-- row -->
-                                <tr>
-                                    <td>
-                                        <span>2014-05-01</span>
-                                    </td>
-                                    <td>
-                                        <span class="dollar">55.8</span>
-                                    </td>
-                                    <td>
-                                        <span class="label label-info dollar">18.6</span>
-                                    </td>
-                                    <td>
-                                        <span>food</span>
-                                    </td>
-                                    <td class="description">
-                                        <p>If you are going to use a passage of Lorem Ipsum.</p>
-                                    </td>
-                                    <td>
-                                        <ul class="actions">
-                                            <li>
-                                                <a href="#editRecord" data-toggle="modal"><i class="table-edit"></i></a>
-                                                <div id="editRecord" class="modal hide fade">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                                <h4 class="modal-title">Add Record</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="span8 column">
-                                                                    <form action="/record/new" method="post">
-                                                                        <div class="field-box">
-                                                                            <label>Amount:</label>
-                                                                            $<input class="span3" type="text" name="amount" />
-                                                                        </div>
-                                                                        <div class="field-box">
-                                                                            <input type="checkbox" id="my-checkbox2" name="type" checked />
-                                                                        </div>
-                                                                        <div class="field-box">
-                                                                            <label>Select:</label>
-                                                                            <div class="ui-select">
-                                                                                <select>
-                                                                                    <option selected>food</option>
-                                                                                    <option>shopping</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="field-box">
-                                                                            <label>Pick a date and time:</label>
-                                                                            <input type="text" id="datePicker2" name="datetime" value=""/>
-                                                                        </div>
-                                                                        <div class="field-box">
-                                                                            <label>Description:</label>
-                                                                            <input class="span" type="text" name="desc" />
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                                                                <button type="button" class="btn btn-primary">Submit</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="last"><a href="#deleteRecord" data-toggle="modal"><i class="table-delete"></i></a>
-                                                <div id="deleteRecord" class="modal hide fade">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title">Delete Record</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="span8 column">
-                                                                    <p>Are you sure you want delete this record</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                                                                <button type="button" class="btn btn-primary">Yes</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
                                             </li>
                                         </ul>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                        <div id="editRecord" class="modal hide fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Edit Record</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="span8 column">
+                                            <form action="/record/new" method="post">
+                                                <div class="field-box">
+                                                    <label>Amount:</label>
+                                                        $<input class="span3" type="text" name="amount" />
+                                                </div>
+                                                <div class="field-box">
+                                                    <input type="checkbox" id="my-checkbox2" name="type" checked />
+                                                </div>
+                                                <div class="field-box">
+                                                    <label>Select:</label>
+                                                    <div class="ui-select">
+                                                        <select name="edit-record-category" class="edit-record-category">
+                                                                                    
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="field-box">
+                                                    <label>Pick a date and time:</label>
+                                                    <input type="text" id="datePicker2" value="" />
+                                                </div>
+                                                <div class="field-box">
+                                                    <label>Description:</label>
+                                                    <input class="span" type="text" name="desc" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
+                                        <button type="button" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="deleteRecord" class="modal hide fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Delete Record</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="span8 column">
+                                            <p>Are you sure you want delete this record</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
+                                        <button type="button" class="btn btn-primary">Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="pagination">
                       <ul>
@@ -320,6 +223,74 @@
         </div>
     </div>
 
-
+    <script>
+        $(function(){
+            $.ajax({
+                type: "GET",
+                url: "/category/list",
+                dataType: "json",
+                success:function(msg){
+                    console.log(msg);
+                    if(msg.error){
+                    
+                    }else{
+                        var content = "<option value = 'All Category'>All Category</option>";
+                        var contentAddRecord = "";
+                        for(var i = 0; i < msg.categoryList.length; i++){
+                            content+="<option value = '"+msg.categoryList[i]+"'>"+msg.categoryList[i]+"</option>";
+                            contentAddRecord+="<option value = '"+msg.categoryList[i]+"'>"+msg.categoryList[i]+"</option>";
+                        }
+                        $('.category-selector').html(content);
+                        $('.add-record-category').html(contentAddRecord);
+                        $('.edit-record-category').html(contentAddRecord);
+                    }
+                    
+                }
+            })
+            
+            $.ajax({
+                type: "GET",
+                url: "/record/list",
+                dataType: "json",
+                success: function(msg){
+                    console.log(msg);
+                    if(msg.error){
+                    }else{
+                    
+                    var content = "";
+                    for(var i = 0; i < msg.recordList.length; i++){
+                        content+="<tr class='first'>";
+                        content+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
+                        content+="<td><span class='dollar'>"+msg.recordList[i].amount+"</span></td>";
+                        content+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
+                        content+="<td><span>"+msg.recordList[i].category+"</span></td>";
+                        content+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
+                        content+="<td><ul class='actions'>";
+                        content+="<li><a href='#editRecord' title ='Edit' data-toggle='modal'><i class='table-edit'></i></a></li>";
+                        content+="<li class='last'><a href='#deleteRecord' title='delete' data-toggle='modal'><i class='table-delete'></i></a></li>";
+                    }
+                    $('#record-content').html(content);
+                    }
+                    
+                }
+            })
+            
+            $('.add-record-submit').click(function(){
+                $.ajax({
+                    type: "POST",
+                    url: "record/new",
+                    data: {amount:$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), datetime: $('.add-record-datepicker').val()},
+                    dataType: "json",
+                    success:function(msg){
+                        if(msg.error){
+                            alert("error");
+                        }else{
+                            location.reload();
+                        }
+                    }
+                })
+            })
+        })
+    </script>
 
 <% include footer.html %>

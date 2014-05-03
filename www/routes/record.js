@@ -17,11 +17,11 @@ exports.add = function(req, res) {
 	// add a record
 	db.addRecord(req.cookies.user, req.body.amount, req.body.category, req.body.desc, req.body.datetime, function(ret) {
 		if (ret == "success") {
-			res.send({error: true})
+			res.send({error: false})
 		}
 		else {
 			console.log(req.cookies.user + "add record failed!")
-			res.send({error: false})
+			res.send({error: true})
 		}
 	})
 }
