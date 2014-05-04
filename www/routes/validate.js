@@ -27,7 +27,10 @@ exports.isInt = function(value) {
 exports.striptags = function(value) {
 	if (typeof value == 'undefined')
 		return ""
-	var text = value.toString()
-	console.log(text)
-	return text.replace(/(<([^>]+)>)/ig,"")
+	return value.toString().replace(/(<([^>]+)>)/ig,"")
+}
+
+exports.toInt = function(value) {
+	var number = validator.toInt(value)
+	return isNaN(number) ? 0 : number
 }
