@@ -67,7 +67,14 @@
             if(msg.error){
             }else{
                 var content = "";
-                for(var i = 0; i < 10; i++){
+                var high;
+                if(msg.recordList.length < 10){
+                    high = msg.recordList.length;
+                }
+                else{
+                    high = 10;
+                }
+                for(var i = 0; i < high; i++){
                     //console.log(msg.recordList[i].recordId);
                     content+="<tr class='first'>";
                     content+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
