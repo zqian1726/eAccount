@@ -1,6 +1,6 @@
 <% include header.html %>
 <% include sidebar.html %>
-    
+    <script src="js/jquery.textSearch-1.0.js" type="text/javascript"></script>
     <div class="content">
         <div class="container-fluid">
              <div id="pad-wrapper">
@@ -10,16 +10,24 @@
                             <h4>Category</h4>
                         </div>
                     </div>
-
+                    <script>
+                        function sayEnter(event) {
+                            if (event.which == 13)
+                                var v = $("#txtSearchKeyword").val();
+//                                alert( $("#txtSearchKeyword").val());
+                                $("#searchTextTest").textSearch(v);
+                                return false;
+                        }
+                    </script>
                     <div class="row-fluid filter-block">
                         <div class="pull-right" style ="padding-bottom: 20px">
-                            <input type="text" class="search" x-webkit-speech="x-webkit-speech"/>
+                        <input type="text" class="search" placeHolder="Search" id="txtSearchKeyword" x-webkit-speech="x-webkit-speech" onkeypress="sayEnter(event)"/>
                             <a class="btn-flat success new-product" href="#addRecord" data-toggle="modal">+ Add category</a>
                             <div id="addRecord" class="modal fade">
                               <div class="modal-dialog">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                            <h4 class="modal-title">Add Category</h4>
+                                    <h4 class="modal-title">Add Category</h4>
                                     </div>
                                         <div class="modal-body">
                                            <div class="span8 column">
@@ -63,7 +71,7 @@
                                     <th class="span1"><span class="line"></span></th>
                                 </tr>
                             </thead>
-                            <tbody class="category-table">
+                            <tbody class="category-table" id="searchTextTest">
                                 <!-- row -->
                                 <!--
                                 <tr>
@@ -282,6 +290,8 @@
           editable.innerHTML = localStorage.getItem('catename');
         }*/
 	</script>
+    
+
     <style>
         .tooltip {
 /*            position: absolute;*/
