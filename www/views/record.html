@@ -117,33 +117,6 @@
                             </thead>
                             <tbody id="record-content">
                                 <!-- row -->
-                                <tr class="first">
-                                    <td>
-                                        <span>2014-05-01</span>
-                                    </td>
-                                    <td>
-                                        <span class="dollar">55.8</span>
-                                    </td>
-                                    <td>
-                                        <span class="label label-success dollar">18.6</span>
-                                    </td>
-                                    <td>
-                                        <span>food</span>
-                                    </td>
-                                    <td class="description">
-                                        <p>If you are going to use a passage of Lorem Ipsum.</p>
-                                    </td>
-                                    <td>
-                                    	<ul class="actions">
-                                            <li>
-                                                <a href="#editRecord" title ="Edit" data-toggle="modal"><i class="table-edit"></i></a>
-                                            </li>
-                                            <li class="last"><a href="#deleteRecord" title="delete" data-toggle="modal"><i class="table-delete"></i></a>
-                                                
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                         <div id="editRecord" class="modal hide fade">
@@ -158,10 +131,10 @@
                                             <form action="/record/new" method="post">
                                                 <div class="field-box">
                                                     <label>Amount:</label>
-                                                        $<input class="span3" type="text" name="amount" />
+                                                        $<input class="span3 editAmount" type="text" name="amount"/>
                                                 </div>
                                                 <div class="field-box">
-                                                    <input type="checkbox" id="my-checkbox2" name="type" checked />
+                                                    <input type="checkbox" id="my-checkbox2" name="type" class="editInEx" checked/>
                                                 </div>
                                                 <div class="field-box">
                                                     <label>Select:</label>
@@ -173,18 +146,18 @@
                                                 </div>
                                                 <div class="field-box">
                                                     <label>Pick a date and time:</label>
-                                                    <input type="text" id="datePicker2" value="" />
+                                                    <input type="text" id="datePicker2" value="" class="editDate"/>
                                                 </div>
                                                 <div class="field-box">
                                                     <label>Description:</label>
-                                                    <input class="span" type="text" name="desc" />
+                                                    <input class="span" type="text" name="desc" class="editDesc"/>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                                        <button type="button" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-primary edit-record-submit">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +175,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                                        <button type="button" class="btn btn-primary">Yes</button>
+                                        <button type="button" class="btn btn-primary" id="deleteRecordConfirm">Yes</button>
                                     </div>
                                 </div>
                             </div>
@@ -257,39 +230,111 @@
                     if(msg.error){
                     }else{
                     
-                    var content = "";
-                    for(var i = 0; i < msg.recordList.length; i++){
-                        content+="<tr class='first'>";
-                        content+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
-                        content+="<td><span class='dollar'>"+msg.recordList[i].amount+"</span></td>";
-                        content+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
-                        content+="<td><span>"+msg.recordList[i].category+"</span></td>";
-                        content+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
-                        content+="<td><ul class='actions'>";
-                        content+="<li><a href='#editRecord' title ='Edit' data-toggle='modal'><i class='table-edit'></i></a></li>";
-                        content+="<li class='last'><a href='#deleteRecord' title='delete' data-toggle='modal'><i class='table-delete'></i></a></li>";
-                    }
-                    $('#record-content').html(content);
+                        var content = "";
+                        for(var i = 0; i < msg.recordList.length; i++){
+                            //console.log(msg.recordList[i].recordId);
+                            content+="<tr class='first'>";
+                            content+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
+                            content+="<td><span class='dollar'>"+msg.recordList[i].amount+"</span></td>";
+                            if(msg.recordList[i].amount >= 0){
+                                content+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
+                            }else{
+                                content+="<td><span class='label label-info dollar'>"+msg.recordList[i].amount+"</span></td>";
+                            }
+                        
+                            content+="<td><span>"+msg.recordList[i].category+"</span></td>";
+                            content+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
+                            content+="<td><ul class='actions'>";
+                            content+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
+                            content+="<li class='last'><a href='#deleteRecord' title='delete' class='deleteRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-delete'><i class='table-delete'></i></a></li>";
+                        }
+                        $('#record-content').html(content);
+                        
+                        //delete record
+                        $('.deleteRecordButton').click(function(){
+                            var temp = $(this).attr('id').split('-');
+                            var rec = temp[0];
+                            //console.log(rec);
+                            $('#deleteRecordConfirm').click(function(){
+                                $.ajax({
+                                    type: "DELETE",
+                                    url: "/record",
+                                    data: {_method:"delete", name: rec},
+                                    datatype: "json",
+                                    success:function(msg){
+                                        if(msg.error == false){
+                                            location.reload();
+                                        }
+                                    }
+                                })
+                            })
+                        })
+                        
+                        //add record                        
+                        var valueAdd;
+                        $('#my-checkbox1').on('switchChange.bootstrapSwitch',function(event, state){
+                            valueAdd = state;
+                            console.log(state);
+                        }) 
+                        $('.add-record-submit').click(function(){
+                            $.ajax({
+                                type: "POST",
+                                url: "record/new",
+                                data: {amount: valueAdd?$('.add-amount').val():0-$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), datetime: $('.add-record-datepicker').val()},
+                                dataType: "json",
+                                success:function(msg){
+                                    if(msg.error){
+                                        alert("error");
+                                    }else{
+                                        location.reload();
+                                    }
+                                }
+                            })
+                        })
+                        
+                        //edit record
+                        $('.editRecordButton').click(function(){
+                            var temp = $(this).attr('id').split('-');
+                            var rec = temp[0];
+                            console.log(rec);
+                            for(var i = 0; i < msg.recordList.length; i++){
+                                if(msg.recordList[i].recordId == rec){
+                                    $('.editAmount').val(msg.recordList[i].amount);
+                                    
+                                    
+                                    break;
+                                }
+                            }
+                            $('#editRecordConfirm').click(function(){
+                                var valueEdit
+                                $('#my-checkbox2').on('switchChange.bootstrapSwitch',function(event, state){
+                                    valueEdit = state;
+                                }) 
+                                $('.edit-record-submit').click(function(){
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "record/new",
+                                        data: {amount: valueEdit?$('.add-amount').val():0-$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), datetime: $('.add-record-datepicker').val()},
+                                        dataType: "json",
+                                        success:function(msg){
+                                            if(msg.error){
+                                                alert("error");
+                                            }else{
+                                                location.reload();
+                                            }
+                                        }
+                                    })
+                                })
+                            })
+                        })
+                        
+                        
                     }
                     
                 }
             })
             
-            $('.add-record-submit').click(function(){
-                $.ajax({
-                    type: "POST",
-                    url: "record/new",
-                    data: {amount:$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), datetime: $('.add-record-datepicker').val()},
-                    dataType: "json",
-                    success:function(msg){
-                        if(msg.error){
-                            alert("error");
-                        }else{
-                            location.reload();
-                        }
-                    }
-                })
-            })
+            
         })
     </script>
 
