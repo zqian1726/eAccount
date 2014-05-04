@@ -15,10 +15,15 @@ exports.pan = function(req, res) {
 			res.send({error: true})
 		}
 		else {
-
-
-
-			res.send({error: false, balance: 1000, recordList: ret})
+			var cake = {}
+			for (var i = ret.length - 1; i >= 0; i--) {
+				if (ret[i].datetime < date)
+					break
+				if (typeof cake[ret[i].category] == 'undefined')
+					cake[ret[i].category] = 0
+				cake[ret[i].category] += ret[i].amount
+			}
+			res.send({error: false, panList: cake})
 		}
 	})
 }
@@ -30,5 +35,5 @@ exports.bar = function(req, res) {
 exports.line = function(req, res) {
 	var period = req.param.period
 		, date = req.param.date
-	
+
 }

@@ -78,9 +78,9 @@ app.get('/category', auth.authorized, category.index)
 
 // statistic page:
 app.get('/statistic', auth.authorized, statistic.index)
-app.get('/statistic/chart/bar/:date', auth.authorized, statistic.bar)
-app.get('/statistic/chart/pan/:date', auth.authorized, statistic.pan)
-app.get('/statistic/chart/line/:period/:date', auth.authorized, statistic.line)
+app.get('/statistic/chart/bar/:year/:month', auth.authorized, statistic.bar)
+app.get('/statistic/chart/pan/:year/:month', auth.authorized, statistic.pan)
+app.get('/statistic/chart/line/:period/:year/:month', auth.authorized, statistic.line)
 
 // map page:
 app.get('/map', auth.authorized, func.map)
