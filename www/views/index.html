@@ -7,6 +7,24 @@
             background: url('img/bgs/landscape.jpg') no-repeat fixed center;
             background-size:cover
         }
+
+        #signup {
+            position:relative;
+            margin-top: 8%;
+            margin-left: 30%;
+        }
+        #signin {
+            position:relative;
+            margin-top: 8%;
+            margin-left: 30%;
+        }
+        .hide{
+            display:none;
+        }
+        .changeToSignIn {
+            border-style:hidden;
+            
+        }
     </style>
     <script>
         var response = false; 
@@ -17,31 +35,6 @@
             return false;
         }
         $().ready(function() {
-        	// validate the comment form when it is submitted
-            /*$.validator.addMethod(
-			        "uniqueEmail", 
-			        function (value, element) {
-                        //var res = "cheng";
-                        
-			            $.ajax({
-			                type: "POST",
-			                url: "/validate",
-			                data: {
-                                "email": value
-                            },
-			                dataType:"json",
-			                success: function(msg)
-			                {
-                                
-			                    response = msg.flag;
-                                alert(response);
-                                
-			                }
-			             });
-			            return response;
-			        },
-			        "Email is Already Taken"
-			    ); */
         	// validate signup form on keyup and submit
         	$("#signupForm").validate({
         		rules: {
@@ -73,7 +66,7 @@
                     email: {
                         required: "Please provide a email address",
                         email: "Please enter a valid email address",
-                        remote: "Email dupilicate. Enter another email address"
+                        remote: "Email duplicate. Enter another email address"
                     },
         			
         			password: {
@@ -131,26 +124,6 @@
         })
         
     </script>
-    <style>
-        #signup {
-            position:relative;
-            margin-top: 8%;
-            margin-left: 30%;
-        }
-        #signin {
-            position:relative;
-            margin-top: 8%;
-            margin-left: 30%;
-        }
-        .hide{
-            display:none;
-        }
-        .changeToSignIn {
-            border-style:hidden;
-            
-        }
-        
-    </style>
     <div class="container">
             <div id="signup" class="row-fluid login-wrapper">
                 <div class="span4 box">
@@ -184,7 +157,11 @@
                             <input id="email" name = "email" class="span12" type="text" placeholder="E-mail address" />
                             <input id="pass" name = "password" class="span12" type="password" placeholder="Your password" />
                             <input class="submit" type="submit" value="Submit">
+<<<<<<< HEAD
                             <div class="remember" style="display:inline-block">
+=======
+                            <div class="remember">
+>>>>>>> 379b0f77290ab00eb9bbc84c1689c472bb6b1223
                                 <label for="remember-me"><input id="remember-me" type="checkbox" />
                                 Remember me</label>
                             </div>

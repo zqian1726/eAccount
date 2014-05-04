@@ -13,12 +13,6 @@
 
                     <div class="row-fluid filter-block">
                         <div class="pull-right" style ="padding-bottom: 20px">
-                            <div class="ui-select">
-                                <select>
-                                  <option>Filter category</option>
-                                  <option>Filter amount</option>
-                                </select>
-                            </div>
                             <input type="text" class="search" x-webkit-speech="x-webkit-speech"/>
                             <a class="btn-flat success new-product" href="#addRecord" data-toggle="modal">+ Add category</a>
                             <div id="addRecord" class="modal fade">
@@ -224,7 +218,7 @@
                                                 data: {name:$('.addcategory-name').val()},
                                                 dataType: "json",
                                                 success: function(msg){
-                                                    alert(msg.error);
+                                                    //alert(msg.error);
                                                     if(msg.error){
                                                         
                                                     }else{
@@ -261,71 +255,6 @@
                 }
             })
             /*
-            $(".sliderFood").slider({
-                range: "min",
-                min: 0,
-                max: 500,
-                value: 40,
-                slide: function(event, ui) {
-                    $("#food").val("$" + ui.value);
-                }
-            });
-            $(".sliderRent").slider({
-                range: "min",
-                min: 0,
-                max: 500,
-                value: 10,
-                slide: function(event, ui) {
-                    $("#rent").val("$" + ui.value);
-                }
-            });
-            $(".sliderShopping").slider({
-                range: "min",
-                min: 0,
-                max: 500,
-                value: 200,
-                slide: function(event, ui) {
-                    $("#shopping").val("$" + ui.value);
-                }
-            });
-            $(".sliderPet").slider({
-                range: "min",
-                min: 0,
-                max: 500,
-                value: 350,
-                slide: function(event, ui) {
-                    $("#pet").val("$" + ui.value);
-                }
-            });
-            $(".sliderEmergency").slider({
-                range: "min",
-                min: 0,
-                max: 500,
-                value: 400,
-                slide: function(event, ui) {
-                    $("#emergency").val("$" + ui.value);
-                }
-            });
-            
-            
-            
-            $(".sliderTotal").slider({
-                range: "min",
-                value: totalValue,
-                min: 0,
-                max: 500,
-                start: function(event,ui) {
-				    tooltip.fadeIn('fast');
-				},
-				slide: function(event, ui) {
-					var value  = slider.slider('value');
-					tooltip.css('left', value).text(ui.value);  //Adjust the tooltip accordingly                
-                    $("#totalAmount").val("$" + ui.value);
-				},
-				stop: function(event,ui) {
-				    tooltip.fadeOut('fast');
-				},
-            });
             
             // Switch slide buttons
             $('.slider-button').click(function() {

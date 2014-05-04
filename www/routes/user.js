@@ -1,4 +1,5 @@
 var db = require('./dao/dbOperation')
+  , sha1 = require('sha1')
 
 exports.info = function(req, res) {
 	// send profile information
@@ -19,7 +20,7 @@ exports.info = function(req, res) {
 
 exports.update = function(req, res) {
 	// update profile information
-	db.updateUserInfo(req.cookies.user, req.body.username, req.body.dob, req.body.gender, function(ret) {
+	db.updateUserInfo(req.cookies.user, validator.striptags(req.body.username), req.body.dob, validator.striptags(req.body.gender), function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
 		}
@@ -32,7 +33,7 @@ exports.update = function(req, res) {
 
 exports.reset = function(req, res) {
 	// reset password
-	db.changePassword(req.cookies.user, req.body.newPass, function(ret) {
+	db.changePassword(req.cookies.user, sha1(req.body.newPass), function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
 		}

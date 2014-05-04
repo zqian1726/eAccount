@@ -47,7 +47,6 @@ app.get('/signout', auth.authorized, auth.signout)
 
 // Validation
 app.post('/validate/email', validate.email)
-app.post('/validate/category', validate.category)
 
 // Welcome page: sign in & sign up
 app.get('/', auth.unauthorized, index.index)
@@ -62,15 +61,15 @@ app.post('/user/reset', auth.authorized, user.reset)
 
 // Record CRUD:
 app.post('/record/new', auth.authorized, record.add)
-app.put('/record/:rid', auth.authorized, record.update)
-app.delete('/record/:rid', auth.authorized, record.delete)
+app.put('/record', auth.authorized, record.update)
+app.delete('/record', auth.authorized, record.delete)
 app.get('/record/list', auth.authorized, record.list)
 // Record page:
 app.get('/record', auth.authorized, record.index)
 
 // Record CRUD:
 app.post('/category/new', auth.authorized, category.add)
-app.put('/category/:tag', auth.authorized, category.update)
+app.put('/category', auth.authorized, category.update)
 app.delete('/category', auth.authorized, category.delete)
 app.get('/category/list', auth.authorized, category.list)
 // Record page:

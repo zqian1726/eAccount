@@ -1,4 +1,5 @@
 var db = require('./dao/dbOperation')
+	, validator = require('./validate')
   , sha1 = require('sha1')
   , default_cookie_time = 1000 * 60 * 60 * 2; // 2 hour
 
@@ -27,8 +28,10 @@ exports.authorized = function (req, res, next) {
  * Handlers
  */
 exports.signin = function(req, res) {
+	// validate
+
 	// log in
-	db.checkUser(req.body.email, req.body.password, function(ret) {
+	db.checkUser(req.body.email, sha1(req.body.password), function(ret) {
 		if (ret) {
 			// succeed
 			res.cookie('user', req.body.email, { maxAge: default_cookie_time })
@@ -44,7 +47,7 @@ exports.signin = function(req, res) {
 
 exports.signup = function(req, res, next) {
 	// register
-	db.registerUser(req.body.email, req.body.username, req.body.password, req.body.dob, req.body.gender,function(ret) {
+	db.registerUser(req.body.email, validator.striptags(req.body.username), sha1(req.body.password), req.body.dob, validator.striptags(req.body.gender), function(ret) {
 		if (ret == "success") {
 			// succeed
 			res.cookie('user', req.body.email, { maxAge: default_cookie_time })

@@ -4,6 +4,16 @@
   height: 250px;
   margin-top: 35px; }
 
+#statsChartMonth {
+  width: 97%;
+  height: 250px;
+  margin-top: 35px; }
+
+#statsChartYear {
+  width: 97%;
+  height: 250px;
+  margin-top: 35px; }
+
 /* specific chart styles */
 .legendLabel {
   font-size: 12px;

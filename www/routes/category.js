@@ -1,4 +1,5 @@
 var db = require('./dao/dbOperation')
+	, validator = require('./validate')
 
 exports.list = function(req, res) {
 	// get category list
@@ -16,7 +17,7 @@ exports.list = function(req, res) {
 
 exports.add = function(req, res) {
 	// add a category
-	var item = req.body.name
+	var item = validator.striptags(req.body.name)
 	db.addCategory(req.cookies.user, item, function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
