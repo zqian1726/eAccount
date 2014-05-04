@@ -67,6 +67,10 @@
                             <div id="sectionA" class="tab-pane fade in active">
                                 <form action="/user" method="post" id="userForm1">
                                     <input type="hidden" name="_method" value="PUT">
+                                    <div class="field-box">
+                                        <label for="username">Username:</label>
+                                        <input id="username" name="username" value="<%= userInfo.username %>" class="span5 inline-input" type="text" />
+                                    </div>
                                     <div id="gender" class="field-box">
                                         <label>Gender:</label>
                                         <div class="ui-select">
@@ -79,7 +83,7 @@
                                     </div>
                                     <div id="dob" class="field-box">
                                         <label for="dobin">Date of Birth:</label>
-                                        <input class="span5 inline-input" id="dobin" name="dob" value="<%= userInfo.dob %>" data-date-format="yyyy-mm-dd" type="text" />
+                                        <input class="span5 inline-input" id="dobin" name="dob" value="<%= userInfo.dob %>" data-date-format="yyyy-mm-dd" type="text" readonly style="background-color: white; cursor: auto; color: rgb(85, 85, 85);" />
                                     </div>
                                     <script>
                                             $('#dob').ready(function() {
@@ -94,10 +98,6 @@
                                                 })
                                             })
                                     </script>
-                                    <div class="field-box">
-                                        <label for="username">Username:</label>
-                                        <input id="username" name="username" value="<%= userInfo.username %>" class="span5 inline-input" type="text" />
-                                    </div>
                                     <div class="span6 field-box actions">
                                         <input type="submit" class="btn-glow primary" value="Save Changes" />
                                         <span>OR</span>
