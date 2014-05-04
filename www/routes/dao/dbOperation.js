@@ -23,7 +23,13 @@ exports.registerUser = function(email, username, password, dob, gender, callback
 			"password" : password,
 			"dob" : dob,
 			"gender" : gender,
-			"categories" : ['income','shopping',"food","rent"],
+			"categories" : [
+				{'name' : 'income','line' : 0 },
+				{'name' : 'shopping','line' : 0},
+				{'name' : 'food','line' : 0},
+				{'name' : 'rent','line' : 0},
+				{'name' : 'other','line' : 0}
+			],
 			"records" : [],
 			"balace" : 0
 		},function(err, result) {
@@ -187,7 +193,10 @@ var addCategory = function (email,category,callback){
 			},
 			{
 				$addToSet : {
-					categories : category
+					categories : {
+						'name' : category,
+						'line' : 0
+					}
 				}
 			},
 			function(err, doc) {
@@ -206,128 +215,7 @@ exports.addCategory=addCategory;
 //addCategory(1,"3",function(result){console.log(result)})
 //succeed:success
 
-var deleteCategory = function(email,category,callback){
-	var mongoclient = new MongoClient(new Server("localhost", 27017, {
-		native_parser : true
-	}));
-	mongoclient.open(function(err, mongoclient) {
-		var db = mongoclient.db("eAccount");
-		var collection = db.collection("user");
-		collection.update(
-			{
-				"email" : email
-			},
-			{
-				$pull : {
-					categories : category
-				}
-			},
-			function(err, doc) {
-				mongoclient.close();
-				if(err){
-					callback(err);
-				}else{
-					callback("success");
-				}
-		});
-		
-	});
-}
-exports.deleteCategory=deleteCategory;
-//demo
-//deleteCategory(1,"2",function(result){console.log(result)})
-//succeed:success
-
-exports.getCategories = function (email,callback){
-	var mongoclient = new MongoClient(new Server("localhost", 27017, {
-		native_parser : true
-	}));
-	mongoclient.open(function(err, mongoclient) {
-		var db = mongoclient.db("eAccount");
-		var collection = db.collection("user");
-		collection.findOne({"email" : email},function(err, doc) {
-			mongoclient.close();
-				if(err){
-					callback("error");
-				}else{
-					callback(doc.categories);
-				}
-			 
-		  });
-		
-	});
-}
-//demo
-//getCategories(1,function(result){console.log(JSON.stringify(result))})
-//succeed:success
-
-exports.addRecord = function(email,amount,category,desc,dateTime,callback){
-	var mongoclient = new MongoClient(new Server("localhost", 27017, {
-		native_parser : true
-	}));
-	mongoclient.open(function(err, mongoclient) {
-		var db = mongoclient.db("eAccount");
-		var collection = db.collection("user");
-		collection.update(
-			{
-				"email" : email
-			},
-			{
-				$push : {
-					"records" : {
-						"recordId" : new ObjectID(),
-						"amount" : amount,
-						"category" : category,
-						"desc" : desc,
-						"dateTime" : dateTime
-					}
-				}
-			},
-			function(err, doc) {
-				mongoclient.close();
-				if(err){
-					callback(err);
-				}else{
-					callback("success");
-				}
-		});
-		
-	});
-}
-
-//demo
-//addRecord("1@1.com",25,"food","test","04/27/2014 14:25",function(result){console.log(result)});
-//succeed:success
-
-exports.getRecords = function(email,callback){
-	var mongoclient = new MongoClient(new Server("localhost", 27017, {
-		native_parser : true
-	}));
-	mongoclient.open(function(err, mongoclient) {
-		var db = mongoclient.db("eAccount");
-		var collection = db.collection("user");
-		collection.findOne({"email" : email},function(err, doc) {
-			mongoclient.close();
-				if(err){
-					callback("error");
-				}else{
-					if(doc.records.length>0){
-						doc.records.forEach(function(element){
-							element.recordId=element.recordId.toString();
-						});
-					}
-					callback(doc.records);
-				}
-			 
-		  });
-		
-	});
-}
-//demo
-//getRecords(1,function(result){console.log(JSON.stringify(result))})
-//succeed:success
-
-exports.editCategory = function(email,newCategories,oldCategory,newCatogory,callback){
+exports.editCategory = function(email,newCategories,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
@@ -388,3 +276,135 @@ editCategory("1@1.com",['food','rent'],1,2,function(result){
 	console.log(result);
 })
 */ 
+
+var deleteCategory = function(email,category,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.update(
+			{
+				"email" : email
+			},
+			{
+				$pull : {
+					categories : {'name' : category}
+				}
+			},
+			function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					callback("success");
+				}
+		});
+		
+	});
+}
+exports.deleteCategory=deleteCategory;
+//demo
+//deleteCategory(1,"2",function(result){console.log(result)})
+//succeed:success
+
+exports.getCategories = function (email,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.findOne({"email" : email},function(err, doc) {
+			mongoclient.close();
+				if(err){
+					callback("error");
+				}else{
+					callback(doc.categories);
+				}
+			 
+		  });
+		
+	});
+}
+//demo
+//getCategories(1,function(result){console.log(JSON.stringify(result))})
+//succeed:success
+db.servers.aggregate(
+    {$unwind: '$service.apps.updates'}, 
+    {$sort: {'service.apps.updates.date': 1}}, 
+    {$group: {_id: '$_id', 'updates': {$push: '$service.apps.updates'}}}, 
+    {$project: {'service.apps.updates': '$updates'}})
+exports.addRecord = function(email,amount,category,desc,dateTime,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.aggregate(
+			[
+				{ $unwind: '$records' },
+				{$sort:{records.dataTime:1}},
+				{$group:{email:email,'updates':{$push:records}}},
+				{$project: {records.updates:'$updates'}}
+			],
+			{
+				"email" : email
+			},
+			{
+				$push : {
+					"records" : {
+						"recordId" : new ObjectID(),
+						"amount" : amount,
+						"category" : category,
+						"desc" : desc,
+						"dateTime" : dateTime
+					}
+				}
+			},
+			function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					callback("success");
+				}
+		});
+		
+	});
+}
+
+//demo
+//addRecord("1@1.com",25,"food","test","04/27/2014 14:25",function(result){console.log(result)});
+//succeed:success
+
+exports.getRecords = function(email,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.findOne({"email" : email},function(err, doc) {
+			mongoclient.close();
+				if(err){
+					callback("error");
+				}else{
+					if(doc.records.length>0){
+						doc.records.forEach(function(element){
+							element.recordId=element.recordId.toString();
+						});
+					}
+					callback(doc.records);
+				}
+			 
+		  });
+		
+	});
+}
+//demo
+//getRecords(1,function(result){console.log(JSON.stringify(result))})
+//succeed:success
+
