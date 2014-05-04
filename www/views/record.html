@@ -253,7 +253,7 @@
                             //console.log(msg.recordList[i].recordId);
                             content+="<tr class='first'>";
                             content+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
-                            content+="<td><span class='dollar'>"+msg.recordList[i].amount+"</span></td>";
+                            content+="<td><span class='dollar'>"+msg.recordList[i].balance+"</span></td>";
                             if(msg.recordList[i].amount >= 0){
                                 content+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
                             }else{
@@ -275,7 +275,7 @@
                                     //console.log(msg.recordList[i].recordId);
                                     selectedContent+="<tr class='first'>";
                                     selectedContent+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
-                                    selectedContent+="<td><span class='dollar'>"+msg.recordList[i].amount+"</span></td>";
+                                    selectedContent+="<td><span class='dollar'>"+msg.recordList[i].balance+"</span></td>";
                                     if(msg.recordList[i].amount >= 0){
                                         selectedContent+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
                                     }else{
@@ -296,7 +296,7 @@
                                         //console.log(msg.recordList[i].recordId);
                                         selectedContent+="<tr class='first'>";
                                         selectedContent+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
-                                        selectedContent+="<td><span class='dollar'>"+msg.recordList[i].amount+"</span></td>";
+                                        selectedContent+="<td><span class='dollar'>"+msg.recordList[i].balance+"</span></td>";
                                         if(msg.recordList[i].amount >= 0){
                                             selectedContent+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
                                         }else{
