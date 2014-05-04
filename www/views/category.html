@@ -228,17 +228,18 @@
                         $('.submit-change').click(function(){
                             var cateData = "[";
                             for(var i = 0; i < msg.categoryList.length; i++){
+                                var value = $('#'+msg.categoryList[i]).val().replace('$','');
                                 if(i != msg.categoryList.length-1)
-                                    cateData+="{name:'"+msg.categoryList[i]+"',line:'"+$('#'+msg.categoryList[i]).val()+"'},";
+                                    cateData+="{name:'"+msg.categoryList[i]+"',line:"+value+"},";
                                 else
-                                    cateData+="{name:'"+msg.categoryList[i]+"',line:'"+$('#'+msg.categoryList[i]).val()+"'}";
+                                    cateData+="{name:'"+msg.categoryList[i]+"',line:"+value+"}";
                             }
                             cateData+="]";
                             console.log(cateData);
                             $.ajax({
-                                type: "PUT",
+                                type: "POST",
                                 url: "/category",
-                                data: {test:cateData},
+                                data: {_method:'put',categoryList:cateData},
                                 dataType: "json",
                                 success: function(msg){
                                     

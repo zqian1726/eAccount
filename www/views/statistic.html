@@ -91,37 +91,38 @@
             success: function(msg){
                 if(msg.error){
                 }else{
+                    
                     Morris.Bar({
                         element: 'hero-bar',
                         data: [
-                            {category: '1', line: 136},
-                            {category: '3G', line: 1037},
-                            {category: '3GS', line: 275},
-                            {category: '4', line: 380},
-                            {category: '4S', line: 655},
-                            {category: '5', line: 1571}
+                            {category: '1', line: 136, amount: 200},
+                            {category: '3G', line: 1037, amount: 200},
+                            {category: '3GS', line: 275, amount: 200},
+                            {category: '4', line: 380, amount: 200},
+                            {category: '4S', line: 655, amount: 200},
+                            {category: '5', line: 1571, amount: 200}
                         ],
                         xkey: 'category',
-                        ykeys: ['line'],
-                        labels: ['Lines'],
+                        ykeys: ['line', 'amount'],
+                        labels: ['Lines', 'Amount'],
                         barRatio: 0.4,
                         xLabelMargin: 10,
                         hideHover: 'auto',
                         barColors: ["#3d88ba"]
                     });
+                    Morris.Donut({
+                        element: 'hero-donut',
+                        data: [
+                            {label: 'Direct', value: 25 },
+                            {label: 'Referrals', value: 40 },
+                            {label: 'Search engines', value: 25 },
+                            {label: 'Unique visitors', value: 10 }
+                        ],
+                        colors: ["#30a1ec", "#76bdee", "#c4dafe"],
+                        formatter: function (y) { return y + "%" }
+                    });
                 }
-                // ` Chart
-                Morris.Donut({
-                    element: 'hero-donut',
-                    data: [
-                        {label: 'Direct', value: 25 },
-                        {label: 'Referrals', value: 40 },
-                        {label: 'Search engines', value: 25 },
-                        {label: 'Unique visitors', value: 10 }
-                    ],
-                    colors: ["#30a1ec", "#76bdee", "#c4dafe"],
-                    formatter: function (y) { return y + "%" }
-        });
+                    
             }
         })
 
