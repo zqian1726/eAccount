@@ -1,19 +1,33 @@
 var db = require('./dao/dbOperation')
+  , sha1 = require('sha1')
 	, validator = require('validator')
 
 exports.email = function(req, res) {
 	// check email address is not used
-	hasEmail(req.body.email, function(ret) {
+	availableEmail(req.body.email, function(ret) {
 		res.type('json').send(ret)
 	})
 }
 
-exports.hasEmail = hasEmail
-var hasEmail = function(value, callback) {
+exports.availableEmail = availableEmail = function(value, callback) {
 	if (typeof callback == 'function')
 		db.checkEmail(value, callback)
 	else
-		return ret
+		return false
+}
+
+exports.password = function(req, res) {
+	// check password
+	checkPass(req.cookies.user, req.body.password, function(ret) {
+		res.type('json').send(ret)
+	})
+}
+
+exports.checkPass = checkPass = function(user, pass, callback) {
+	if (typeof callback == 'function')
+		db.checkUser(user, sha1(pass), callback)
+	else
+		return false
 }
 
 exports.isEmail = function(value) {

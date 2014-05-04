@@ -11,6 +11,19 @@
     $(function() {
         $("#userForm2").validate({
             rules: {
+                oldPass: {
+                    required: true,
+                    minlength: 6,
+                    remote: {
+                        url: "/validate/password",
+                        type: "POST",
+                        data:{
+                            password: function(){
+                                return $("#oldPass").val()
+                            }
+                        }
+                    }
+                },
                 newPass: {
                     required: true,
                     minlength: 6
@@ -22,12 +35,17 @@
                 }
             },
             messages: {
+                oldPass: {
+                    required: "Please provide an old password",
+                    minlength: "Your password must be at least 6 characters long",
+                    remote: "Your password is wrong"
+                },
                 newPass: {
-                    required: "Please provide a password",
+                    required: "Please provide a new password",
                     minlength: "Your password must be at least 6 characters long"
                 },
                 renewPass: {
-                    required: "Please provide a password",
+                    required: "Please provide a confirm password",
                     minlength: "Your password must be at least 6 characters long",
                     equalTo: "Please enter the same password as above"
                 }
@@ -105,11 +123,12 @@
                                 </form>
                             </div>
                             <div id="sectionB" class="tab-pane fade">
-                                <form action="/changePassword" method="post" id="userForm2">
+                                <form action="/user/reset" method="post" id="userForm2">
+                                    <input type="hidden" name="_method" value="PUT">
                                     <div>
                                         <div class="field-box">
                                             <label>Old Password:</label>
-                                            <input class="span5 inline-input" name="oldPass" type="password" />
+                                            <input class="span5 inline-input" name="oldPass" id="oldPass" type="password" />
                                         </div>
                                         <label style="width: 770px;"for="newPass">New Password:</label>
                                         <input class="span5 inline-input" name = "newPass" id ="newPass" type="password" />

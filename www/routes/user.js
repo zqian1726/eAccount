@@ -23,7 +23,7 @@ exports.update = function(req, res) {
 	// update profile information
 	db.updateUserInfo(req.cookies.user, validator.striptags(req.body.username), req.body.dob, validator.striptags(req.body.gender), function(ret) {
 		if (ret == "success") {
-			res.redirect('back')
+			res.redirect('/')
 		}
 		else {
 			console.log(req.cookies.user + " edit user info failed!")
@@ -33,14 +33,24 @@ exports.update = function(req, res) {
 }
 
 exports.reset = function(req, res) {
-	// reset password
-	db.changePassword(req.cookies.user, sha1(req.body.newPass), function(ret) {
-		if (ret == "success") {
-			res.send({error: false})
+	console.log(validator.password)
+	// check old password
+	validator.checkPass(req.cookies.user, req.body.oldPass, function(flag) {
+		if (flag) {
+			// reset password
+			db.changePassword(req.cookies.user, sha1(req.body.newPass), function(ret) {
+				if (ret == "success") {
+					res.redirect('/')
+				}
+				else {
+					console.log(req.cookies.user + " reset pass failed!")
+					res.redirect('/404')
+				}
+			})
 		}
 		else {
-			console.log(req.cookies.user + " reset pass failed!")
-			res.send({error: true})
+			console.log(req.cookies.user + " reset pass failed! old pass is incorrect.")
+			res.redirect('/404')
 		}
 	})
 }

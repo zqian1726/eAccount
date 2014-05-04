@@ -47,6 +47,7 @@ app.get('/signout', auth.authorized, auth.signout)
 
 // Validation
 app.post('/validate/email', validate.email)
+app.post('/validate/password', validate.password)
 
 // Welcome page: sign in & sign up
 app.get('/', auth.unauthorized, index.index)
@@ -57,7 +58,7 @@ app.get('/home', auth.authorized, index.home)
 // User page:
 app.put('/user', auth.authorized, user.update)
 app.get('/user', auth.authorized, user.info)
-app.post('/user/reset', auth.authorized, user.reset)
+app.put('/user/reset', auth.authorized, user.reset)
 
 // Record CRUD:
 app.post('/record/new', auth.authorized, record.add)
