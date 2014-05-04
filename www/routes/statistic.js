@@ -4,3 +4,15 @@ exports.index = function(req, res) {
   	title: 'Statistic'
   })
 }
+
+exports.pan = function(req, res) {
+
+}
+
+exports.bar = function(req, res) {
+
+}
+
+exports.pan = function(req, res) {
+
+}

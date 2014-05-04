@@ -78,6 +78,9 @@ app.get('/category', auth.authorized, category.index)
 
 // statistic page:
 app.get('/statistic', auth.authorized, statistic.index)
+app.get('/statistic/chart/bar', auth.authorized, statistic.bar)
+app.get('/statistic/chart/pan', auth.authorized, statistic.pan)
+app.get('/statistic/chart/line/:period', auth.authorized, statistic.line)
 
 // map page:
 app.get('/map', auth.authorized, func.map)
