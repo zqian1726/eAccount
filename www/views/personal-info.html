@@ -62,7 +62,7 @@
                             <li class="active personal-title" ><a data-toggle="tab" href="#sectionA">Change Basic Information</a></li>
                             <li class="personal-title"><a data-toggle="tab" href="#sectionB">Change Password</a></li>
                         </ul>
-                        <div class="tab-content">
+                        <div class="tab-content" >
                             <div id="sectionA" class="tab-pane fade in active">
                                 <form action="/user" method="post" id="userForm1">
                                     <input type="hidden" name="_method" value="PUT">
@@ -106,18 +106,20 @@
                             </div>
                             <div id="sectionB" class="tab-pane fade">
                                 <form action="/changePassword" method="post" id="userForm2">
-                                    <div>
+                                    
                                         <div class="field-box">
-                                            <label>Old Password:</label>
+                                            <label >Old Password:</label>
                                             <input class="span5 inline-input" name="oldPass" type="password" />
                                         </div>
-                                        <label style="width: 770px;"for="newPass">New Password:</label>
-                                        <input class="span5 inline-input" name = "newPass" id ="newPass" type="password" />
                                         <div class="field-box">
-                                            <label  style="width:770px;"for="renewPass">Confirm new password: </label>
+                                            <label for="newPass">New Password:</label>
+                                            <input class="span5 inline-input" name = "newPass" id ="newPass" type="password" />
+                                        </div>
+                                        <div class="field-box">
+                                            <label for="renewPass">Confirm new password: </label>
                                             <input class="span5 inline-input" name = "renewPass"id ="renewPass"type="password" />  
                                         </div>
-                                    </div>
+                                   
                                     <div class="span6 field-box actions">
                                         <input type="submit" class="btn-glow primary"  value="Save Changes" />
                                         <span>OR</span>
