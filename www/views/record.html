@@ -150,7 +150,7 @@
                                                 </div>
                                                 <div class="field-box">
                                                     <label>Description:</label>
-                                                    <input class="span" type="text" name="desc" class="editDesc"/>
+                                                    <input class="span editDesc" type="text" name="desc" />
                                                 </div>
                                             </form>
                                         </div>
@@ -293,7 +293,47 @@
                         })
                         
                         //edit record
-                        
+                        $('.editRecordButton').click(function(){
+                            var temp = $(this).attr('id').split('-');
+                            var rec = temp[0];
+                            console.log(rec);
+                            for(var i = 0; i < msg.recordList.length; i++){
+                                if(msg.recordList[i].recordId == rec){
+                                    console.log(msg.recordList[i].desc);
+                                    if(msg.recordList[i].amount >= 0){
+                                        $('.editAmount').val(msg.recordList[i].amount);
+                                    }else{
+                                        $('.editAmount').val(0-msg.recordList[i].amount);
+                                        $('#my-checkbox2').bootstrapSwitch('toggleState');
+                                    }
+                                    $('.editDate').val(msg.recordList[i].datetime);
+                                    $('.editDesc').val(msg.recordList[i].desc);
+                                    console.log($('.editDesc').val());
+                                    break;
+                                }
+                            }
+                            $('#editRecordConfirm').click(function(){
+                                var valueEdit
+                                $('#my-checkbox2').on('switchChange.bootstrapSwitch',function(event, state){
+                                    valueEdit = state;
+                                }) 
+                                $('.edit-record-submit').click(function(){
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "record/new",
+                                        data: {amount: valueEdit?$('.add-amount').val():0-$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), datetime: $('.add-record-datepicker').val()},
+                                        dataType: "json",
+                                        success:function(msg){
+                                            if(msg.error){
+                                                alert("error");
+                                            }else{
+                                                location.reload();
+                                            }
+                                        }
+                                    })
+                                })
+                            })
+                        })
                         
                         
                     }
