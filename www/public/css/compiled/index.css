@@ -33,6 +33,9 @@
       position: absolute;
       right: 50px; }
 
+
+
+
 .section {
   border-top: 1px solid #edeff1;
   margin-top: 100px;
@@ -175,7 +178,18 @@
   #pad-wrapper .table-products .table input[type="checkbox"] {
     margin-right: 10px; }
   #pad-wrapper .table-products .table .label {
-    display: none; } }
+    display: none; } 
+    #signup {
+            position:left;
+            margin-top: 8%;
+            margin-left: 10%;
+        }
+    #signin {
+        position:left;
+        margin-top: 8%;
+        margin-left: 10%;
+    }
+}
 @media (max-width: 979px) {
   #main-stats .stat .data {
     padding-right: 17px; }
@@ -184,12 +198,46 @@
     display: none; }
 
   .pointer {
-    top: 5%; } }
+    top: 5%; }
+    
+    #signup {
+            position:relative;
+            margin-top: 8%;
+            margin-left: 30%;
+        }
+        #signin {
+            position:relative;
+            margin-top: 8%;
+            margin-left: 30%;
+        }
+}
 @media (min-width: 980px) {
   #pad-wrapper .ui-elements .knob-wrapper + .knob-wrapper {
-    margin-left: 5px; } }
+    margin-left: 5px; } 
+    #signup {
+            position:relative;
+            margin-top: 8%;
+           
+        }
+        #signin {
+            position:relative;
+            margin-top: 8%;
+            
+        }
+}
 @media (min-width: 1200px) {
   #pad-wrapper .ui-elements .showcase {
     width: 53%; }
   #pad-wrapper .ui-elements .knob-wrapper + .knob-wrapper {
-    margin-left: 35px; } }
+    margin-left: 35px; } 
+    #signup {
+            position:relative;
+            margin-top: 8%;
+            margin-left: 30%;
+        }
+        #signin {
+            position:relative;
+            margin-top: 8%;
+            margin-left: 30%;
+        }
+}
