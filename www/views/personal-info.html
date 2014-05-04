@@ -7,141 +7,127 @@
     <link rel="stylesheet" href="css/compiled/personal-info.css" type="text/css" media="screen" />
     <!-- // <script src="js/bootstrap.datepicker.js"></script> -->
     <script src="js/bootstrap-datetimepicker.js"></script>
-
     <script>
-     $().ready(function() {
-    $("#userForm2").validate({
-                rules: {
-                    newPass: {
-                        required: true,
-                        minlength: 6
-                    },
-                    renewPass: {
-                        required: true,
-                        minlength: 6,
-                        equalTo: "#newPass"
-                    }
-                    
+    $(function() {
+        console.log('<%= userInfo.gender %>')
+        $("#userForm2").validate({
+            rules: {
+                newPass: {
+                    required: true,
+                    minlength: 6
                 },
-                messages: {
-                    newPass: {
-                        required: "Please provide a password",
-                        minlength: "Your password must be at least 6 characters long"
-                    },
-                    renewPass: {
-                        required: "Please provide a password",
-                        minlength: "Your password must be at least 6 characters long",
-                        equalTo: "Please enter the same password as above"
-                    }
-                    
-                    
+                renewPass: {
+                    required: true,
+                    minlength: 6,
+                    equalTo: "#newPass"
                 }
-            });
-    $("#userForm1").validate({
-                rules: {
-                    dobin: {
-                        date:true
-                    },
-                    username: {  
-                        digits: true ,
-                        minlength: 6,
-                        maxlength:10
-                    }   
+            },
+            messages: {
+                newPass: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 6 characters long"
+                },
+                renewPass: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 6 characters long",
+                    equalTo: "Please enter the same password as above"
                 }
-                
-            });
-    
-});
-
+            }
+        })
+        $("#userForm1").validate({
+            rules: {
+                dobin: {
+                    date: true
+                },
+                username: {  
+                    digits: true,
+                    minlength: 6,
+                    maxlength: 10
+                }   
+            }
+        })
+    })
     </script>
 	<!-- main container .wide-content is used for this layout without sidebar :)  -->
     <div class="content">
         <div class="container-fluid">
-            
             <div class="settings-wrapper" id="pad-wrapper">
-                
                 <div class="span8 personal-info">
                     <div class="alert alert-info">
                         <i class="icon-lightbulb"></i>
-                        Please use this page to update your personal information
+                        <span>Please use this page to update your personal information</span>
                     </div>
-                   
                     <h5 class="personal-title">Personal info</h5>
                     <div class="infotab">
-                    <ul class="nav nav-tabs">
-                        <li class="active personal-title" ><a data-toggle="tab" href="#sectionA">Change Basic Information</a></li>
-                        <li class="personal-title"><a data-toggle="tab" href="#sectionB">Change Password</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div id="sectionA" class="tab-pane fade in active">
-                        <form action="/user" method="post" id="userForm1">
-                         <div id="gender" class="field-box">
-                            <label>Gender:</label>
-                            <div class="ui-select">
-                                <select id="gender" name="user[gender]">
-                                    <option value="mail" />Male
-                                    <option value="femail" />Female
-                                    <option value="femail" />other
-                                </select>
-                            </div>
-                            
-                        </div>
-                        <div id="dob" class="field-box">
-                            <label for="dobin">Date of Birth:</label>
-                            <input class="span5 inline-input" id="dobin" name="dobin"data-date-format="mm-dd-yyyy" value="" type="text" />
-                        </div>
-                        <script>
-                                $('#dob').ready(function() {
-                                             
+                        <ul class="nav nav-tabs">
+                            <li class="active personal-title" ><a data-toggle="tab" href="#sectionA">Change Basic Information</a></li>
+                            <li class="personal-title"><a data-toggle="tab" href="#sectionB">Change Password</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="sectionA" class="tab-pane fade in active">
+                                <form action="/user" method="post" id="userForm1">
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <div id="gender" class="field-box">
+                                        <label>Gender:</label>
+                                        <div class="ui-select">
+                                            <select id="gender" name="gender">
+                                                <option value="male" <%= userInfo.gender == 'male' ? 'selected' : '' %>>Male</option>
+                                                <option value="female" <%= userInfo.gender == 'female' ? 'selected' : '' %>>Female</option>
+                                                <option value="other" <%= userInfo.gender == 'other' ? 'selected' : '' %>>other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div id="dob" class="field-box">
+                                        <label for="dobin">Date of Birth:</label>
+                                        <input class="span5 inline-input" id="dobin" name="dob" value="<%= userInfo.dob %>" data-date-format="yyyy-mm-dd" type="text" />
+                                    </div>
+                                    <script>
+                                            $('#dob').ready(function() {
                                                 $('#dobin').datetimepicker({
-                                                        weekStart: 1,
-                                                        todayBtn:  1,
-                                                        autoclose: 1,
-                                                        todayHighlight: 1,
-                                                        startView: 4,
-                                                        minView: 2,
-                                                        forceParse: 0
-                                                    });
+                                                    weekStart: 1,
+                                                    todayBtn:  1,
+                                                    autoclose: 1,
+                                                    todayHighlight: 1,
+                                                    startView: 4,
+                                                    minView: 2,
+                                                    forceParse: 0
+                                                })
                                             })
-                        </script>
-                        <div class="field-box">
-                            <label for="username">Username:</label>
-                            <input id="username" name="username"class="span5 inline-input" type="text" />
-                        </div>
-                        <div class="span6 field-box actions">
-                            <input type="submit" class="btn-glow primary" value="Save Changes" />
-                            <span>OR</span>
-                            <input type="reset" value="Cancel" class="reset" />
-                        </div>
-                     </form>
-                     </div>
-                        <div id="sectionB" class="tab-pane fade">
-                            <form action="/changePassword" method="post" id="userForm2">
-                            <div>
-                            <div class="field-box">
-                                <label>Old Password:</label>
-                                <input class="span5 name="oldPass" inline-input" type="password" />
-                            </div>   
-                          
-                                <label style="width: 770px;"for="newPass">New Password:</label>
-                                <input class="span5 inline-input" name = "newPass" id ="newPass" type="password" />
-                                
-                               
-                           
-                            <div class="field-box">
-                                <label  style="width:770px;"for="renewPass">Confirm new password: </label>
-                                <input class="span5 inline-input" name = "renewPass"id ="renewPass"type="password" />  
+                                    </script>
+                                    <div class="field-box">
+                                        <label for="username">Username:</label>
+                                        <input id="username" name="username" value="<%= userInfo.username %>" class="span5 inline-input" type="text" />
+                                    </div>
+                                    <div class="span6 field-box actions">
+                                        <input type="submit" class="btn-glow primary" value="Save Changes" />
+                                        <span>OR</span>
+                                        <input type="reset" value="Cancel" class="reset" />
+                                    </div>
+                                </form>
                             </div>
+                            <div id="sectionB" class="tab-pane fade">
+                                <form action="/changePassword" method="post" id="userForm2">
+                                    <div>
+                                        <div class="field-box">
+                                            <label>Old Password:</label>
+                                            <input class="span5 name="oldPass" inline-input" type="password" />
+                                        </div>
+                                        <label style="width: 770px;"for="newPass">New Password:</label>
+                                        <input class="span5 inline-input" name = "newPass" id ="newPass" type="password" />
+                                        <div class="field-box">
+                                            <label  style="width:770px;"for="renewPass">Confirm new password: </label>
+                                            <input class="span5 inline-input" name = "renewPass"id ="renewPass"type="password" />  
+                                        </div>
+                                    </div>
+                                    <div class="span6 field-box actions">
+                                        <input type="submit" class="btn-glow primary"  value="Save Changes" />
+                                        <span>OR</span>
+                                        <input type="reset" value="Cancel" class="reset" />
+                                    </div>
+                                </form>
+                            </div>    
                         </div>
-                        <div class="span6 field-box actions">
-                            <input type="submit" class="btn-glow primary"  value="Save Changes" />
-                            <span>OR</span>
-                            <input type="reset" value="Cancel" class="reset" />
                     </div>
-                    </form>
-                    </div>    
-                    </div>
-                  </div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 var db = require('./dao/dbOperation')
   , sha1 = require('sha1')
+	, validator = require('./validate')
 
 exports.info = function(req, res) {
 	// send profile information
@@ -22,11 +23,11 @@ exports.update = function(req, res) {
 	// update profile information
 	db.updateUserInfo(req.cookies.user, validator.striptags(req.body.username), req.body.dob, validator.striptags(req.body.gender), function(ret) {
 		if (ret == "success") {
-			res.send({error: false})
+			res.redirect('back')
 		}
 		else {
 			console.log(req.cookies.user + " edit user info failed!")
-			res.send({error: true})
+			res.redirect('/404')
 		}
 	})
 }
