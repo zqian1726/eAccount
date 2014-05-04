@@ -58,7 +58,8 @@
                                                 <form action="/record/new" method="post">
                                                     <div class="field-box">
                                                         <label>Amount:</label>
-                                                        $<input class="span3 add-amount" type="text" name="add-amount" />
+                                                        $<input class="span3 amount add-amount" id = "amount1"type="text" name="add-amount" />
+                                                         <span class="error" style="color: Red; display: none">* Input digits (0 - 9)</span>
                                                     </div>
                                                     <div class="field-box">
                                                         <input type="checkbox" id="my-checkbox1" name="type" checked />
@@ -73,7 +74,7 @@
                                                     </div>
                                                     <div class="field-box">
                                                         <label>Pick a date and time:</label>
-                                                        <input type="text" id="datePicker1" class = "add-record-datepicker" value="" />
+                                                        <input style="background-color: white !important;cursor:auto !important;" type="text" id="datePicker1" class = "add-record-datepicker" value="" readonly/>
                                                     </div>
                                                     <div class="field-box">
                                                         <label>Description:</label>
@@ -131,7 +132,8 @@
                                             <form action="/record/new" method="post">
                                                 <div class="field-box">
                                                     <label>Amount:</label>
-                                                        $<input class="span3 editAmount" type="text" name="amount"/>
+                                                        $<input type="text" class="span3 amount"id = "amount2"name="amount"  />
+                                                    <span class="error" style="color: Red; display: none">* Input digits (0 - 9)</span>
                                                 </div>
                                                 <div class="field-box">
                                                     <input type="checkbox" id="my-checkbox2" name="type" class="editInEx" checked/>
@@ -146,7 +148,7 @@
                                                 </div>
                                                 <div class="field-box">
                                                     <label>Pick a date and time:</label>
-                                                    <input type="text" id="datePicker2" value="" class="editDate"/>
+                                                    <input style="background-color: white !important;cursor:auto !important;" type="text" id="datePicker2" value="" class="editDate" readonly/>
                                                 </div>
                                                 <div class="field-box">
                                                     <label>Description:</label>
@@ -181,23 +183,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pagination">
-                      <ul>
-                        <li><a href="#">&#8249;</a></li>
-                        <li><a class="active" href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">&#8250;</a></li>
-                      </ul>
-                    </div>
+                   
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+    // amount validation
+        var specialKeys = new Array();
+        specialKeys.push(8);
         $(function(){
+            $(".amount").bind("keypress", function (e) {
+             var keyCode = e.which ? e.which : e.keyCode
+             var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+            $(".error").css("display", ret ? "none" : "inline");
+                return ret;
+            });
+            $(".amount").bind("paste", function (e) {
+                return false;
+            });
+            $(".amount").bind("drop", function (e) {
+                return false;
+            });
+
             $.ajax({
                 type: "GET",
                 url: "/category/list",
