@@ -24,26 +24,26 @@
                                 $('#addRecord').ready(function() {
                                     $("#my-checkbox1").bootstrapSwitch()
                                     $('#datePicker1').datetimepicker({
-                                                    weekStart: 1,
-                                                    todayBtn:  1,
-                                                    autoclose: 1,
-                                                    todayHighlight: 1,
-                                                    startView: 2,
-                                                    forceParse: 0,
-                                                    showMeridian: 1
-                                                });
+                                        weekStart: 1,
+                                        todayBtn:  1,
+                                        autoclose: 1,
+                                        todayHighlight: 1,
+                                        startView: 2,
+                                        forceParse: 0,
+                                        showMeridian: 1
+                                    })
                                 })
                                 $('#editRecord').ready(function() {
                                     $("#my-checkbox2").bootstrapSwitch()
                                     $('#datePicker2').datetimepicker({
-                                                    weekStart: 1,
-                                                    todayBtn:  1,
-                                                    autoclose: 1,
-                                                    todayHighlight: 1,
-                                                    startView: 2,
-                                                    forceParse: 0,
-                                                    showMeridian: 1
-                                                });
+                                        weekStart: 1,
+                                        todayBtn:  1,
+                                        autoclose: 1,
+                                        todayHighlight: 1,
+                                        startView: 2,
+                                        forceParse: 0,
+                                        showMeridian: 1
+                                    })
                                 })
                             </script>
                             <div id="addRecord" class="modal hide fade" role="dialog">
@@ -229,7 +229,6 @@
                     console.log(msg);
                     if(msg.error){
                     }else{
-                    
                         var content = "";
                         for(var i = 0; i < msg.recordList.length; i++){
                             //console.log(msg.recordList[i].recordId);
