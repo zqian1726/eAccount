@@ -13,6 +13,6 @@ exports.bar = function(req, res) {
 
 }
 
-exports.pan = function(req, res) {
+exports.line = function(req, res) {
 
 }
