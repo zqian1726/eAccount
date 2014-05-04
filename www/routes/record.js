@@ -9,7 +9,7 @@ exports.list = function(req, res) {
 			res.send({error: true})
 		}
 		else {
-			res.send({error: false, recordList: ret})
+			res.send({error: false, balance: 1000, recordList: ret})
 		}
 	})
 }

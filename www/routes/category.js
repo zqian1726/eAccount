@@ -42,6 +42,7 @@ exports.update = function(req, res) {
 	// 		res.send({error: true})
 	// 	}
 	// })
+	console.log(req.body.test)
 }
 
 exports.delete = function(req, res) {

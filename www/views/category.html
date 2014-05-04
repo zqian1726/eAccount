@@ -22,8 +22,8 @@
                     <div class="row-fluid filter-block">
                         <div class="pull-right" style ="padding-bottom: 20px">
                         <input type="text" class="search" placeHolder="Search" id="txtSearchKeyword" x-webkit-speech="x-webkit-speech" onkeypress="sayEnter(event)"/>
-                            <a class="btn-flat success new-product" href="#addRecord" data-toggle="modal">+ Add category</a>
-                            <div id="addRecord" class="modal fade">
+                            <a class="btn-flat success new-product" href="#addCategory" data-toggle="modal">+ Add category</a>
+                            <div id="addCategory" class="modal hide fade">
                               <div class="modal-dialog">
                                 <div class="modal-content">
                                   <div class="modal-header">
@@ -72,33 +72,16 @@
                                 </tr>
                             </thead>
                             <tbody class="category-table" id="searchTextTest">
-                                <!-- row -->
-                                <!--
-                                <tr>
-                                    <td><span id="catename" contenteditable="true">Food</span></td>
-                                    <td>
-                                        <input type="text" id="food" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
-                                    </td>
-                                    <td><div class="success sliderFood"></div></td>
-                                    <td>
-                                        <ul class="actions">
-                                            <li class="last">
-                                                <a href="#deleteCate" data-toggle="modal" class="icon-remove-sign" style="color: #d5393e;">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                -->
+                                
                             </tbody>
                         </table>
                     </div>
                     <div class="span6 field-box actions">
-                        <input type="button" class="btn-glow primary" value="Save Changes" />
+                        <input type="button" class="btn-glow primary submit-change" value="Save Changes" />
                         <span>OR</span>
-                        <input type="reset" value="Cancel" class="reset" />
+                        <input type="reset" value="Cancel" class="reset cancel-change" />
                     </div>
-                    <div id="deleteCate" class="modal fade">
+                    <div id="deleteCate" class="modal hide fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -140,7 +123,7 @@
                         
                         var content;
                         for(var i = 0; i < msg.categoryList.length; i++){
-                            content += "<tr><td><span id= '"+msg.categoryList[i]+"name' contenteditable='true'>"+msg.categoryList[i]+"</span></td><td><input type='text' id='"+msg.categoryList[i]+"' disabled style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i]+"'></div></td><td><ul class='actions'><li><a href='#deleteCate' id='delete-"+msg.categoryList[i]+"' data-toggle='modal' class='icon-remove-sign deleteCate' style='color: #d5393e;'></a></li></ul></td></tr>"                      
+                            content += "<tr><td><span id= '"+msg.categoryList[i]+"name' contenteditable='true'>"+msg.categoryList[i]+"</span></td><td><input type='text' id='"+msg.categoryList[i]+"' disabled value = '$40' style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i]+"'></div></td><td><ul class='actions'><li><a href='#deleteCate' id='delete-"+msg.categoryList[i]+"' data-toggle='modal' class='icon-remove-sign deleteCate' style='color: #d5393e;'></a></li></ul></td></tr>"                      
                         }
                         $('.category-table').html(content);
                         
@@ -180,26 +163,7 @@
                                 });
                             }(ele))                            
                         }
-                        /*
-                                            console.log(totleValue)
-                                            $(".sliderTotal").slider({
-                                                range: "min",
-                                                value: totleValue,
-                                                min: 0,
-                                                max: totleMax,
-                                                start: function(event,ui) {
-                                                    tooltip.fadeIn('fast');
-				                                },
-				                                slide: function(event, ui) {
-                                                    var value  = slider.slider('value');
-                                                    tooltip.css('left', value).text(ui.value);  //Adjust the tooltip accordingly
-                                                    $("#totalAmount").val("$" + ui.value);
-				                                },
-				                                stop: function(event,ui) {
-				                                    tooltip.fadeOut('fast');
-				                                },
-                                            });*/
-                        
+                       
                         // Switch slide buttons
                         $('.slider-button').click(function() {
                             if ($(this).hasClass("on")) {
@@ -250,7 +214,7 @@
                                     url: "/category",
                                     data: {_method:"delete", name: cat},
                                     datatype: "json",
-                                    success:function(msg){
+                                    success: function(msg){
                                         if(msg.error == false){
                                             location.reload();
                                         }
@@ -258,37 +222,36 @@
                                 })
                             })
                             console.log(name);
+                        });
+                        
+                        //submit change
+                        $('.submit-change').click(function(){
+                            var cateData = "[";
+                            for(var i = 0; i < msg.categoryList.length; i++){
+                                if(i != msg.categoryList.length-1)
+                                    cateData+="{name:'"+msg.categoryList[i]+"',line:'"+$('#'+msg.categoryList[i]).val()+"'},";
+                                else
+                                    cateData+="{name:'"+msg.categoryList[i]+"',line:'"+$('#'+msg.categoryList[i]).val()+"'}";
+                            }
+                            cateData+="]";
+                            console.log(cateData);
+                            $.ajax({
+                                type: "PUT",
+                                url: "/category",
+                                data: {test:cateData},
+                                dataType: "json",
+                                success: function(msg){
+                                    
+                                }
+                            })
+                            
                         })
                     }
                 }
             })
-            /*
             
-            // Switch slide buttons
-            $('.slider-button').click(function() {
-                if ($(this).hasClass("on")) {
-                    $(this).removeClass('on').html($(this).data("off-text"));   
-                } else {
-                    $(this).addClass('on').html($(this).data("on-text"));
-                }
-            });
-            */
         });
-        /*
-        var editable = document.getElementById('catename');
         
-        addEvent(editable, 'blur', function () {
-          localStorage.setItem('catename', this.innerHTML);
-          document.designMode = 'off';
-        });
-
-        addEvent(editable, 'focus', function () {
-          document.designMode = 'on';
-        });
-
-        if (localStorage.getItem('catename')) {
-          editable.innerHTML = localStorage.getItem('catename');
-        }*/
 	</script>
     
 
