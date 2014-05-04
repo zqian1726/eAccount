@@ -5,6 +5,7 @@ body {
 	margin: 0px;
 	font-size: 12px;
 	padding: 0px;
+	min-width:480px; 
 	/*-webkit-font-smoothing: antialiased;*/
 }
 

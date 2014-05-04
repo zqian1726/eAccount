@@ -101,8 +101,8 @@
     display: none; }
   .table-wrapper .table input[type="checkbox"] {
     margin-right: 10px; }
-  .table-wrapper .table .label {
-    display: none; }
+ /* .table-wrapper .table .label {
+    display: none; }*/
   .table-wrapper .filter-block .search {
     width: 30%;
     margin: 0 10px 0 0; }
