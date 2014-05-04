@@ -58,5 +58,33 @@
             colors: ["#30a1ec", "#76bdee", "#c4dafe"],
             formatter: function (y) { return y + "%" }
         });
+    
+    $.ajax({
+        type: "GET",
+        url: "/record/list",
+        dataType: "json",
+        success: function(msg) {
+            if(msg.error){
+            }else{
+                var content = "";
+                for(var i = 0; i < 10; i++){
+                    //console.log(msg.recordList[i].recordId);
+                    content+="<tr class='first'>";
+                    content+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
+                    content+="<td><span class='dollar'>"+msg.recordList[i].amount+"</span></td>";
+                    if(msg.recordList[i].amount >= 0){
+                        content+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
+                    }else{
+                        content+="<td><span class='label label-info dollar'>"+msg.recordList[i].amount+"</span></td>";
+                    }
+                        
+                    content+="<td><span>"+msg.recordList[i].category+"</span></td>";
+                    content+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
+                    
+                }
+                $('#record-content').html(content);
+        }
+        }
+    })
 </script>
 <% include footer.html %>
