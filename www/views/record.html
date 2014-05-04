@@ -250,6 +250,52 @@
                         }
                         $('#record-content').html(content);
                         
+                        $('.category-selector').change(function(){
+                            var selectedContent = "";
+                            if($('.category-selector').val() == "All Category"){
+                                for(var i = 0; i < msg.recordList.length; i++){
+                                    //console.log(msg.recordList[i].recordId);
+                                    selectedContent+="<tr class='first'>";
+                                    selectedContent+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
+                                    selectedContent+="<td><span class='dollar'>"+msg.recordList[i].amount+"</span></td>";
+                                    if(msg.recordList[i].amount >= 0){
+                                        selectedContent+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
+                                    }else{
+                                        selectedContent+="<td><span class='label label-info dollar'>"+msg.recordList[i].amount+"</span></td>";
+                                }
+                        
+                                    selectedContent+="<td><span>"+msg.recordList[i].category+"</span></td>";
+                                    selectedContent+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
+                                    selectedContent+="<td><ul class='actions'>";
+                                    selectedContent+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
+                                    selectedContent+="<li class='last'><a href='#deleteRecord' title='delete' class='deleteRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-delete'><i class='table-delete'></i></a></li>";
+                                }
+                                $('#record-content').html(selectedContent);
+                            }
+                            else{
+                                for(var i = 0; i < msg.recordList.length; i++){
+                                    if(msg.recordList[i].category == $('.category-selector').val()){
+                                        //console.log(msg.recordList[i].recordId);
+                                        selectedContent+="<tr class='first'>";
+                                        selectedContent+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
+                                        selectedContent+="<td><span class='dollar'>"+msg.recordList[i].amount+"</span></td>";
+                                        if(msg.recordList[i].amount >= 0){
+                                            selectedContent+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
+                                        }else{
+                                            selectedContent+="<td><span class='label label-info dollar'>"+msg.recordList[i].amount+"</span></td>";
+                                }
+                        
+                                        selectedContent+="<td><span>"+msg.recordList[i].category+"</span></td>";
+                                        selectedContent+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
+                                        selectedContent+="<td><ul class='actions'>";
+                                        selectedContent+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
+                                        selectedContent+="<li class='last'><a href='#deleteRecord' title='delete' class='deleteRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-delete'><i class='table-delete'></i></a></li>";
+                                    }
+                                }
+                                $('#record-content').html(selectedContent);
+                            }
+                        })
+                        
                         //delete record
                         $('.deleteRecordButton').click(function(){
                             var temp = $(this).attr('id').split('-');
