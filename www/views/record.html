@@ -69,7 +69,7 @@
                                                     <div class="field-box">
                                                         <label>Amount:</label>
                                                         $<input class="span3 amount add-amount" id = "amount1"type="text" name="add-amount" />
-                                                         <span class="error" style="color: Red; display: none">* Input digits (0 - 9)</span>
+                                                         <span class="error" style="color: red; display: none">* Input digits (0 - 9) or "."</span>
                                                     </div>
                                                     <div class="field-box">
                                                         <input type="checkbox" id="my-checkbox1" name="type" checked />
@@ -143,7 +143,7 @@
                                                 <div class="field-box">
                                                     <label>Amount:</label>
                                                         $<input type="text" class="span3 amount"id = "amount2"name="amount"  />
-                                                    <span class="error" style="color: Red; display: none">* Input digits (0 - 9)</span>
+                                                    <span class="error" style="color: Red; display: none">* Input digits (0 - 9) or "."</span>
                                                 </div>
                                                 <div class="field-box">
                                                     <input type="checkbox" id="my-checkbox2" name="type" class="editInEx" checked/>
@@ -206,7 +206,7 @@
         $(function(){
             $(".amount").bind("keypress", function (e) {
              var keyCode = e.which ? e.which : e.keyCode
-             var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+             var ret = ((keyCode == 46||keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
             $(".error").css("display", ret ? "none" : "inline");
                 return ret;
             });
