@@ -16,7 +16,7 @@ exports.list = function(req, res) {
 
 exports.add = function(req, res) {
 	// add a record
-	db.addRecord(req.cookies.user, validator.toInt(validator.striptags(req.body.amount)), req.body.category, validator.striptags(req.body.desc), req.body.datetime, function(ret) {
+	db.addRecord(req.cookies.user, validator.toFloat(validator.striptags(req.body.amount)), req.body.category, validator.striptags(req.body.desc), req.body.datetime, function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
 		}

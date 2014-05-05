@@ -34,17 +34,13 @@ exports.isEmail = function(value) {
 	return validator.isEmail(value)
 }
 
-exports.isInt = function(value) {
-	return validator.isInt(value)
-}
-
 exports.striptags = function(value) {
 	if (typeof value == 'undefined')
 		return ""
 	return value.toString().replace(/(<([^>]+)>)/ig,"")
 }
 
-exports.toInt = function(value) {
-	var number = validator.toInt(value)
+exports.toFloat = function(value) {
+	var number = validator.toFloat(value)
 	return isNaN(number) ? 0 : number
 }
