@@ -59,7 +59,10 @@ exports.addRecord = function(email,amount,category,desc,dateTime,callback){
 		
 	});
 }
-
+db.addRecord("1@1.com",25,"food","test","2010-12-01 12:15",function(result){console.log(result)});
+db.addRecord("1@1.com",25,"food","test","2012-12-01 12:15",function(result){console.log(result)});
+db.addRecord("1@1.com",25,"food","test","2013-12-01 12:15",function(result){console.log(result)});
+db.addRecord("1@1.com",25,"food","test","2009-12-01 12:15",function(result){console.log(result)});
 
 */
 
@@ -67,7 +70,6 @@ exports.addRecord = function(email,amount,category,desc,dateTime,callback){
 
 var db = require('./dbOperation');
 //db.deleteCategory('1@1.com','test',function(result){console.log(result)});
-db.addRecord("1@1.com",25,"food","test","2010-12-01 12:15",function(result){console.log(result)});
-db.addRecord("1@1.com",25,"food","test","2012-12-01 12:15",function(result){console.log(result)});
-db.addRecord("1@1.com",25,"food","test","2013-12-01 12:15",function(result){console.log(result)});
-db.addRecord("1@1.com",25,"food","test","2009-12-01 12:15",function(result){console.log(result)});
+
+db.deleteRecord('1@1.com','536697a4075150101b540de5',function(result){console.log(JSON.stringify(result))});
+db.getRecords('1@1.com',function(result){console.log(JSON.stringify(result))});

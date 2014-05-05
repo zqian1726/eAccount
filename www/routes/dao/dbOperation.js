@@ -331,11 +331,7 @@ exports.getCategories = function (email,callback){
 //demo
 //getCategories(1,function(result){console.log(JSON.stringify(result))})
 //succeed:success
-db.servers.aggregate(
-    {$unwind: '$service.apps.updates'}, 
-    {$sort: {'service.apps.updates.date': 1}}, 
-    {$group: {_id: '$_id', 'updates': {$push: '$service.apps.updates'}}}, 
-    {$project: {'service.apps.updates': '$updates'}})
+
 exports.addRecord = function(email,amount,category,desc,dateTime,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
@@ -343,13 +339,7 @@ exports.addRecord = function(email,amount,category,desc,dateTime,callback){
 	mongoclient.open(function(err, mongoclient) {
 		var db = mongoclient.db("eAccount");
 		var collection = db.collection("user");
-		collection.aggregate(
-			[
-				{ $unwind: '$records' },
-				{$sort:{records.dataTime:1}},
-				{$group:{email:email,'updates':{$push:records}}},
-				{$project: {records.updates:'$updates'}}
-			],
+		collection.update(
 			{
 				"email" : email
 			},
@@ -387,24 +377,54 @@ exports.getRecords = function(email,callback){
 	mongoclient.open(function(err, mongoclient) {
 		var db = mongoclient.db("eAccount");
 		var collection = db.collection("user");
-		collection.findOne({"email" : email},function(err, doc) {
-			mongoclient.close();
+		collection.aggregate(
+		[
+			{$match: { email: email } },
+			{$unwind: '$records' },
+			{$sort: {"records.dateTime":1}}, 
+			{$group: {  _id: email,records: {$push:"$records"} } }
+		],function(err, doc) {
+				mongoclient.close();
 				if(err){
-					callback("error");
+					callback(err);
 				}else{
-					if(doc.records.length>0){
-						doc.records.forEach(function(element){
-							element.recordId=element.recordId.toString();
-						});
-					}
-					callback(doc.records);
+					callback(doc[0].records);
 				}
-			 
-		  });
+		});
 		
 	});
 }
 //demo
 //getRecords(1,function(result){console.log(JSON.stringify(result))})
-//succeed:success
+//return an array
+
+exports.deleteRecord = function(email,recordId,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.update(
+			{
+				"email" : email
+			},
+			{
+				$pull : {
+					"records" : {
+						"recordId" : new ObjectID(recordId)
+					}
+				}
+			},
+			function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					callback("success");
+				}
+		});
+		
+	});
+}
 
