@@ -16,8 +16,7 @@ exports.list = function(req, res) {
 
 exports.add = function(req, res) {
 	// add a category
-	var item = validator.striptags(req.body.name)
-	db.addCategory(req.cookies.user, item, function(ret) {
+	db.addCategory(req.cookies.user, validator.striptags(req.body.name), function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
 		}
@@ -43,8 +42,7 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
 	// delete a category
-	var item = req.body.name
-	db.deleteCategory(req.cookies.user, item, function(ret) {
+	db.deleteCategory(req.cookies.user, req.body.name, function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
 		}
