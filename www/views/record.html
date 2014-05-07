@@ -278,12 +278,13 @@
                     console.log(msg);
                     if(msg.error){
                     }else{
-                        console.log(msg.balance);
+                        
                         var content = "";
                         for(var i = 0; i < msg.recordList.length; i++){
                             //console.log(msg.recordList[i].recordId);
+                            console.log(msg.balance);
                             content+="<tr class='first'>";
-                            content+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
+                            content+="<td><span>"+msg.recordList[i].dateTime+"</span></td>";
                             content+="<td><span class='dollar'>"+msg.balance+"</span></td>";
                             if(msg.recordList[i].amount >= 0){
                                 content+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
@@ -305,7 +306,7 @@
                                 for(var i = 0; i < msg.recordList.length; i++){
                                     //console.log(msg.recordList[i].recordId);
                                     selectedContent+="<tr class='first'>";
-                                    selectedContent+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
+                                    selectedContent+="<td><span>"+msg.recordList[i].dateTime+"</span></td>";
                                     selectedContent+="<td><span class='dollar'>"+msg.balance+"</span></td>";
                                     if(msg.recordList[i].amount >= 0){
                                         selectedContent+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
@@ -326,7 +327,7 @@
                                     if(msg.recordList[i].category == $('.category-selector').val()){
                                         //console.log(msg.recordList[i].recordId);
                                         selectedContent+="<tr class='first'>";
-                                        selectedContent+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
+                                        selectedContent+="<td><span>"+msg.recordList[i].dateTime+"</span></td>";
                                         selectedContent+="<td><span class='dollar'>"+msg.balance+"</span></td>";
                                         if(msg.recordList[i].amount >= 0){
                                             selectedContent+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
@@ -375,7 +376,7 @@
                             $.ajax({
                                 type: "POST",
                                 url: "record/new",
-                                data: {amount: valueAdd?$('.add-amount').val():0-$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), datetime: $('.add-record-datepicker').val()},
+                                data: {amount: valueAdd?$('.add-amount').val():0-$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), dateTime: $('.add-record-datepicker').val()},
                                 dataType: "json",
                                 success:function(msg){
                                     if(msg.error){
@@ -401,7 +402,7 @@
                                         $('.editAmount').val(0-msg.recordList[i].amount);
                                         $('#my-checkbox2').bootstrapSwitch('toggleState');
                                     }
-                                    $('.editDate').val(msg.recordList[i].datetime);
+                                    $('.editDate').val(msg.recordList[i].dateTime);
                                     $('.editDesc').val(msg.recordList[i].desc);
                                     console.log($('.editDesc').val());
                                     break;
@@ -416,7 +417,7 @@
                                     $.ajax({
                                         type: "POST",
                                         url: "record/new",
-                                        data: {amount: valueEdit?$('.add-amount').val():0-$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), datetime: $('.add-record-datepicker').val()},
+                                        data: {amount: valueEdit?$('.add-amount').val():0-$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), dateTime: $('.add-record-datepicker').val()},
                                         dataType: "json",
                                         success:function(msg){
                                             if(msg.error){
