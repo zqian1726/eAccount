@@ -70,6 +70,7 @@ db.addRecord("1@1.com",25,"food","test","2009-12-01 12:15",function(result){cons
 
 var db = require('./dbOperation');
 //db.deleteCategory('1@1.com','test',function(result){console.log(result)});
-db.editCategory('1@1.com',[{name:'food', line: 40},{name: 'shopping', line: 50}],function(result){console.log(result)})
+//db.editCategory('1@1.com',[{name:'food', line: 40},{name: 'shopping', line: 50}],function(result){console.log(result)})
 //db.deleteRecord('1@1.com','536697a4075150101b540de5',function(result){console.log(JSON.stringify(result))});
 //db.getRecords('1@1.com',function(result){console.log(JSON.stringify(result))});
+db.getBalance('x@x.com',function(result){console.log(JSON.stringify(result))}); 
