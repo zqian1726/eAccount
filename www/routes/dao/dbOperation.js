@@ -388,10 +388,7 @@ exports.getRecords = function(email,callback){
 				if(err){
 					callback(err);
 				}else{
-					if(JSON.stringify(doc)=='[]')
-						callback(null);
-					else
-						callback(doc[0].records);
+						callback(typeof doc[0] == 'undefined' ? [] : doc[0].records);
 				}
 		});
 		
