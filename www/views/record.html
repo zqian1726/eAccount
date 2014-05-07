@@ -259,8 +259,8 @@
                         var content = "<option value = 'All Category'>All Category</option>";
                         var contentAddRecord = "";
                         for(var i = 0; i < msg.categoryList.length; i++){
-                            content+="<option value = '"+msg.categoryList[i]+"'>"+msg.categoryList[i]+"</option>";
-                            contentAddRecord+="<option value = '"+msg.categoryList[i]+"'>"+msg.categoryList[i]+"</option>";
+                            content+="<option value = '"+msg.categoryList[i].name+"'>"+msg.categoryList[i].name+"</option>";
+                            contentAddRecord+="<option value = '"+msg.categoryList[i].name+"'>"+msg.categoryList[i].name+"</option>";
                         }
                         $('.category-selector').html(content);
                         $('.add-record-category').html(contentAddRecord);
