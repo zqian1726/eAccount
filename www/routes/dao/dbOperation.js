@@ -388,7 +388,10 @@ exports.getRecords = function(email,callback){
 				if(err){
 					callback(err);
 				}else{
-					callback(doc[0].records);
+					if(JSON.stringify(doc)=='[]')
+						callback('[]');
+					else
+						callback(doc[0].records);
 				}
 		});
 		
