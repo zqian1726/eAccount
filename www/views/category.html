@@ -240,19 +240,20 @@
                             }
                             cateData+="]";
                             console.log(cateData);
-                            /*$.ajax({
+                            $.ajax({
                                 type: "POST",
                                 url: "/category",
                                 data: {_method:'put',categoryList:cateData},
                                 dataType: "json",
                                 success: function(msg){
+                                    
                                     if(msg.error){
                                         console.log("error")
                                     }else{
                                         location.reload();
                                     }
                                 }
-                            })*/
+                            })
                             
                         })
                     }
