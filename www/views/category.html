@@ -124,7 +124,7 @@
                         var content;
                         for(var i = 0; i < msg.categoryList.length; i++){
                             console.log(msg.categoryList[i].name);
-                            content += "<tr><td><span id= '"+msg.categoryList[i].name+"name' contenteditable='true'>"+msg.categoryList[i].name+"</span></td><td><input type='text' id='"+msg.categoryList[i].name+"' disabled value = '$40' style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i].name+"'></div></td><td><ul class='actions'><li><a href='#deleteCate' id='delete-"+msg.categoryList[i].name+"' data-toggle='modal' class='icon-remove-sign deleteCate' style='color: #d5393e;'></a></li></ul></td></tr>"                      
+                            content += "<tr><td><span id= '"+msg.categoryList[i].name+"name' contenteditable='true'>"+msg.categoryList[i].name+"</span></td><td><input type='text' id='"+msg.categoryList[i].name+"' disabled value = '$"+msg.categoryList[i].line+"' style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i].name+"'></div></td><td><ul class='actions'><li><a href='#deleteCate' id='delete-"+msg.categoryList[i].name+"' data-toggle='modal' class='icon-remove-sign deleteCate' style='color: #d5393e;'></a></li></ul></td></tr>"                      
                         }
                         $('.category-table').html(content);
                         
@@ -144,7 +144,7 @@
                                     range: "min",
                                     min: 0,
                                     max: 500,
-                                    value: 40,
+                                    value: msg.categoryList[i].line,
                                     slide: function(event, ui) {
                                         $("#"+ele).val("$" + ui.value);
                                         
@@ -239,7 +239,7 @@
                             }
                             cateData+="]";
                             console.log(cateData);
-                            $.ajax({
+                            /*$.ajax({
                                 type: "POST",
                                 url: "/category",
                                 data: {_method:'put',categoryList:cateData},
@@ -251,7 +251,7 @@
                                         location.reload();
                                     }
                                 }
-                            })
+                            })*/
                             
                         })
                     }
