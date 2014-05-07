@@ -228,7 +228,7 @@ exports.editCategory = function(email,newCategories,callback){
 			},
 			{
 				$set:{
-					categories : JSON.parse(JSON.stringify(newCategories)) 
+					categories : newCategories
 				}
 			},
 			function(err, doc) {
