@@ -389,7 +389,7 @@ exports.getRecords = function(email,callback){
 					callback(err);
 				}else{
 					if(JSON.stringify(doc)=='[]')
-						callback('[]');
+						callback(null);
 					else
 						callback(doc[0].records);
 				}
