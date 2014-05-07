@@ -120,10 +120,11 @@
                     if(msg.error){
                         alert("db error");
                     }else{
-                        
+                        //console.log(msg.categoryList);
                         var content;
                         for(var i = 0; i < msg.categoryList.length; i++){
-                            content += "<tr><td><span id= '"+msg.categoryList[i]+"name' contenteditable='true'>"+msg.categoryList[i]+"</span></td><td><input type='text' id='"+msg.categoryList[i]+"' disabled value = '$40' style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i]+"'></div></td><td><ul class='actions'><li><a href='#deleteCate' id='delete-"+msg.categoryList[i]+"' data-toggle='modal' class='icon-remove-sign deleteCate' style='color: #d5393e;'></a></li></ul></td></tr>"                      
+                            console.log(msg.categoryList[i].name);
+                            content += "<tr><td><span id= '"+msg.categoryList[i].name+"name' contenteditable='true'>"+msg.categoryList[i].name+"</span></td><td><input type='text' id='"+msg.categoryList[i].name+"' disabled value = '$40' style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i].name+"'></div></td><td><ul class='actions'><li><a href='#deleteCate' id='delete-"+msg.categoryList[i].name+"' data-toggle='modal' class='icon-remove-sign deleteCate' style='color: #d5393e;'></a></li></ul></td></tr>"                      
                         }
                         $('.category-table').html(content);
                         
@@ -137,9 +138,9 @@
                         var start;
                         var stop;
                         for(var i = 0; i < msg.categoryList.length; i++){
-                            var ele = msg.categoryList[i];
+                            var ele = msg.categoryList[i].name;
                             (function(ele){
-                                $(".slider"+msg.categoryList[i]).slider({
+                                $(".slider"+msg.categoryList[i].name).slider({
                                     range: "min",
                                     min: 0,
                                     max: 500,
@@ -179,7 +180,7 @@
                             }
                             else{
                                 for(var i = 0; i < msg.categoryList.length; i++){
-                                    if($('.addcategory-name').val() == msg.categoryList[i]){
+                                    if($('.addcategory-name').val() == msg.categoryList[i].name){
                                         $('.field-box').append('You have already set this category');
                                         break;
                                     }else{
@@ -190,7 +191,7 @@
                                                 data: {name:$('.addcategory-name').val()},
                                                 dataType: "json",
                                                 success: function(msg){
-                                                    //alert(msg.error);
+                                                    alert(msg.error);
                                                     if(msg.error){
                                                         
                                                     }else{
@@ -215,6 +216,7 @@
                                     data: {_method:"delete", name: cat},
                                     datatype: "json",
                                     success: function(msg){
+                                        console.log(msg.error);
                                         if(msg.error == false){
                                             location.reload();
                                         }
