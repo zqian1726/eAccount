@@ -9,7 +9,15 @@ exports.list = function(req, res) {
 			res.send({error: true})
 		}
 		else {
-			res.send({error: false, balance: 1000, recordList: ret})
+			db.getBalance(req.cookies.user, function(num) {
+				if (num == 'error') {
+					console.log(req.cookies.user + " get balance failed!")
+					res.send({error: true})
+				}
+				else {
+					res.send({error: false, balance: num.balance, recordList: ret})
+				}
+			})
 		}
 	})
 }
@@ -52,6 +60,7 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
 	// delete a record
+	console.log(req.body.recordId)
 	db.deleteRecord(req.cookies.user, req.body.recordId, function(ret) {
 		if (ret == "success") {
 			res.send({error: false})

@@ -109,8 +109,8 @@ exports.getBalance = function(email,callback){
 		var collection = db.collection("user");
 		collection.findOne({"email" : email}, {_id:0, balance:1}, function(err, doc) {
 			mongoclient.close();
-			if(err)		
-			  callback("error"); 	
+			if(err)
+			  callback("error");
 			else
 			  callback(doc);
 		});

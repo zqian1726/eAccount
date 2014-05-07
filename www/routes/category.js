@@ -9,7 +9,6 @@ exports.list = function(req, res) {
 			res.send({error: true})
 		}
 		else {
-			console.log(ret)
 			res.send({error: false, categoryList: ret})
 		}
 	})
