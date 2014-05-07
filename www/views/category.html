@@ -122,8 +122,9 @@
                     }else{
                         //console.log(msg.categoryList);
                         var content;
+                        var totleValue = 0;
                         for(var i = 0; i < msg.categoryList.length; i++){
-                            console.log(msg.categoryList[i].name);
+                            totleValue+=msg.categoryList[i].line;
                             content += "<tr><td><span id= '"+msg.categoryList[i].name+"name' contenteditable='true'>"+msg.categoryList[i].name+"</span></td><td><input type='text' id='"+msg.categoryList[i].name+"' disabled value = '$"+msg.categoryList[i].line+"' style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i].name+"'></div></td><td><ul class='actions'><li><a href='#deleteCate' id='delete-"+msg.categoryList[i].name+"' data-toggle='modal' class='icon-remove-sign deleteCate' style='color: #d5393e;'></a></li></ul></td></tr>"                      
                         }
                         $('.category-table').html(content);
@@ -133,7 +134,7 @@
                         //Hide the Tooltip at first
                         tooltip.hide();
                         
-                        var totleValue = 40*msg.categoryList.length;
+                        //var totleValue = 40*msg.categoryList.length;
                         var totleMax = 0;
                         var start;
                         var stop;
