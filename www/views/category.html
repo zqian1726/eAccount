@@ -230,11 +230,12 @@
                         $('.submit-change').click(function(){
                             var cateData = "[";
                             for(var i = 0; i < msg.categoryList.length; i++){
-                                var value = $('#'+msg.categoryList[i]).val().replace('$','');
+                                var value = $('#'+msg.categoryList[i].name).val().replace('$','');
+                                console.log(value);
                                 if(i != msg.categoryList.length-1)
-                                    cateData+="{name:'"+msg.categoryList[i]+"',line:"+value+"},";
+                                    cateData+="{name:'"+msg.categoryList[i].name+"',line:"+value+"},";
                                 else
-                                    cateData+="{name:'"+msg.categoryList[i]+"',line:"+value+"}";
+                                    cateData+="{name:'"+msg.categoryList[i].name+"',line:"+value+"}";
                             }
                             cateData+="]";
                             console.log(cateData);
@@ -244,7 +245,11 @@
                                 data: {_method:'put',categoryList:cateData},
                                 dataType: "json",
                                 success: function(msg){
-                                    
+                                    if(msg.error){
+                                        console.log("error")
+                                    }else{
+                                        location.reload();
+                                    }
                                 }
                             })
                             

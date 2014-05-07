@@ -66,6 +66,7 @@
         success: function(msg) {
             if(msg.error){
             }else{
+                console.log(msg.recordList)
                 var content = "";
                 var high;
                 if(msg.recordList.length < 10){
