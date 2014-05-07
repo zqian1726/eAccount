@@ -31,7 +31,7 @@ exports.registerUser = function(email, username, password, dob, gender, callback
 				{'name' : 'other','line' : 0}
 			],
 			"records" : [],
-			"balace" : 0
+			"balance" : 0
 		},function(err, result) {
 			mongoclient.close();
 			if(err){
