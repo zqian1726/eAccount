@@ -29,7 +29,8 @@ exports.add = function(req, res) {
 
 exports.update = function(req, res) {
 	// update category list
-	db.editCategory(req.cookies.user, req.body.categoryList, function(ret) {
+	var categoryList = eval('(' + req.body.categoryList + ')')
+	db.editCategory(req.cookies.user, categoryList, function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
 		}
