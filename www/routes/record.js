@@ -5,7 +5,7 @@ exports.list = function(req, res) {
 	// get record list
 	db.getRecords(req.cookies.user, function(ret) {
 		if (ret == "error") {
-			console.log(req.cookies.user + "get records failed!")
+			console.log(req.cookies.user + " get records failed!")
 			res.send({error: true})
 		}
 		else {
@@ -21,7 +21,7 @@ exports.add = function(req, res) {
 			res.send({error: false})
 		}
 		else {
-			console.log(req.cookies.user + "add record failed!")
+			console.log(req.cookies.user + " add record failed!")
 			res.send({error: true})
 		}
 	})
@@ -38,13 +38,13 @@ exports.update = function(req, res) {
 					res.send({error: false})
 				}
 				else {
-					console.log(req.cookies.user + "update record failed on adding!")
+					console.log(req.cookies.user + " update record failed on adding!")
 					res.send({error: true})
 				}
 			})
 		}
 		else {
-			console.log(req.cookies.user + "update record failed on deleting!")
+			console.log(req.cookies.user + " update record failed on deleting!")
 			res.send({error: true})
 		}
 	})
@@ -57,7 +57,7 @@ exports.delete = function(req, res) {
 			res.send({error: false})
 		}
 		else {
-			console.log(req.cookies.user + "delete record failed!")
+			console.log(req.cookies.user + " delete record failed!")
 			res.send({error: true})
 		}
 	})
