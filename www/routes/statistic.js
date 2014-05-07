@@ -86,7 +86,7 @@ exports.line = function(req, res) {
 			var cutPoint = period == 'yearly' ? 6 : 9
 				, cake = {}
 				, list = []
-			for (var i = ret.length - 1; i >= 0; i--) {
+		for (var i = ret.length - 1; i >= 0; i--) {
 				if (ret[i].datetime < endTime)
 					break
 				var date = ret[i].datetime.slice(0, cutPoint)
