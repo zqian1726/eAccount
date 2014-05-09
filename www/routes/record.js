@@ -60,8 +60,7 @@ exports.update = function(req, res) {
 
 exports.delete = function(req, res) {
 	// delete a record
-	console.log(req.body.recordId)
-	db.deleteRecord(req.cookies.user, req.body.recordId, function(ret) {
+	db.deleteRecord(req.cookies.user, req.body.recordId, req.body.amount, function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
 		}
