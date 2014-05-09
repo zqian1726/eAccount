@@ -413,6 +413,7 @@ exports.addRecord = function(email,amount,category,desc,dateTime,callback){
 				if(err){
 					callback(err);
 				}else{
+					updateBalance(email,amount,function(result){});
 					callback("success");
 				}
 		});
@@ -420,6 +421,33 @@ exports.addRecord = function(email,amount,category,desc,dateTime,callback){
 	});
 }
 
+updateBalance = function(email,amount,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.update(
+			{
+				"email" : email
+			},
+			{
+				$inc : {
+					"balance" : amount
+				}
+			},
+			function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					callback("success");
+				}
+		});
+		
+	});
+}
 //demo
 //addRecord("1@1.com",25,"food","test","04/27/2014 14:25",function(result){console.log(result)});
 //succeed:success
@@ -452,7 +480,7 @@ exports.getRecords = function(email,callback){
 //getRecords(1,function(result){console.log(JSON.stringify(result))})
 //return an array
 
-exports.deleteRecord = function(email,recordId,callback){
+exports.deleteRecord = function(email,recordId,amount,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
 	}));
@@ -475,6 +503,8 @@ exports.deleteRecord = function(email,recordId,callback){
 				if(err){
 					callback(err);
 				}else{
+					amount=0-amount;
+					updateBalance(email,amount,function(result){});
 					callback("success");
 				}
 		});
