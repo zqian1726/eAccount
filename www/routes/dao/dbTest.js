@@ -74,4 +74,4 @@ var db = require('./dbOperation');
 //db.deleteRecord('1@1.com','536697a4075150101b540de5',function(result){console.log(JSON.stringify(result))});
 //db.getRecords('1@1.com',function(result){console.log(JSON.stringify(result))});
 //db.getBalance('x@x.com',function(result){console.log(JSON.stringify(result))}); 
-db.deleteRecord("1@1.com","536c34d2ce0df2fc281a9d23",25,function(result){console.log(result)});
+//db.deleteRecord("1@1.com","536c34d2ce0df2fc281a9d23",25,function(result){console.log(result)});
