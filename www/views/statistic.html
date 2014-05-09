@@ -86,22 +86,17 @@
         // Morris Bar Chart
         $.ajax({
             type: "GET",
-            url: "/category/list",
+            url: "/statistic/chart/bar",
             dataType: "json",
             success: function(msg){
                 if(msg.error){
                 }else{
-                    
+                    //for(int i = 0; i < msg.barList.length; i++){
+                    //    console.log(msg.barList[i].line+": "+msg.barList[i].amount);
+                    //}
                     Morris.Bar({
                         element: 'hero-bar',
-                        data: [
-                            {category: '1', line: 136, amount: 200},
-                            {category: '3G', line: 1037, amount: 200},
-                            {category: '3GS', line: 275, amount: 200},
-                            {category: '4', line: 380, amount: 200},
-                            {category: '4S', line: 655, amount: 200},
-                            {category: '5', line: 1571, amount: 200}
-                        ],
+                        data: msg.barList,
                         xkey: 'category',
                         ykeys: ['line', 'amount'],
                         labels: ['Lines', 'Amount'],
@@ -110,22 +105,28 @@
                         hideHover: 'auto',
                         barColors: ["red", "#3d00ba"]
                     });
-                    Morris.Donut({
-                        element: 'hero-donut',
-                        data: [
-                            {label: 'Direct', value: 25 },
-                            {label: 'Referrals', value: 40 },
-                            {label: 'Search engines', value: 25 },
-                            {label: 'Unique visitors', value: 10 }
-                        ],
-                        colors: ["#30a1ec", "#76bdee", "#c4dafe"],
-                        formatter: function (y) { return y + "%" }
-                    });
+                    
                 }
                     
             }
         })
-
+        
+        $.ajax({
+            type: "GET",
+            url: "/statistic/chart/pan",
+            dataType: "json",
+            success: function(msg){
+                if(msg.error){
+                }else{
+                    Morris.Donut({
+                        element: 'hero-donut',
+                        data: msg.panList,
+                        colors: ["#30a1ec", "#76bdee", "#c4dafe"],
+                        formatter: function (y) { return y + "%" }
+                    });
+                }
+            }
+        })
 
         //  jQuery Flot Chart
         var visits = [[1, 50], [2, 40], [3, 45], [4, 23],[5, 55],[6, 65],[7, 61],[8, 70],[9, 65],[10, 75],[11, 57],[12, 59]];
