@@ -15,7 +15,6 @@ exports.list = function(req, res) {
 					res.send({error: true})
 				}
 				else {
-					console.log(num.balance)
 					res.send({error: false, balance: num.balance, recordList: ret})
 				}
 			})
