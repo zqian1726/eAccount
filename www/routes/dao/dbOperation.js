@@ -480,6 +480,35 @@ exports.getRecords = function(email,callback){
 //getRecords(1,function(result){console.log(JSON.stringify(result))})
 //return an array
 
+exports.getRecordsRange = function(email,startDate,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.aggregate(
+		[
+			{$match: { email: email}},
+			{$unwind: '$records' },
+			{$match: {"records.dateTime":{$gt:startDate}}} ,
+			{$sort: {"records.dateTime":1}}, 
+			{$group: {  _id: email,records: {$push:"$records"} } }
+		],function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+						callback(typeof doc[0] == 'undefined' ? [] : doc[0].records);
+				}
+		});
+		
+	});
+}
+//demo
+//getRecordsRange(1,,startDate,function(result){console.log(JSON.stringify(result))})
+//return an array
+
 exports.deleteRecord = function(email,recordId,amount,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
 		native_parser : true
