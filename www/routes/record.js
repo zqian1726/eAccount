@@ -15,6 +15,7 @@ exports.list = function(req, res) {
 					res.send({error: true})
 				}
 				else {
+					console.log(num.balance)
 					res.send({error: false, balance: num.balance, recordList: ret})
 				}
 			})
@@ -24,7 +25,7 @@ exports.list = function(req, res) {
 
 exports.add = function(req, res) {
 	// add a record
-	db.addRecord(req.cookies.user, validator.toFloat(validator.striptags(req.body.amount)), req.body.category, validator.striptags(req.body.desc), req.body.datetime, function(ret) {
+	db.addRecord(req.cookies.user, validator.toFloat(validator.striptags(req.body.amount)), req.body.category, validator.striptags(req.body.desc), req.body.dateTime, function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
 		}
