@@ -287,7 +287,7 @@
                             content+="<td><span>"+msg.recordList[i].dateTime+"</span></td>";
                             content+="<td><span class='dollar'>"+msg.balance+"</span></td>";
                             if(msg.recordList[i].amount >= 0){
-                                content+="<td><span class='label label-success dollar amountIs"+msg.recordList[i]+" value="+msg.recordList[i].amount+"'>"+msg.recordList[i].amount+"</span></td>";
+                                content+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
                             }else{
                                 content+="<td><span class='label label-info dollar'>"+msg.recordList[i].amount+"</span></td>";
                             }
@@ -355,9 +355,10 @@
                                 $.ajax({
                                     type: "DELETE",
                                     url: "/record",
-                                    data: {_method:"delete", name: rec, amount: },
+                                    data: {_method:"delete", name: rec},
                                     datatype: "json",
                                     success:function(msg){
+                                        console.log(msg.error);
                                         if(msg.error == false){
                                             location.reload();
                                         }
@@ -397,6 +398,7 @@
                                 if(msg.recordList[i].recordId == rec){
                                     console.log(msg.recordList[i].desc);
                                     if(msg.recordList[i].amount >= 0){
+                                        console.log("amount: "+msg.recordList[i].amount);
                                         $('.editAmount').val(msg.recordList[i].amount);
                                     }else{
                                         $('.editAmount').val(0-msg.recordList[i].amount);
