@@ -130,6 +130,7 @@
                                 <!-- row -->
                             </tbody>
                         </table>
+                        <!--
                         <div id="editRecord" class="modal hide fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -142,7 +143,7 @@
                                             <form action="/record/new" method="post">
                                                 <div class="field-box">
                                                     <label>Amount:</label>
-                                                        $<input type="text" class="span3 amount"id = "amount2"name="amount"  />
+                                                        $<input type="text" class="span3 editAmount" id = "amount2" name="amount"  />
                                                     <span class="error" style="color: Red; display: none">Please input digits up to two decimal places</span>
                                                 </div>
                                                 <div class="field-box">
@@ -169,11 +170,12 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                                        <button type="button" class="btn btn-primary edit-record-submit">Submit</button>
+                                        <button type="button" class="btn btn-primary edit-record-submit" id="editRecordConfirm">Submit</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+-->
                         <div id="deleteRecord" class="modal hide fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -280,12 +282,15 @@
                     }else{
                         
                         var content = "";
+                        var balance = 0;
                         for(var i = 0; i < msg.recordList.length; i++){
+                            balance+=msg.recordList[i].amount;
+                            
                             //console.log(msg.recordList[i].recordId);
-                            console.log(msg.balance);
+                            //console.log(msg.balance);
                             content+="<tr class='first'>";
                             content+="<td><span>"+msg.recordList[i].dateTime+"</span></td>";
-                            content+="<td><span class='dollar'>"+msg.balance+"</span></td>";
+                            content+="<td><span class='dollar'>"+balance+"</span></td>";
                             if(msg.recordList[i].amount >= 0){
                                 content+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
                             }else{
@@ -295,7 +300,7 @@
                             content+="<td><span>"+msg.recordList[i].category+"</span></td>";
                             content+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
                             content+="<td><ul class='actions'>";
-                            content+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
+                            //content+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
                             content+="<li class='last'><a href='#deleteRecord' title='delete' class='deleteRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-delete'><i class='table-delete'></i></a></li>";
                         }
                         $('#record-content').html(content);
@@ -346,27 +351,6 @@
                             }
                         })
                         
-                        //delete record
-                        $('.deleteRecordButton').click(function(){
-                            var temp = $(this).attr('id').split('-');
-                            var rec = temp[0];
-                            //console.log(rec);
-                            $('#deleteRecordConfirm').click(function(){
-                                $.ajax({
-                                    type: "DELETE",
-                                    url: "/record",
-                                    data: {_method:"delete", name: rec},
-                                    datatype: "json",
-                                    success:function(msg){
-                                        console.log(msg.error);
-                                        if(msg.error == false){
-                                            location.reload();
-                                        }
-                                    }
-                                })
-                            })
-                        })
-                        
                         //add record                        
                         var valueAdd = true;
                         $('#my-checkbox1').on('switchChange.bootstrapSwitch',function(event, state){
@@ -389,6 +373,33 @@
                             })
                         })
                         
+                        //delete record
+                        $('.deleteRecordButton').click(function(){
+                            var temp = $(this).attr('id').split('-');
+                            var rec = temp[0];
+                            var amt = 0;
+                            for(var i = 0; i < msg.recordList.length; i++){
+                                if(msg.recordList[i].recordId == rec){
+                                    amt = msg.recordList[i].amount;
+                                }
+                            }
+                            //console.log(rec);
+                            $('#deleteRecordConfirm').click(function(){
+                                $.ajax({
+                                    type: "DELETE",
+                                    url: "/record",
+                                    data: {_method:"delete", recordId: rec, amount: amt},
+                                    datatype: "json",
+                                    success:function(msg){
+                                        console.log(msg.error);
+                                        if(msg.error == false){
+                                            location.reload();
+                                        }
+                                    }
+                                })
+                            })
+                        })
+                        /*
                         //edit record
                         $('.editRecordButton').click(function(){
                             var temp = $(this).attr('id').split('-');
@@ -396,17 +407,16 @@
                             console.log(rec);
                             for(var i = 0; i < msg.recordList.length; i++){
                                 if(msg.recordList[i].recordId == rec){
-                                    console.log(msg.recordList[i].desc);
+                                    console.log(msg.recordList[i].amount);
                                     if(msg.recordList[i].amount >= 0){
-                                        console.log("amount: "+msg.recordList[i].amount);
                                         $('.editAmount').val(msg.recordList[i].amount);
+                                        //$('#my-checkbox2').bootstrapSwitch('on');
                                     }else{
                                         $('.editAmount').val(0-msg.recordList[i].amount);
                                         $('#my-checkbox2').bootstrapSwitch('toggleState');
                                     }
                                     $('.editDate').val(msg.recordList[i].dateTime);
                                     $('.editDesc').val(msg.recordList[i].desc);
-                                    console.log($('.editDesc').val());
                                     break;
                                 }
                             }
@@ -422,6 +432,7 @@
                                         data: {amount: valueEdit?$('.add-amount').val():0-$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), dateTime: $('.add-record-datepicker').val()},
                                         dataType: "json",
                                         success:function(msg){
+                                            console.log(msg.error);
                                             if(msg.error){
                                                 alert("error");
                                             }else{
@@ -432,7 +443,7 @@
                                 })
                             })
                         })
-                        
+                        */
                         
                     }
                     
