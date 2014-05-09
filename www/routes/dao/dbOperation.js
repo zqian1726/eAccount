@@ -265,33 +265,7 @@ exports.editCategory = function(email,newCategories,callback){
 	});
 }
 
-updateCategoryInRecords = function(email,oldCategory,newCatogory,callback){
-	var mongoclient = new MongoClient(new Server("localhost", 27017, {
-		native_parser : true
-	}));
-	mongoclient.open(function(err, mongoclient) {
-		var db = mongoclient.db("eAccount");
-		var collection = db.collection("user");
-		collection.update(
-			{},
-			{
-				$set:
-				{
-					categories : newCategories
-				}
-			},
-			function(err, doc) {
-				mongoclient.close();
-				if(err){
-					callback(err);
-				}else{
-					callback("success");
-					
-				}
-		});
-		
-	});
-}
+
 /*
 editCategory("1@1.com",['food','rent'],1,2,function(result){
 	console.log(result);
@@ -319,6 +293,7 @@ var deleteCategory = function(email,category,callback){
 				if(err){
 					callback(err);
 				}else{
+					updateCategoryInRecords(email,category,function(result){})
 					callback("success");
 				}
 		});
@@ -326,9 +301,67 @@ var deleteCategory = function(email,category,callback){
 	});
 }
 exports.deleteCategory=deleteCategory;
+
+
+multiFindInRecords = function(email,oldCategory,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.update(
+			{email:email,"records.category": oldCategory},
+			{
+				$set:
+				{
+					"records.$.category" : "other"
+				}
+			},
+			{upsert: false, multi: true},
+			function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{
+					updateCategoryInRecords(email,oldCategory,function(result){});
+				}
+		});
+		
+	});
+}
+updateCategoryInRecords= function(email,oldCategory,callback){
+	var mongoclient = new MongoClient(new Server("localhost", 27017, {
+		native_parser : true
+	}));
+	mongoclient.open(function(err, mongoclient) {
+		var db = mongoclient.db("eAccount");
+		var collection = db.collection("user");
+		collection.findOne(
+			{"email":email, "records.category": oldCategory},
+			function(err, doc) {
+				mongoclient.close();
+				if(err){
+					callback(err);
+				}else{ 
+					if(doc == null)
+						callback("success");
+					else{
+						multiFindInRecords(email,oldCategory,function(result){});
+						callback("success");
+					}
+						
+				}
+		});
+		
+	});
+}
+
 //demo
 //deleteCategory(1,"2",function(result){console.log(result)})
 //succeed:success
+
+
 
 exports.getCategories = function (email,callback){
 	var mongoclient = new MongoClient(new Server("localhost", 27017, {
