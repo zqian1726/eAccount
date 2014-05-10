@@ -9,41 +9,40 @@
                             <h4>Recent Records</h4>
                         </div>
                 </div>
-        	<div class="table-wrapper">
-                    
-                    <div class="row-fluid filter-block">
-                    </div>
-                    <table class="span6 table table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="span2">
-                                       <span>Date</span>
-                                    </th>
-                                    <th class="span1">
-                                        <span>balance</span>
-                                    </th>
-                                    <th class="span1">
-                                        <span>Amount</span>
-                                    </th>
-                                    <th class="span1">
-                                        <span>Category</span>
-                                    </th>
-                                    <th class="span2">
-                                        <span>Description</span>
-                                    </th> 
-                                </tr>
-                            </thead>
-                            <tbody id="record-content">
-                                <!-- row -->
-                            </tbody>
-                    </table>
-                    <div class="span4 chart">
-                        <h5>Category Percentage</h5>
-                        <div id="hero-donut" style="height: 250px;"></div>    
-                    </div>
+    	        <div class="table-wrapper">
+                <div class="row-fluid filter-block">
+                </div>
+                <table class="span6 table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="span2">
+                                   <span>Date</span>
+                                </th>
+                                <th class="span1">
+                                    <span>balance</span>
+                                </th>
+                                <th class="span1">
+                                    <span>Amount</span>
+                                </th>
+                                <th class="span1">
+                                    <span>Category</span>
+                                </th>
+                                <th class="span2">
+                                    <span>Description</span>
+                                </th> 
+                            </tr>
+                        </thead>
+                        <tbody id="record-content">
+                            <!-- row -->
+                        </tbody>
+                </table>
+                <div class="span4 chart">
+                    <h5>Category Percentage</h5>
+                    <div id="hero-donut" style="height: 250px;"></div>    
+                </div>
+                </div>
             </div>
-            </div>
-            <div class="row-fluid chart section">
+            <div class="row-fluid section">
                     <h4 class="title">
                         <div class="btn-group pull-right">
                             <button class="glow left active" id="weekbtn">WEEK</button>
@@ -51,6 +50,7 @@
                             <button class="glow right" id="yearbtn">YEAR</button>
                         </div>
                     </h4>
+                    
                     <div class="span12" id="sectionWeek">
                         <div id="statsChart"></div>
                     </div>
@@ -60,7 +60,8 @@
                     <div class="span12 hide" id="sectionYear">
                         <div id="statsChartYear"></div>
                     </div>
-            </div>
+                 
+                </div>
                
             </div>
         </div>
@@ -71,6 +72,32 @@
 <script src="js/jquery.flot.resize.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="js/morris.min.js"></script>
+<script type="text/javascript">
+        $("#weekbtn").click(function(){
+            $("#weekbtn").addClass("active");
+            $("#monthbtn").removeClass("active");
+            $("#yearbtn").removeClass("active");
+            $("#sectionWeek").removeClass("hide");
+            $("#sectionMonth").addClass("hide");
+            $("#sectionYear").addClass("hide");
+        });
+        $("#monthbtn").click(function(){
+            $("#weekbtn").removeClass("active");
+            $("#monthbtn").addClass("active");
+            $("#yearbtn").removeClass("active");
+            $("#sectionWeek").addClass("hide");
+            $("#sectionMonth").removeClass("hide");
+            $("#sectionYear").addClass("hide");
+        });
+        $("#yearbtn").click(function(){
+            $("#weekbtn").removeClass("active");
+            $("#monthbtn").removeClass("active");
+            $("#yearbtn").addClass("active");
+            $("#sectionWeek").addClass("hide");
+            $("#sectionMonth").addClass("hide");
+            $("#sectionYear").removeClass("hide");
+        });
+    </script>
 <script type="text/javascript">
     $.ajax({
             type: "GET",
@@ -163,7 +190,7 @@
                     var line = 
                 }
         })*/
-var plot = $.plot($("#statsChart"),
+        var plot = $.plot($("#statsChart"),
             [ { data: visits, label: "Signups"},
              { data: visitors, label: "Visits" }], {
                 series: {
