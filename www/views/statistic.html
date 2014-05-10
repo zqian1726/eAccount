@@ -91,9 +91,9 @@
             success: function(msg){
                 if(msg.error){
                 }else{
-                    //for(int i = 0; i < msg.barList.length; i++){
-                    //    console.log(msg.barList[i].line+": "+msg.barList[i].amount);
-                    //}
+                    for(var i = 0; i < msg.barList.length; i++){
+                        msg.barList[i].amount = 0-msg.barList[i].amount;
+                    }
                     Morris.Bar({
                         element: 'hero-bar',
                         data: msg.barList,
@@ -118,6 +118,16 @@
             success: function(msg){
                 if(msg.error){
                 }else{
+                    var total = 0;
+                    for(var i = 0; i < msg.panList.length; i++){
+                        console.log(msg.panList[i].value);
+                        total+=msg.panList[i].value;
+                    }
+                    console.log(total);
+                    for(var i = 0; i < msg.panList.length; i++){
+                        msg.panList[i].value = (msg.panList[i].value/total)*100;
+                        
+                    }
                     Morris.Donut({
                         element: 'hero-donut',
                         data: msg.panList,
@@ -129,9 +139,19 @@
         })
 
         //  jQuery Flot Chart
-        var visits = [[1, 50], [2, 40], [3, 45], [4, 23],[5, 55],[6, 65],[7, 61],[8, 70],[9, 65],[10, 75],[11, 57],[12, 59]];
-        var visitors = [[1, 25], [2, 50], [3, 23], [4, 48],[5, 38],[6, 40],[7, 47],[8, 55],[9, 43],[10,50],[11,47],[12, 39]];
-
+        var visits = [[1, 50], [2, 40], [3, 45], [4, 23],[5, 55],[6, 65],[7, 61]];
+        var visitors = [[1, 25], [2, 50], [3, 23], [4, 48],[5, 38],[6, 40],[7, 47]];
+        /*$.ajax({
+            type: "GET",
+            url: '/statistic/chart/line/'+week,
+            dataType: "json",
+            success function(msg){
+                if(msg.error){
+                    
+                }else{
+                    var line = 
+                }
+        })*/
         var plot = $.plot($("#statsChart"),
             [ { data: visits, label: "Signups"},
              { data: visitors, label: "Visits" }], {
