@@ -19,7 +19,7 @@ exports.pan = function(req, res) {
 			var cake = {}
 				, list = []
 			for (var i = ret.length - 1; i >= 0; i--) {
-				if (ret[i].datetime < endTime)
+				if (ret[i].dateTime < endTime)
 					break
 				if (typeof cake[ret[i].i] == 'undefined')
 					cake[ret[i].category] = 0
@@ -45,7 +45,7 @@ exports.bar = function(req, res) {
 			var cake = {}
 				, list = []
 			for (var i = ret.length - 1; i >= 0; i--) {
-				if (ret[i].datetime < endTime)
+				if (ret[i].dateTime < endTime)
 					break
 				if (typeof cake[ret[i].i] == 'undefined')
 					cake[ret[i].category] = 0
@@ -65,10 +65,13 @@ exports.line = function(req, res) {
 		, endTime = ''
 	if (period == 'weekly') {
 		var past = new Date(now.getTime() - now.getDay() * 24 * 3600 * 1000)
-		endTime = past.getFullYear() + '-' + (past.getMonth() + 1) + '-' + past.getDate() + ' 00:00'
+			, month = past.getMonth() + 1
+			, day = past.getDate()
+		endTime = past.getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day) + ' 00:00'
 	}
 	else if (period == 'monthly') {
-		endTime = now.getFullYear() + '-' + (now.getMonth() + 1) + '-00 00:00'
+		var month = now.getMonth() + 1
+		endTime = now.getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-00 00:00'
 	}
 	else if (period == 'yearly') {
 		endTime = now.getFullYear() + '-00-00 00:00'
@@ -83,13 +86,16 @@ exports.line = function(req, res) {
 			res.send({error: true})
 		}
 		else {
-			var cutPoint = period == 'yearly' ? 6 : 9
+			var cutPoint = period == 'yearly' ? 7 : 10
 				, cake = {}
 				, list = []
-		for (var i = ret.length - 1; i >= 0; i--) {
-				if (ret[i].datetime < endTime)
+			console.log(endTime)
+			for (var i = ret.length - 1; i >= 0; i--) {
+				console.log('dateTime: ' + ret[i].dateTime)
+				if (ret[i].dateTime < endTime)
 					break
-				var date = ret[i].datetime.slice(0, cutPoint)
+				var date = ret[i].dateTime.slice(0, cutPoint)
+				console.log(date)
 				if (typeof cake[date] == 'undefined')
 					cake[date] = 0
 				cake[date] += ret[i].amount
