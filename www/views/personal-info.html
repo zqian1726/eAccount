@@ -7,62 +7,62 @@
     <link rel="stylesheet" href="css/compiled/personal-info.css" type="text/css" media="screen" />
     <script src="js/bootstrap-datetimepicker.js"></script>
     <script>
-    $(function() {
-        $("#userForm2").validate({
-            rules: {
-                oldPass: {
-                    required: true,
-                    minlength: 6,
-                    remote: {
-                        url: "/validate/password",
-                        type: "POST",
-                        data:{
-                            password: function(){
-                                return $("#oldPass").val()
+        $(function() {
+            $("#userForm2").validate({
+                rules: {
+                    oldPass: {
+                        required: true,
+                        minlength: 6,
+                        remote: {
+                            url: "/validate/password",
+                            type: "POST",
+                            data:{
+                                password: function(){
+                                    return $("#oldPass").val()
+                                }
                             }
                         }
+                    },
+                    newPass: {
+                        required: true,
+                        minlength: 6
+                    },
+                    renewPass: {
+                        required: true,
+                        minlength: 6,
+                        equalTo: "#newPass"
                     }
                 },
-                newPass: {
-                    required: true,
-                    minlength: 6
-                },
-                renewPass: {
-                    required: true,
-                    minlength: 6,
-                    equalTo: "#newPass"
+                messages: {
+                    oldPass: {
+                        required: "Please provide an old password",
+                        minlength: "Your password must be at least 6 characters long",
+                        remote: "Your password is wrong"
+                    },
+                    newPass: {
+                        required: "Please provide a new password",
+                        minlength: "Your password must be at least 6 characters long"
+                    },
+                    renewPass: {
+                        required: "Please provide a confirm password",
+                        minlength: "Your password must be at least 6 characters long",
+                        equalTo: "Please enter the same password as above"
+                    }
                 }
-            },
-            messages: {
-                oldPass: {
-                    required: "Please provide an old password",
-                    minlength: "Your password must be at least 6 characters long",
-                    remote: "Your password is wrong"
-                },
-                newPass: {
-                    required: "Please provide a new password",
-                    minlength: "Your password must be at least 6 characters long"
-                },
-                renewPass: {
-                    required: "Please provide a confirm password",
-                    minlength: "Your password must be at least 6 characters long",
-                    equalTo: "Please enter the same password as above"
+            })
+            $("#userForm1").validate({
+                rules: {
+                    dobin: {
+                        date: true
+                    },
+                    username: {  
+                        digits: true,
+                        minlength: 6,
+                        maxlength: 10
+                    }   
                 }
-            }
+            })
         })
-        $("#userForm1").validate({
-            rules: {
-                dobin: {
-                    date: true
-                },
-                username: {  
-                    digits: true,
-                    minlength: 6,
-                    maxlength: 10
-                }   
-            }
-        })
-    })
     </script>
 	<!-- main container .wide-content is used for this layout without sidebar :)  -->
     <div class="content">
@@ -137,14 +137,14 @@
                                             <label for="renewPass">Confirm new password: </label>
                                             <input class="span5 inline-input" name = "renewPass"id ="renewPass"type="password" />  
                                         </div>
-                                   
+                                   </div>
                                     <div class="span6 field-box actions">
                                         <input type="submit" class="btn-glow primary"  value="Save Changes" />
                                         <span>OR</span>
                                         <input type="reset" value="Cancel" class="reset" />
                                     </div>
                                 </form>
-                            </div>    
+                            </div>
                         </div>
                     </div>
                 </div>
