@@ -265,7 +265,7 @@
                             contentAddRecord+="<option value = '"+msg.categoryList[i].name+"'>"+msg.categoryList[i].name+"</option>";
                         }
                         $('.category-selector').html(content);
-                        $('.add-record-category').html(contentAddRecord);
+                        //$('.add-record-category').html(contentAddRecord);
                         $('.edit-record-category').html(contentAddRecord);
                     }
                     
@@ -283,7 +283,9 @@
                         
                         var content = "";
                         var balance = 0;
+                        var contentList = new Array();
                         for(var i = 0; i < msg.recordList.length; i++){
+                            var tempContent = "";
                             balance+=msg.recordList[i].amount;
                             
                             //console.log(msg.recordList[i].recordId);
@@ -302,28 +304,31 @@
                             content+="<td><ul class='actions'>";
                             //content+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
                             content+="<li class='last'><a href='#deleteRecord' title='delete' class='deleteRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-delete'><i class='table-delete'></i></a></li>";
+                            
+                            tempContent+="<tr class='first'>";
+                            tempContent+="<td><span>"+msg.recordList[i].dateTime+"</span></td>";
+                            tempContent+="<td><span class='dollar'>"+balance+"</span></td>";
+                            if(msg.recordList[i].amount >= 0){
+                                tempContent+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
+                            }else{
+                                tempContent+="<td><span class='label label-info dollar'>"+msg.recordList[i].amount+"</span></td>";
+                            }
+                        
+                            tempContent+="<td><span>"+msg.recordList[i].category+"</span></td>";
+                            tempContent+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
+                            tempContent+="<td><ul class='actions'>";
+                            //content+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
+                            tempContent+="<li class='last'><a href='#deleteRecord' title='delete' class='deleteRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-delete'><i class='table-delete'></i></a></li>";
+                            contentList[i] = tempContent;
                         }
+                        console.log(contentList.length);
                         $('#record-content').html(content);
                         
                         $('.category-selector').change(function(){
                             var selectedContent = "";
                             if($('.category-selector').val() == "All Category"){
-                                for(var i = 0; i < msg.recordList.length; i++){
-                                    //console.log(msg.recordList[i].recordId);
-                                    selectedContent+="<tr class='first'>";
-                                    selectedContent+="<td><span>"+msg.recordList[i].dateTime+"</span></td>";
-                                    selectedContent+="<td><span class='dollar'>"+msg.balance+"</span></td>";
-                                    if(msg.recordList[i].amount >= 0){
-                                        selectedContent+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
-                                    }else{
-                                        selectedContent+="<td><span class='label label-info dollar'>"+msg.recordList[i].amount+"</span></td>";
-                                }
-                        
-                                    selectedContent+="<td><span>"+msg.recordList[i].category+"</span></td>";
-                                    selectedContent+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
-                                    selectedContent+="<td><ul class='actions'>";
-                                    selectedContent+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
-                                    selectedContent+="<li class='last'><a href='#deleteRecord' title='delete' class='deleteRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-delete'><i class='table-delete'></i></a></li>";
+                                for(var i = 0; i < contentList.length; i++){
+                                    selectedContent+=contentList[i];
                                 }
                                 $('#record-content').html(selectedContent);
                             }
@@ -331,20 +336,7 @@
                                 for(var i = 0; i < msg.recordList.length; i++){
                                     if(msg.recordList[i].category == $('.category-selector').val()){
                                         //console.log(msg.recordList[i].recordId);
-                                        selectedContent+="<tr class='first'>";
-                                        selectedContent+="<td><span>"+msg.recordList[i].dateTime+"</span></td>";
-                                        selectedContent+="<td><span class='dollar'>"+msg.balance+"</span></td>";
-                                        if(msg.recordList[i].amount >= 0){
-                                            selectedContent+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
-                                        }else{
-                                            selectedContent+="<td><span class='label label-info dollar'>"+msg.recordList[i].amount+"</span></td>";
-                                }
-                        
-                                        selectedContent+="<td><span>"+msg.recordList[i].category+"</span></td>";
-                                        selectedContent+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
-                                        selectedContent+="<td><ul class='actions'>";
-                                        selectedContent+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
-                                        selectedContent+="<li class='last'><a href='#deleteRecord' title='delete' class='deleteRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-delete'><i class='table-delete'></i></a></li>";
+                                        selectedContent+=contentList[i];
                                     }
                                 }
                                 $('#record-content').html(selectedContent);
@@ -353,10 +345,35 @@
                         
                         //add record                        
                         var valueAdd = true;
+                        $('.add-record-category').html("<option value = 'income'>income</option>");
                         $('#my-checkbox1').on('switchChange.bootstrapSwitch',function(event, state){
                             valueAdd = state;
+                            if(valueAdd == true){
+                                $('.add-record-category').html("<option value = 'income'>income</option>");
+                            }else{
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/category/list",
+                                    dataType: "json",
+                                    success:function(msg){
+                                        console.log(msg);
+                                        if(msg.error){
+                    
+                                        }else{
+                                            var contentAddRecord = "";
+                                            for(var i = 0; i < msg.categoryList.length; i++){
+                                                if(msg.categoryList[i].name != 'income')
+                                                    contentAddRecord+="<option value = '"+msg.categoryList[i].name+"'>"+msg.categoryList[i].name+"</option>";
+                                            }
+                                            $('.add-record-category').html(contentAddRecord);
+                                        }
+                    
+                                    }
+                                })
+                            }
                             console.log(state);
                         }) 
+                        
                         $('.add-record-submit').click(function(){
                             $.ajax({
                                 type: "POST",
