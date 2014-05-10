@@ -9,7 +9,8 @@ exports.index = function(req, res) {
 
 exports.pan = function(req, res) {
 	var now = new Date()
-		, endTime = now.getFullYear() + '-' + (now.getMonth() + 1) + '-00 00:00'
+		, month = now.getMonth() + 1
+		, endTime = now.getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-00 00:00'
 	db.getRecords(req.cookies.user, function(ret) {
 		if (ret == "error") {
 			console.log(req.cookies.user + " get pan failed!")
@@ -21,7 +22,9 @@ exports.pan = function(req, res) {
 			for (var i = ret.length - 1; i >= 0; i--) {
 				if (ret[i].dateTime < endTime)
 					break
-				if (typeof cake[ret[i].i] == 'undefined')
+				if (ret[i].category == 'income')
+					continue
+				if (typeof cake[ret[i].category] == 'undefined')
 					cake[ret[i].category] = 0
 				cake[ret[i].category] += ret[i].amount
 			}
@@ -35,7 +38,8 @@ exports.pan = function(req, res) {
 
 exports.bar = function(req, res) {
 	var now = new Date()
-		, endTime = now.getFullYear() + '-' + (now.getMonth() + 1) + '-00 00:00'
+		, month = now.getMonth() + 1
+		, endTime = now.getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-00 00:00'
 	db.getRecords(req.cookies.user, function(ret) {
 		if (ret == "error") {
 			console.log(req.cookies.user + " get bar failed!")
@@ -47,7 +51,9 @@ exports.bar = function(req, res) {
 			for (var i = ret.length - 1; i >= 0; i--) {
 				if (ret[i].dateTime < endTime)
 					break
-				if (typeof cake[ret[i].i] == 'undefined')
+				if (ret[i].category == 'income')
+					continue
+				if (typeof cake[ret[i].category] == 'undefined')
 					cake[ret[i].category] = 0
 				cake[ret[i].category] += ret[i].amount
 			}
