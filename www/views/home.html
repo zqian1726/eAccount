@@ -47,17 +47,22 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="js/morris.min.js"></script>
 <script type="text/javascript">
-    Morris.Donut({
-            element: 'hero-donut',
-            data: [
-                {label: 'Direct', value: 25 },
-                {label: 'Referrals', value: 40 },
-                {label: 'Search engines', value: 25 },
-                {label: 'Unique visitors', value: 10 }
-            ],
-            colors: ["#30a1ec", "#76bdee", "#c4dafe"],
-            formatter: function (y) { return y + "%" }
-        });
+    $.ajax({
+            type: "GET",
+            url: "/statistic/chart/pan",
+            dataType: "json",
+            success: function(msg){
+                if(msg.error){
+                }else{
+                    Morris.Donut({
+                        element: 'hero-donut',
+                        data: msg.panList,
+                        colors: ["#30a1ec", "#76bdee", "#c4dafe"],
+                        formatter: function (y) { return y + "%" }
+                    });
+                }
+            }
+        })
     
     $.ajax({
         type: "GET",
@@ -79,11 +84,16 @@
                     else{
                         high = 10;
                     }
+                    var content = "";
+                    var balance = 0;
                     for(var i = 0; i < high; i++){
+                        balance+=msg.recordList[i].amount;
+                            
                         //console.log(msg.recordList[i].recordId);
+                        //console.log(msg.balance);
                         content+="<tr class='first'>";
-                        content+="<td><span>"+msg.recordList[i].datetime+"</span></td>";
-                        content+="<td><span class='dollar'>"+msg.recordList[i].amount+"</span></td>";
+                        content+="<td><span>"+msg.recordList[i].dateTime+"</span></td>";
+                        content+="<td><span class='dollar'>"+balance+"</span></td>";
                         if(msg.recordList[i].amount >= 0){
                             content+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
                         }else{
@@ -92,8 +102,11 @@
                         
                         content+="<td><span>"+msg.recordList[i].category+"</span></td>";
                         content+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
-                    
+                        content+="<td><ul class='actions'>";
+                            //content+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
+                        content+="<li class='last'><a href='#deleteRecord' title='delete' class='deleteRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-delete'><i class='table-delete'></i></a></li>";
                     }
+                    $('#record-content').html(content);
                 }
                
                 
