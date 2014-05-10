@@ -74,6 +74,7 @@ exports.delete = function(req, res) {
 exports.index = function(req, res) {
 	// render record page
 	res.render('record', {
-		title: 'Record'
+		title: 'Record',
+		token: req.cookies.token
 	})
 }

@@ -12,7 +12,8 @@ exports.info = function(req, res) {
 		else {
 			res.render('personal-info', {
 				title:'User Information',
-				userInfo: ret
+				userInfo: ret,
+				token: req.cookies.token
 			})
 		}
 	})

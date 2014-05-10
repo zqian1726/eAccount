@@ -3,7 +3,8 @@ var db = require('./dao/dbOperation')
 exports.index = function(req, res) {
 	// statistic index page
 	res.render('statistic', {
-  	title: 'Statistic'
+  	title: 'Statistic',
+		token: req.cookies.token
   })
 }
 

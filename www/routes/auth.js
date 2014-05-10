@@ -1,6 +1,7 @@
 var db = require('./dao/dbOperation')
 	, validator = require('./validate')
   , sha1 = require('sha1')
+  , https = require('https')
   , default_cookie_time = 1000 * 60 * 60 * 2; // 2 hour
 
 /*
@@ -72,7 +73,51 @@ exports.signup = function(req, res, next) {
 
 exports.signout = function(req, res) {
 	// log out
-	res.clearCookie('user');
-	res.clearCookie('passport');
+	// delete cookies
+	res.clearCookie('user')
+	res.clearCookie('passport')
+	res.clearCookie('token')
+
+	// back
 	res.redirect('/')
+}
+
+exports.google = function(req, res) {
+	var email = "google#" + req.body.uid
+		, password = sha1("$eAcount&secret" + req.body.uid)
+		, token = req.body.token
+	validator.availableEmail(email, function(flag) {
+		// new user: sign up
+		if (flag) {
+			db.registerUser(email, validator.striptags(req.body.username), password, req.body.dob, validator.striptags(req.body.gender), function(ret) {
+				if (ret == "success") {
+					// succeed
+					res.cookie('user', req.body.email, { maxAge: default_cookie_time })
+					res.cookie('passport', sha1(req.body.email + "#This%is%eAcount%secret#"), { maxAge: default_cookie_time })
+					res.cookie('token', token, { maxAge: default_cookie_time })
+					res.send({error: false})
+				}
+				else {
+					// failed
+					res.send({error: true})
+				}
+			})
+		}
+		// exist user: sign in
+		else {
+			db.checkUser(email, password, function(ret) {
+				if (ret) {
+					// succeed
+					res.cookie('user', email, { maxAge: default_cookie_time })
+					res.cookie('passport', sha1(email + "#This%is%eAcount%secret#"), { maxAge: default_cookie_time })
+					res.cookie('token', token, { maxAge: default_cookie_time })
+					res.send({error: false})
+				}
+				else {
+					// failed
+					res.send({error: true})
+				}
+			})
+		}
+	})
 }

@@ -57,6 +57,7 @@ exports.delete = function(req, res) {
 exports.index = function(req, res) {
 	// render category page
 	res.render('category', {
-		title: 'Category'
+		title: 'Category',
+		token: req.cookies.token
 	})
 }

@@ -12,7 +12,8 @@ exports.index = function(req, res) {
 exports.home = function(req, res) {
 	// render homepage
 	res.render('home', {
-		title: 'Home'
+		title: 'Home',
+    token: req.cookies.token
   })
 }
 

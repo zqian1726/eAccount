@@ -44,6 +44,8 @@ if ('development' == app.get('env')) {
 app.post('/signin', auth.unauthorized, auth.signin)
 app.post('/signup', auth.unauthorized, auth.signup)
 app.get('/signout', auth.authorized, auth.signout)
+// google
+app.post('/google', auth.unauthorized, auth.google)
 
 // Validation
 app.post('/validate/email', validate.email)
