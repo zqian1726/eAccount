@@ -73,5 +73,5 @@ var db = require('./dbOperation');
 //db.editCategory('1@1.com',[{name:'food', line: 40},{name: 'shopping', line: 50}],function(result){console.log(result)})
 //db.deleteRecord('1@1.com','536697a4075150101b540de5',function(result){console.log(JSON.stringify(result))});
 //db.getRecords('1@1.com',function(result){console.log(JSON.stringify(result))});
-db.getRecordsRange('1@1.com',"2012-12-01 00:00",function(result){console.log(JSON.stringify(result))}); 
+db.getRecordsRange('1@1.com',"2014-05-00 00:00",function(result){console.log(JSON.stringify(result))}); 
 //db.deleteRecord("1@1.com","536c34d2ce0df2fc281a9d23",25,function(result){console.log(result)});

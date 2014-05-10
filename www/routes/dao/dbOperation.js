@@ -463,7 +463,7 @@ exports.getRecords = function(email,callback){
 		[
 			{$match: { email: email } },
 			{$unwind: '$records' },
-			{$sort: {"records.dateTime":1}}, 
+			{$sort: {"records.dateTime": -1}}, 
 			{$group: {  _id: email,records: {$push:"$records"} } }
 		],function(err, doc) {
 				mongoclient.close();

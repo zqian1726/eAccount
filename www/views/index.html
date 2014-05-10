@@ -2,34 +2,17 @@
     <!-- this page specific styles -->
     <link rel="stylesheet" href="css/compiled/signup.css" type="text/css" media="screen" />
     <style type="text/css">
-          #signin-button {
-            padding: 5px;
-          }
+        #signin-button {
+          padding: 5px;
+        }
 
-          #oauth2-results pre { margin: 0; padding:0;}
-          .hide { display: none;}
-          .show { display: block;}
-      </style>
-    <style>
+        #oauth2-results pre { margin: 0; padding:0;}
+        .hide { display: none;}
+        .show { display: block;}
         body {
             background: url('img/bgs/landscape.jpg') no-repeat fixed center;
             background-size:cover
         }
-
-/*
-        #signup {
-            position:relative;
-            margin-top: 8%;
-            margin-left: 20%;
-        }
-*/
-/*
-        #signin {
-            position:relative;
-            margin-top: 8%;
-            margin-left: 30%;
-        }
-*/
         .hide{
             display:none;
         }
@@ -115,8 +98,6 @@
         			}
                 }
             })
-            
-        	// propose username by combining first- and lastname
         });
         $(function(){
             $(".changeToSignIn").click(function(){
@@ -195,7 +176,6 @@
             if (authResult['status']['signed_in']) {
                 // Update the app to reflect a signed in user
                 // Hide the sign-in button now that the user is authorized, for example:
-                console.log(authResult)
                 gapi.auth.setToken(authResult);
                 getProfile();
                 document.getElementById('signinButton').setAttribute('style', 'display: none');
@@ -236,7 +216,6 @@
             po.src = 'https://apis.google.com/js/client:plusone.js';
            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);            
         })();
-    </script>    
-    
+    </script>
     
 <% include footer.html %>
