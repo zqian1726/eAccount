@@ -62,7 +62,7 @@
                     console.log(total);
                     for(var i = 0; i < msg.panList.length; i++){
                         msg.panList[i].value = (msg.panList[i].value/total)*100;
-                        
+                        msg.panList[i].value = Math.round(msg.panList[i].value*100)/100;
                     }
                     Morris.Donut({
                         element: 'hero-donut',
