@@ -5,6 +5,11 @@
             <div id="pad-wrapper">
                  <!-- jQuery flot chart -->
                 <div class="row-fluid section">
+                    <div class="row-fluid head">
+                        <div class="span12">
+                            <h4>Linear Statistic</h4>
+                        </div>
+                    </div>
                     <h4 class="title">
                         <div class="btn-group pull-right">
                             <button class="glow left active" id="weekbtn">WEEK</button>
@@ -12,7 +17,6 @@
                             <button class="glow right" id="yearbtn">YEAR</button>
                         </div>
                     </h4>
-                    
                     <div class="span12" id="sectionWeek">
                         <div id="statsChart"></div>
                     </div>
@@ -22,16 +26,11 @@
                     <div class="span12 hide" id="sectionYear">
                         <div id="statsChartYear"></div>
                     </div>
-                 
                 </div>
-               
-               
 
                 <!-- morris bar & donut charts -->
                 <div class="row-fluid section">
-                    <h4 class="title">
-                        Monthly Category View
-                    </h4>
+                    <h4 class="title">Monthly Category View</h4>
                     <div class="span6 chart">
                         <h5>Alter and Expense</h5>
                         <div id="hero-bar" style="height: 250px;"></div>
@@ -140,44 +139,44 @@
         })
 
         var lineSettings = {
-                            series: {
-                                lines: { show: true,
-                                        lineWidth: 1,
-                                        fill: true, 
-                                        fillColor: { colors: [ { opacity: 0.25 }, { opacity: 0.09 } ] }
-                                     },
-                                points: { show: true, 
-                                         lineWidth: 2,
-                                         radius: 3
-                                     },
-                                shadowSize: 0,
-                                stack: true
-                            },
-                            grid: { hoverable: true, 
-                                   clickable: true, 
-                                   tickColor: "#f9f9f9",
-                                   borderWidth: 0
-                                },
-                            legend: {
-                                    // show: false
-                                    labelBoxBorderColor: "#fff"
-                                },  
-                            colors: ["#a1cb89", "#4fa6f0"],//["#30a0eb", "#a7b5c5"],
-                            xaxis: {
-                                ticks: [],
-                                font: {
-                                    size: 12,
-                                    family: "Open Sans, Arial",
-                                    variant: "small-caps",
-                                    color: "#9da3a9"
-                                }
-                            },
-                            yaxis: {
-                                ticks:3, 
-                                tickDecimals: 0,
-                                font: {size:12, color: "#9da3a9"}
-                            }
-                        }
+            series: {
+                lines: { show: true,
+                        lineWidth: 1,
+                        fill: true, 
+                        fillColor: { colors: [ { opacity: 0.25 }, { opacity: 0.09 } ] }
+                     },
+                points: { show: true, 
+                         lineWidth: 2,
+                         radius: 3
+                     },
+                shadowSize: 0,
+                stack: true
+            },
+            grid: { hoverable: true, 
+                   clickable: true, 
+                   tickColor: "#f9f9f9",
+                   borderWidth: 0
+                },
+            legend: {
+                    // show: false
+                    labelBoxBorderColor: "#fff"
+                },  
+            colors: ["#a1cb89", "#4fa6f0"],//["#30a0eb", "#a7b5c5"],
+            xaxis: {
+                ticks: [],
+                font: {
+                    size: 12,
+                    family: "Open Sans, Arial",
+                    variant: "small-caps",
+                    color: "#9da3a9"
+                }
+            },
+            yaxis: {
+                ticks:3, 
+                tickDecimals: 0,
+                font: {size:12, color: "#9da3a9"}
+            }
+        }
 
         $.ajax({
             type: "GET",
