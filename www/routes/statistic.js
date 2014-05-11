@@ -12,7 +12,6 @@ exports.pan = function(req, res) {
 	var now = new Date()
 		, month = now.getMonth() + 1
 		, endTime = now.getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-00 00:00'
-		console.log(endTime)
 	db.getRecordsRange(req.cookies.user, endTime, function(ret) {
 		if (ret == "error") {
 			console.log(req.cookies.user + " get pan failed!")
@@ -21,7 +20,7 @@ exports.pan = function(req, res) {
 		else {
 			var cake = {}
 				, list = []
-			for (var i = ret.length - 1; i >= 0; i--) {
+			for (var i = 0; i < ret.length; i++) {
 				if (ret[i].category == 'income')
 					continue
 				if (typeof cake[ret[i].category] == 'undefined')
@@ -57,7 +56,7 @@ exports.bar = function(req, res) {
 				else {
 					var cake = {}
 						, list = []
-					for (var i = ret.length - 1; i >= 0; i--) {
+					for (var i = 0; i < ret.length; i++) {
 						if (ret[i].category == 'income')
 							continue
 						if (typeof cake[ret[i].category] == 'undefined')
@@ -105,7 +104,7 @@ exports.line = function(req, res) {
 			for (var i = 0; i < categoryList.length; i++)
 				if (categoryList[i].name != 'income')
 					alert += categoryList[i].line
-			db.getRecords(req.cookies.user, function(ret) {
+			db.getRecordsRange(req.cookies.user, endTime, function(ret) {
 				if (ret == "error") {
 					console.log(req.cookies.user + " get line failed!")
 					res.send({error: true})
@@ -114,18 +113,12 @@ exports.line = function(req, res) {
 					var cutPoint = period == 'yearly' ? 7 : 10
 						, cake = {}
 						, list = []
-					console.log(endTime)
-					for (var i = ret.length - 1; i >= 0; i--) {
-						console.log('dateTime: ' + ret[i].dateTime)
-						if (ret[i].dateTime < endTime)
-							break
+					for (var i = 0; i < ret.length; i++) {
 						var date = ret[i].dateTime.slice(0, cutPoint)
-						console.log(date)
 						if (typeof cake[date] == 'undefined')
 							cake[date] = 0
 						cake[date] += ret[i].amount
 					}
-					console.log(cake)
 					res.send({error: false, line: alert, lineList: cake})
 				}
 			})
