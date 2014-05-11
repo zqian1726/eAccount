@@ -51,15 +51,15 @@
 
                     <div class="row-fluid">
                         <table class="table table-hover">
-                                <tr>
-                                    <th class="span2"><h3>Total:</h3>(per month)</th>
-                                    <th class="span2">
-                                        <input type="text" id="totalAmount" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
-                                    </th>
-                                    <th class="span4">
-                                       <div class="tooltip"></div> 
-                                       <div class="sliderTotal"></div>
-                                    </th>
+                            <thead>
+                                <th class="span2"><h3>Total:</h3>(per month)</th>
+                                <th class="span2">
+                                    <input type="text" id="totalAmount" disabled style="width: 100px; overflow-x: visible; overflow-y: visible;"/>
+                                </th>
+                                <th class="span4">
+                                   <div class="tooltip"></div> 
+                                   <div class="sliderTotal"></div>
+                                </th>
                             </thead>
                         </table>
                         <table class="table table-hover">
@@ -122,9 +122,9 @@
                     }else{
                         console.log(msg.categoryList);
                         var content;
-                        var totleValue = 0;
+                        var totelValue = 0;
                         for(var i = 0; i < msg.categoryList.length; i++){
-                            totleValue+=msg.categoryList[i].line;
+                            totelValue+=msg.categoryList[i].line;
                             if(msg.categoryList[i].name == 'other' || msg.categoryList[i].name == 'income')
                                 content += "<tr><td><span id= '"+msg.categoryList[i].name+"name' contenteditable='false'>"+msg.categoryList[i].name+"</span></td><td><input type='text' id='"+msg.categoryList[i].name+"' disabled value = '$"+msg.categoryList[i].line+"' style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i].name+"'></div></td><td></td></tr>";
                                 
@@ -132,13 +132,13 @@
                                 content += "<tr><td><span id= '"+msg.categoryList[i].name+"name' contenteditable='false'>"+msg.categoryList[i].name+"</span></td><td><input type='text' id='"+msg.categoryList[i].name+"' disabled value = '$"+msg.categoryList[i].line+"' style='width: 100px; overflow-x: visible; overflow-y: visible;'/></td><td><div class='success slider"+msg.categoryList[i].name+"'></div></td><td><ul class='actions'><li><a href='#deleteCate' id='delete-"+msg.categoryList[i].name+"' data-toggle='modal' class='icon-remove-sign deleteCate' style='color: #d5393e;'></a></li></ul></td></tr>";
                         }
                         $('.category-table').html(content);
-                        
+                        $('#totalAmount').val("$" + totelValue)
                         var slider  = $('.sliderTotal'),
 				        tooltip = $('.tooltip');
                         //Hide the Tooltip at first
                         tooltip.hide();
                         
-                        //var totleValue = 40*msg.categoryList.length;
+                        //var totelValue = 40*msg.categoryList.length;
                         var totleMax = 0;
                         var start;
                         var stop;
@@ -163,8 +163,8 @@
                                     stop: function(event, ui){
                                         stop = ui.value;
                                         var diff = stop-start;
-                                        totleValue+=diff;
-                                        $("#totalAmount").val("$" + totleValue);
+                                        totelValue+=diff;
+                                        $("#totalAmount").val("$" + totelValue);
                                     }
                                 });
                             }(ele))                            
