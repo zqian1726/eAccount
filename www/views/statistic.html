@@ -139,62 +139,185 @@
             }
         })
 
-        //  jQuery Flot Chart
-        var visits = [[1, 50], [2, 40], [3, 45], [4, 23],[5, 55],[6, 65],[7, 61]];
-        var visitors = [[1, 25], [2, 50], [3, 23], [4, 48],[5, 38],[6, 40],[7, 47]];
-        /*$.ajax({
+        $.ajax({
             type: "GET",
-            url: '/statistic/chart/line/'+week,
+            url: "/statistic/chart/line/weekly",
             dataType: "json",
-            success function(msg){
-                if(msg.error){
-                    
-                }else{
-                    var line = 
-                }
-        })*/
-        var plot = $.plot($("#statsChart"),
-            [ { data: visits, label: "Signups"},
-             { data: visitors, label: "Visits" }], {
-                series: {
-                    lines: { show: true,
-                            lineWidth: 1,
-                            fill: true, 
-                            fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
-                         },
-                    points: { show: true, 
-                             lineWidth: 2,
-                             radius: 3
-                         },
-                    shadowSize: 0,
-                    stack: true
-                },
-                grid: { hoverable: true, 
-                       clickable: true, 
-                       tickColor: "#f9f9f9",
-                       borderWidth: 0
-                    },
-                legend: {
-                        // show: false
-                        labelBoxBorderColor: "#fff"
-                    },  
-                colors: ["#a7b5c5", "#30a0eb"],
-                xaxis: {
-                    ticks: [[1, "Mon"], [2, "Tues"], [3, "Wed"], [4,"Thur"], [5,"Fri"], [6,"Sat"], 
-                           [7,"Sun"]],
-                    font: {
-                        size: 12,
-                        family: "Open Sans, Arial",
-                        variant: "small-caps",
-                        color: "#9da3a9"
+            success: function (msg) {
+                if(!msg.error){
+                    var value = [], alert = [], label = []
+                    for (var i = 0, amount = 0; i < msg.lineList.length; i++) {
+                        amount -= msg.lineList[i].amount
+                        label.push([i + 1, msg.lineList[i].date])
+                        value.push([i + 1, amount - msg.line])
                     }
-                },
-                yaxis: {
-                    ticks:3, 
-                    tickDecimals: 0,
-                    font: {size:12, color: "#9da3a9"}
+                    alert.push([1, msg.line])
+                    alert.push([msg.lineList.length, msg.line])
+                    $.plot($("#statsChart"),
+                        [ { data: alert, label: "Alert"}, { data: value, label: "Cost"}],
+                        {
+                            series: {
+                                lines: { show: true,
+                                        lineWidth: 1,
+                                        fill: true, 
+                                        fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
+                                     },
+                                points: { show: true, 
+                                         lineWidth: 2,
+                                         radius: 3
+                                     },
+                                shadowSize: 0,
+                                stack: true
+                            },
+                            grid: { hoverable: true, 
+                                   clickable: true, 
+                                   tickColor: "#f9f9f9",
+                                   borderWidth: 0
+                                },
+                            legend: {
+                                    // show: false
+                                    labelBoxBorderColor: "#fff"
+                                },  
+                            colors: ["#30a0eb", "#a7b5c5"],
+                            xaxis: {
+                                ticks: label,
+                                font: {
+                                    size: 12,
+                                    family: "Open Sans, Arial",
+                                    variant: "small-caps",
+                                    color: "#9da3a9"
+                                }
+                            },
+                            yaxis: {
+                                ticks:3, 
+                                tickDecimals: 0,
+                                font: {size:12, color: "#9da3a9"}
+                            }
+                        }
+                    );
                 }
-             });
+            }
+        })
+
+        $.ajax({
+            type: "GET",
+            url: "/statistic/chart/line/monthly",
+            dataType: "json",
+            success: function (msg) {
+                if(!msg.error){
+                    var value = [], alert = [], label = []
+                    for (var i = 0, amount = 0; i < msg.lineList.length; i++) {
+                        amount -= msg.lineList[i].amount
+                        label.push([i + 1, msg.lineList[i].date])
+                        value.push([i + 1, amount - msg.line])
+                    }
+                    alert.push([1, msg.line])
+                    alert.push([msg.lineList.length, msg.line])
+                    $.plot($("#statsChartMonth"),
+                        [ { data: alert, label: "Alert"}, { data: value, label: "Cost"}],
+                        {
+                            series: {
+                                lines: { show: true,
+                                        lineWidth: 1,
+                                        fill: true, 
+                                        fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
+                                     },
+                                points: { show: true, 
+                                         lineWidth: 2,
+                                         radius: 3
+                                     },
+                                shadowSize: 0,
+                                stack: true
+                            },
+                            grid: { hoverable: true, 
+                                   clickable: true, 
+                                   tickColor: "#f9f9f9",
+                                   borderWidth: 0
+                                },
+                            legend: {
+                                    // show: false
+                                    labelBoxBorderColor: "#fff"
+                                },  
+                            colors: ["#30a0eb", "#a7b5c5"],
+                            xaxis: {
+                                ticks: label,
+                                font: {
+                                    size: 12,
+                                    family: "Open Sans, Arial",
+                                    variant: "small-caps",
+                                    color: "#9da3a9"
+                                }
+                            },
+                            yaxis: {
+                                ticks:3, 
+                                tickDecimals: 0,
+                                font: {size:12, color: "#9da3a9"}
+                            }
+                        }
+                    );
+                }
+            }
+        })
+
+        $.ajax({
+            type: "GET",
+            url: "/statistic/chart/line/yearly",
+            dataType: "json",
+            success: function (msg) {
+                if(!msg.error){
+                    var value = [], alert = [], label = []
+                    for (var i = 0, amount = 0; i < msg.lineList.length; i++) {
+                        amount -= msg.lineList[i].amount
+                        label.push([i + 1, msg.lineList[i].date])
+                        value.push([i + 1, amount - msg.line])
+                    }
+                    alert.push([1, msg.line])
+                    alert.push([msg.lineList.length, msg.line])
+                    $.plot($("#statsChartYear"),
+                        [ { data: alert, label: "Alert"}, { data: value, label: "Cost"}],
+                        {
+                            series: {
+                                lines: { show: true,
+                                        lineWidth: 1,
+                                        fill: true, 
+                                        fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
+                                     },
+                                points: { show: true, 
+                                         lineWidth: 2,
+                                         radius: 3
+                                     },
+                                shadowSize: 0,
+                                stack: true
+                            },
+                            grid: { hoverable: true, 
+                                   clickable: true, 
+                                   tickColor: "#f9f9f9",
+                                   borderWidth: 0
+                                },
+                            legend: {
+                                    // show: false
+                                    labelBoxBorderColor: "#fff"
+                                },  
+                            colors: ["#30a0eb", "#a7b5c5"],
+                            xaxis: {
+                                ticks: label,
+                                font: {
+                                    size: 12,
+                                    family: "Open Sans, Arial",
+                                    variant: "small-caps",
+                                    color: "#9da3a9"
+                                }
+                            },
+                            yaxis: {
+                                ticks:3, 
+                                tickDecimals: 0,
+                                font: {size:12, color: "#9da3a9"}
+                            }
+                        }
+                    );
+                }
+            }
+        })
 
         function showTooltip(x, y, contents) {
             $('<div id="tooltip">' + contents + '</div>').css( {
@@ -211,6 +334,7 @@
         }
 
         var previousPoint = null;
+        
         $("#statsChart").bind("plothover", function (event, pos, item) {
             if (item) {
                 if (previousPoint != item.dataIndex) {
@@ -231,65 +355,7 @@
                 previousPoint = null;
             }
         });
-        //month
-        var plot = $.plot($("#statsChartMonth"),
-            [ { data: visits, label: "Signups"},
-             { data: visitors, label: "Visits" }], {
-                series: {
-                    lines: { show: true,
-                            lineWidth: 1,
-                            fill: true, 
-                            fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
-                         },
-                    points: { show: true, 
-                             lineWidth: 2,
-                             radius: 3
-                         },
-                    shadowSize: 0,
-                    stack: true
-                },
-                grid: { hoverable: true, 
-                       clickable: true, 
-                       tickColor: "#f9f9f9",
-                       borderWidth: 0
-                    },
-                legend: {
-                        // show: false
-                        labelBoxBorderColor: "#fff"
-                    },  
-                colors: ["#a7b5c5", "#30a0eb"],
-                xaxis: {
-                    ticks: [[1, "JAN"], [2, "FEB"], [3, "MAR"], [4,"APR"], [5,"MAY"], [6,"JUN"], 
-                           [7,"JUL"], [8,"AUG"], [9,"SEP"], [10,"OCT"], [11,"NOV"], [12,"DEC"]],
-                    font: {
-                        size: 12,
-                        family: "Open Sans, Arial",
-                        variant: "small-caps",
-                        color: "#9da3a9"
-                    }
-                },
-                yaxis: {
-                    ticks:3, 
-                    tickDecimals: 0,
-                    font: {size:12, color: "#9da3a9"}
-                }
-             });
 
-        function showTooltip(x, y, contents) {
-            $('<div id="tooltip">' + contents + '</div>').css( {
-                position: 'absolute',
-                display: 'none',
-                top: y - 30,
-                left: x - 50,
-                color: "#fff",
-                padding: '2px 5px',
-                'border-radius': '6px',
-                'background-color': '#000',
-                opacity: 0.80
-            }).appendTo("body").fadeIn(200);
-        }
-
-        var previousPoint = null;
         $("#statsChartMonth").bind("plothover", function (event, pos, item) {
             if (item) {
                 if (previousPoint != item.dataIndex) {
@@ -310,65 +376,7 @@
                 previousPoint = null;
             }
         });
-        //Year
-        var plot = $.plot($("#statsChartYear"),
-            [ { data: visits, label: "Signups"},
-             { data: visitors, label: "Visits" }], {
-                series: {
-                    lines: { show: true,
-                            lineWidth: 1,
-                            fill: true, 
-                            fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
-                         },
-                    points: { show: true, 
-                             lineWidth: 2,
-                             radius: 3
-                         },
-                    shadowSize: 0,
-                    stack: true
-                },
-                grid: { hoverable: true, 
-                       clickable: true, 
-                       tickColor: "#f9f9f9",
-                       borderWidth: 0
-                    },
-                legend: {
-                        // show: false
-                        labelBoxBorderColor: "#fff"
-                    },  
-                colors: ["#a7b5c5", "#30a0eb"],
-                xaxis: {
-                    ticks: [[1, "2003"], [2, "2004"], [3, "2005"], [4,"2006"], [5,"2007"], [6,"2008"], 
-                           [7,"2009"], [8,"2010"], [9,"2011"], [10,"2012"], [11,"2013"], [12,"2014"]],
-                    font: {
-                        size: 12,
-                        family: "Open Sans, Arial",
-                        variant: "small-caps",
-                        color: "#9da3a9"
-                    }
-                },
-                yaxis: {
-                    ticks:3, 
-                    tickDecimals: 0,
-                    font: {size:12, color: "#9da3a9"}
-                }
-             });
 
-        function showTooltip(x, y, contents) {
-            $('<div id="tooltip">' + contents + '</div>').css( {
-                position: 'absolute',
-                display: 'none',
-                top: y - 30,
-                left: x - 50,
-                color: "#fff",
-                padding: '2px 5px',
-                'border-radius': '6px',
-                'background-color': '#000',
-                opacity: 0.80
-            }).appendTo("body").fadeIn(200);
-        }
-
-        var previousPoint = null;
         $("#statsChartYear").bind("plothover", function (event, pos, item) {
             if (item) {
                 if (previousPoint != item.dataIndex) {

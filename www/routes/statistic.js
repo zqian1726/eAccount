@@ -27,9 +27,8 @@ exports.pan = function(req, res) {
 					cake[ret[i].category] = 0
 				cake[ret[i].category] += ret[i].amount
 			}
-			for(var key in cake) {
+			for(var key in cake)
 				list.push({label: key, value: cake[key]})
-			}
 			res.send({error: false, panList: list})
 		}
 	})
@@ -63,9 +62,8 @@ exports.bar = function(req, res) {
 							cake[ret[i].category] = 0
 						cake[ret[i].category] += ret[i].amount
 					}
-					for(var key in cake) {
+					for(var key in cake)
 						list.push({category: key, amount: cake[key], line: alerts[key]})
-					}
 					res.send({error: false, barList: list})
 				}
 			})
@@ -119,7 +117,9 @@ exports.line = function(req, res) {
 							cake[date] = 0
 						cake[date] += ret[i].amount
 					}
-					res.send({error: false, line: alert, lineList: cake})
+					for(var key in cake)
+						list.push({date: key, amount: cake[key]})
+					res.send({error: false, line: alert, lineList: list})
 				}
 			})
 		}

@@ -577,10 +577,10 @@ input.search{
 }
 
 
-#templatemo_footer_wrapper  {
+.footer_wrapper  {
 	text-align: center;
     clear: both;
     width: 100%;
     background: url(images/templatemo_footer.png) center top no-repeat
 }
-#templatemo_footer .footer_links {color:#333; text-decoration:none; cursor:text; margin-right:5px;}
+.footer .footer_links {color:#333; text-decoration:none; cursor:text; margin-right:5px;}
