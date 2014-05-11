@@ -92,8 +92,8 @@ exports.google = function(req, res) {
 			db.registerUser(email, validator.striptags(req.body.username), password, req.body.dob, validator.striptags(req.body.gender), function(ret) {
 				if (ret == "success") {
 					// succeed
-					res.cookie('user', req.body.email, { maxAge: default_cookie_time })
-					res.cookie('passport', sha1(req.body.email + "#This%is%eAcount%secret#"), { maxAge: default_cookie_time })
+					res.cookie('user', email, { maxAge: default_cookie_time })
+					res.cookie('passport', sha1(email + "#This%is%eAcount%secret#"), { maxAge: default_cookie_time })
 					res.cookie('token', token, { maxAge: default_cookie_time })
 					res.send({error: false})
 				}

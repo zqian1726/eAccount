@@ -375,9 +375,8 @@ exports.getCategories = function (email,callback){
 				if(err){
 					callback("error");
 				}else{
-					callback(doc.categories);
+					callback(doc.categories)
 				}
-			 
 		  });
 		
 	});
@@ -470,7 +469,7 @@ exports.getRecords = function(email,callback){
 				if(err){
 					callback(err);
 				}else{
-						callback(typeof doc[0] == 'undefined' ? [] : doc[0].records);
+					callback(typeof doc[0] == 'undefined' ? [] : doc[0].records);
 				}
 		});
 		
@@ -499,7 +498,7 @@ exports.getRecordsRange = function(email,startDate,callback){
 				if(err){
 					callback(err);
 				}else{
-						callback(typeof doc[0] == 'undefined' ? [] : doc[0].records);
+					callback(typeof doc[0] == 'undefined' ? [] : doc[0].records);
 				}
 		});
 		
