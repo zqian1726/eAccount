@@ -139,28 +139,12 @@
             }
         })
 
-        $.ajax({
-            type: "GET",
-            url: "/statistic/chart/line/weekly",
-            dataType: "json",
-            success: function (msg) {
-                if(!msg.error){
-                    var value = [], alert = [], label = []
-                    for (var i = 0, amount = 0; i < msg.lineList.length; i++) {
-                        amount -= msg.lineList[i].amount
-                        label.push([i + 1, msg.lineList[i].date])
-                        value.push([i + 1, amount - msg.line])
-                    }
-                    alert.push([1, msg.line])
-                    alert.push([msg.lineList.length, msg.line])
-                    $.plot($("#statsChart"),
-                        [ { data: alert, label: "Alert"}, { data: value, label: "Cost"}],
-                        {
+        var lineSettings = {
                             series: {
                                 lines: { show: true,
                                         lineWidth: 1,
                                         fill: true, 
-                                        fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
+                                        fillColor: { colors: [ { opacity: 0.25 }, { opacity: 0.09 } ] }
                                      },
                                 points: { show: true, 
                                          lineWidth: 2,
@@ -178,9 +162,9 @@
                                     // show: false
                                     labelBoxBorderColor: "#fff"
                                 },  
-                            colors: ["#30a0eb", "#a7b5c5"],
+                            colors: ["#a1cb89", "#4fa6f0"],//["#30a0eb", "#a7b5c5"],
                             xaxis: {
-                                ticks: label,
+                                ticks: [],
                                 font: {
                                     size: 12,
                                     family: "Open Sans, Arial",
@@ -194,6 +178,25 @@
                                 font: {size:12, color: "#9da3a9"}
                             }
                         }
+
+        $.ajax({
+            type: "GET",
+            url: "/statistic/chart/line/weekly",
+            dataType: "json",
+            success: function (msg) {
+                if(!msg.error){
+                    var value = [], alert = [], label = []
+                    for (var i = 0, amount = 0; i < msg.lineList.length; i++) {
+                        amount -= msg.lineList[i].amount
+                        label.push([i + 1, msg.lineList[i].date])
+                        value.push([i + 1, amount - msg.line])
+                    }
+                    alert.push([1, msg.line])
+                    alert.push([msg.lineList.length, msg.line])
+                    lineSettings.xaxis.ticks = label
+                    $.plot($("#statsChart"),
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
+                        lineSettings
                     );
                 }
             }
@@ -213,47 +216,10 @@
                     }
                     alert.push([1, msg.line])
                     alert.push([msg.lineList.length, msg.line])
+                    lineSettings.xaxis.ticks = label
                     $.plot($("#statsChartMonth"),
-                        [ { data: alert, label: "Alert"}, { data: value, label: "Cost"}],
-                        {
-                            series: {
-                                lines: { show: true,
-                                        lineWidth: 1,
-                                        fill: true, 
-                                        fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
-                                     },
-                                points: { show: true, 
-                                         lineWidth: 2,
-                                         radius: 3
-                                     },
-                                shadowSize: 0,
-                                stack: true
-                            },
-                            grid: { hoverable: true, 
-                                   clickable: true, 
-                                   tickColor: "#f9f9f9",
-                                   borderWidth: 0
-                                },
-                            legend: {
-                                    // show: false
-                                    labelBoxBorderColor: "#fff"
-                                },  
-                            colors: ["#30a0eb", "#a7b5c5"],
-                            xaxis: {
-                                ticks: label,
-                                font: {
-                                    size: 12,
-                                    family: "Open Sans, Arial",
-                                    variant: "small-caps",
-                                    color: "#9da3a9"
-                                }
-                            },
-                            yaxis: {
-                                ticks:3, 
-                                tickDecimals: 0,
-                                font: {size:12, color: "#9da3a9"}
-                            }
-                        }
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
+                        lineSettings
                     );
                 }
             }
@@ -273,47 +239,10 @@
                     }
                     alert.push([1, msg.line])
                     alert.push([msg.lineList.length, msg.line])
+                    lineSettings.xaxis.ticks = label
                     $.plot($("#statsChartYear"),
-                        [ { data: alert, label: "Alert"}, { data: value, label: "Cost"}],
-                        {
-                            series: {
-                                lines: { show: true,
-                                        lineWidth: 1,
-                                        fill: true, 
-                                        fillColor: { colors: [ { opacity: 0.05 }, { opacity: 0.09 } ] }
-                                     },
-                                points: { show: true, 
-                                         lineWidth: 2,
-                                         radius: 3
-                                     },
-                                shadowSize: 0,
-                                stack: true
-                            },
-                            grid: { hoverable: true, 
-                                   clickable: true, 
-                                   tickColor: "#f9f9f9",
-                                   borderWidth: 0
-                                },
-                            legend: {
-                                    // show: false
-                                    labelBoxBorderColor: "#fff"
-                                },  
-                            colors: ["#30a0eb", "#a7b5c5"],
-                            xaxis: {
-                                ticks: label,
-                                font: {
-                                    size: 12,
-                                    family: "Open Sans, Arial",
-                                    variant: "small-caps",
-                                    color: "#9da3a9"
-                                }
-                            },
-                            yaxis: {
-                                ticks:3, 
-                                tickDecimals: 0,
-                                font: {size:12, color: "#9da3a9"}
-                            }
-                        }
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
+                        lineSettings
                     );
                 }
             }
@@ -334,7 +263,7 @@
         }
 
         var previousPoint = null;
-        
+
         $("#statsChart").bind("plothover", function (event, pos, item) {
             if (item) {
                 if (previousPoint != item.dataIndex) {
