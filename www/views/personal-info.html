@@ -99,7 +99,7 @@
                                     </div>
                                     <div id="dob" class="field-box">
                                         <label for="dobin">Date of Birth:</label>
-                                        <input class="span5 inline-input" id="dobin" name="dob" value="<%= userInfo.dob %>" data-date-format="yyyy-mm-dd" type="text" readonly style="background-color: white; cursor: auto; color: rgb(85, 85, 85);" />
+                                        <input class="span5 inline-input" id="dobin" name="dob" value="<%= userInfo.dob == null ? '' : userInfo.dob %>" data-date-format="yyyy-mm-dd" type="text" readonly style="background-color: white; cursor: auto; color: rgb(85, 85, 85);" />
                                     </div>
                                     <script>
                                             $('#dob').ready(function() {
