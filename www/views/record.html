@@ -275,25 +275,20 @@
                 dataType: "json",
                 success: function(msg){
                     if(msg.error){
-                    }else{
-                        
-                        var content = "";
+                    }else{                        var content = "";
                         var balance = msg.balance;
                         var contentList = new Array();
                         for(var i = 0; i < msg.recordList.length; i++){
                             var tempContent = "";
                             if (i > 0)
                                 balance-=msg.recordList[i - 1].amount;
-                            
-                            //console.log(msg.recordList[i].recordId);
-                            //console.log(msg.balance);
                             content+="<tr class='first'>";
                             content+="<td><span>"+msg.recordList[i].dateTime+"</span></td>";
-                            content+="<td><span class='dollar'>"+balance+"</span></td>";
+                            content+="<td><span class='dollar'>"+(balance >= 0 ? balance : "("+(-balance)+")")+"</span></td>";
                             if(msg.recordList[i].amount >= 0){
                                 content+="<td><span class='label label-success dollar'>"+msg.recordList[i].amount+"</span></td>";
                             }else{
-                                content+="<td><span class='label label-info dollar'>"+msg.recordList[i].amount+"</span></td>";
+                                content+="<td><span class='label label-info dollar'>"+(-msg.recordList[i].amount)+"</span></td>";
                             }
                         
                             content+="<td><span>"+msg.recordList[i].category+"</span></td>";
