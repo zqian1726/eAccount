@@ -118,11 +118,8 @@
                 if(msg.error){
                 }else{
                     var total = 0;
-                    for(var i = 0; i < msg.panList.length; i++){
-                        console.log(msg.panList[i].value);
+                    for(var i = 0; i < msg.panList.length; i++)
                         total+=msg.panList[i].value;
-                    }
-                    console.log(total);
                     for(var i = 0; i < msg.panList.length; i++){
                         msg.panList[i].value = (msg.panList[i].value/total)*100;
                         msg.panList[i].value = Math.round(msg.panList[i].value*100)/100;

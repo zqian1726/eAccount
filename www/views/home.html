@@ -100,8 +100,7 @@
             $("#sectionMonth").addClass("hide");
             $("#sectionYear").removeClass("hide");
         });
-    </script>
-    <script type="text/javascript">
+
         $.ajax({
             type: "GET",
             url: "/statistic/chart/pan",
@@ -111,10 +110,8 @@
                 }else{
                     var total = 0;
                     for(var i = 0; i < msg.panList.length; i++){
-                        console.log(msg.panList[i].value);
                         total+=msg.panList[i].value;
                     }
-                    console.log(total);
                     for(var i = 0; i < msg.panList.length; i++){
                         msg.panList[i].value = (msg.panList[i].value/total)*100;
                         msg.panList[i].value = Math.round(msg.panList[i].value*100)/100;
@@ -136,7 +133,6 @@
             success: function(msg) {
                 if(msg.error){
                 }else{
-                    console.log(msg.recordList)
                     var content = "";
                     var high;
                     if(msg.recordList.length == 0){
@@ -233,7 +229,7 @@
                     alert.push([msg.lineList.length, msg.line])
                     lineSettings.xaxis.ticks = label
                     $.plot($("#statsChart"),
-                        [ { data: alert, label: "Budget"}, { data: value, label: "Expense"}],
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
                         lineSettings
                     );
                 }
@@ -256,7 +252,7 @@
                     alert.push([msg.lineList.length, msg.line])
                     lineSettings.xaxis.ticks = label
                     $.plot($("#statsChartMonth"),
-                        [ { data: alert, label: "Budget"}, { data: value, label: "Expense"}],
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
                         lineSettings
                     );
                 }
@@ -279,7 +275,7 @@
                     alert.push([msg.lineList.length, msg.line])
                     lineSettings.xaxis.ticks = label
                     $.plot($("#statsChartYear"),
-                        [ { data: alert, label: "Budget"}, { data: value, label: "Expense"}],
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
                         lineSettings
                     );
                 }
@@ -364,5 +360,5 @@
                 previousPoint = null;
             }
         });
-</script>
+</script>   
 <% include footer.html %>

@@ -120,7 +120,6 @@
                     if(msg.error){
                         alert("db error");
                     }else{
-                        console.log(msg.categoryList);
                         var content;
                         var totelValue = 0;
                         for(var i = 0; i < msg.categoryList.length; i++){
@@ -152,10 +151,6 @@
                                     value: msg.categoryList[i].line,
                                     slide: function(event, ui) {
                                         $("#"+ele).val("$" + ui.value);
-                                        
-                                        //totleMax+=ui.max;
-                                        
-                                        //console.log(ele);
                                     },
                                     start: function(event, ui){
                                         start = ui.value;
@@ -220,14 +215,13 @@
                                     data: {_method:"delete", name: cat},
                                     datatype: "json",
                                     success: function(msg){
-                                        console.log(msg.error);
+
                                         if(msg.error == false){
                                             location.reload();
                                         }
                                     }
                                 })
                             })
-                            console.log(name);
                         });
                         
                         //submit change
@@ -235,23 +229,19 @@
                             var cateData = "[";
                             for(var i = 0; i < msg.categoryList.length; i++){
                                 var value = $('#'+msg.categoryList[i].name).val().replace('$','');
-                                console.log(value);
                                 if(i != msg.categoryList.length-1)
                                     cateData+="{name:'"+msg.categoryList[i].name+"',line:"+value+"},";
                                 else
                                     cateData+="{name:'"+msg.categoryList[i].name+"',line:"+value+"}";
                             }
                             cateData+="]";
-                            console.log(cateData);
                             $.ajax({
                                 type: "POST",
                                 url: "/category",
                                 data: {_method:'put',categoryList:cateData},
                                 dataType: "json",
                                 success: function(msg){
-                                    
                                     if(msg.error){
-                                        console.log("error")
                                     }else{
                                         location.reload();
                                     }

@@ -252,7 +252,6 @@
                 url: "/category/list",
                 dataType: "json",
                 success:function(msg){
-                    console.log(msg);
                     if(msg.error){
                     
                     }else{
@@ -275,7 +274,6 @@
                 url: "/record/list",
                 dataType: "json",
                 success: function(msg){
-                    console.log(msg);
                     if(msg.error){
                     }else{
                         
@@ -319,7 +317,6 @@
                             tempContent+="<li class='last'><a href='#deleteRecord' title='delete' class='deleteRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-delete'><i class='table-delete'></i></a></li>";
                             contentList[i] = tempContent;
                         }
-                        console.log(contentList.length);
                         $('#record-content').html(content);
                         
                         $('.category-selector').change(function(){
@@ -354,7 +351,6 @@
                                     url: "/category/list",
                                     dataType: "json",
                                     success:function(msg){
-                                        console.log(msg);
                                         if(msg.error){
                     
                                         }else{
@@ -369,13 +365,11 @@
                                     }
                                 })
                             }
-                            console.log(state);
                         }) 
                         
                         $('.add-record-submit').click(function(){
                             var now = new Date(), month = now.getMonth() + 1, day = now.getDate(), hour = now.getHours(), minute = now.getMinutes();
                             var date = now.getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day) + ' ' + (hour < 10 ? '0' + hour : hour) + ':' + (minute < 10 ? '0' + minute : minute);
-                            console.log(date)
                             date = $('.add-record-datepicker').val() != '' ? $('.add-record-datepicker').val() : date;
                             $.ajax({
                                 type: "POST",
@@ -407,7 +401,6 @@
                                     amt = msg.recordList[i].amount;
                                 }
                             }
-                            //console.log(rec);
                             $('#deleteRecordConfirm').click(function(){
                                 $.ajax({
                                     type: "DELETE",
@@ -415,7 +408,6 @@
                                     data: {_method:"delete", recordId: rec, amount: amt},
                                     datatype: "json",
                                     success:function(msg){
-                                        console.log(msg.error);
                                         if(msg.error == false){
                                             location.reload();
                                         }
@@ -428,10 +420,8 @@
                         $('.editRecordButton').click(function(){
                             var temp = $(this).attr('id').split('-');
                             var rec = temp[0];
-                            console.log(rec);
                             for(var i = 0; i < msg.recordList.length; i++){
                                 if(msg.recordList[i].recordId == rec){
-                                    console.log(msg.recordList[i].amount);
                                     if(msg.recordList[i].amount >= 0){
                                         $('.editAmount').val(msg.recordList[i].amount);
                                         if (!$('#my-checkbox2').bootstrapSwitch('state'))
@@ -448,7 +438,6 @@
                                 }
                             }
                             $('#editRecordConfirm').click(function(){
-                                console.log('clicked')
                                 var valueEdit = $('#my-checkbox2').bootstrapSwitch('state')
                                 $.ajax({
                                     type: "PUT",
@@ -462,7 +451,6 @@
                                     },
                                     dataType: "json",
                                     success:function(msg){
-                                        console.log(msg.error);
                                         if(msg.error){
                                             alert("error");
                                         }else{
