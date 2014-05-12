@@ -278,11 +278,12 @@
                     }else{
                         
                         var content = "";
-                        var balance = 0;
+                        var balance = msg.balance;
                         var contentList = new Array();
                         for(var i = 0; i < msg.recordList.length; i++){
                             var tempContent = "";
-                            balance+=msg.recordList[i].amount;
+                            if (i > 0)
+                                balance-=msg.recordList[i - 1].amount;
                             
                             //console.log(msg.recordList[i].recordId);
                             //console.log(msg.balance);
