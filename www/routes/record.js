@@ -24,7 +24,7 @@ exports.list = function(req, res) {
 
 exports.add = function(req, res) {
 	// add a record
-	db.addRecord(req.cookies.user, validator.toFloat(validator.striptags(req.body.amount)), req.body.category, validator.striptags(req.body.desc), req.body.dateTime, function(ret) {
+	db.addRecord(req.cookies.user, validator.toFloat(validator.striptags(req.body.amount)), validator.striptags(req.body.category), validator.striptags(req.body.desc), validator.striptags(req.body.dateTime), function(ret) {
 		if (ret == "success") {
 			res.send({error: false})
 		}
@@ -38,10 +38,11 @@ exports.add = function(req, res) {
 exports.update = function(req, res) {
 	// update a record
 	// 1. delete
-	db.deleteRecord(req.cookies.user, req.body.recordId, function(ret) {
+	console.log(req.body)
+	db.deleteRecord(req.cookies.user, req.body.recordId, validator.toFloat(validator.striptags(req.body.amount)), function(ret) {
 		if (ret == "success") {
 			// 2. add
-			db.addRecord(req.cookies.user, validator.toFloat(validator.striptags(req.body.amount)), req.body.category, validator.striptags(req.body.desc), req.body.datetime, function(ret) {
+			db.addRecord(req.cookies.user, validator.toFloat(validator.striptags(req.body.amount)), validator.striptags(req.body.category), validator.striptags(req.body.desc), validator.striptags(req.body.dateTime), function(ret) {
 				if (ret == "success") {
 					res.send({error: false})
 				}

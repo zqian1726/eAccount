@@ -130,7 +130,6 @@
                                 <!-- row -->
                             </tbody>
                         </table>
-                        <!--
                         <div id="editRecord" class="modal hide fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -143,7 +142,7 @@
                                             <form action="/record/new" method="post">
                                                 <div class="field-box">
                                                     <label>Amount:</label>
-                                                        $<input type="text" class="span3 editAmount" id = "amount2" name="amount"  />
+                                                    $<input type="text" class="span3 editAmount" id = "amount2" name="amount"  />
                                                     <span class="error" style="color: Red; display: none">Please input digits up to two decimal places</span>
                                                 </div>
                                                 <div class="field-box">
@@ -159,7 +158,7 @@
                                                 </div>
                                                 <div class="field-box">
                                                     <label>Pick a date and time:</label>
-                                                    <input style="background-color: white !important;cursor:auto !important;" type="text" id="datePicker2" value="" class="editDate" readonly/>
+                                                    <input style="background-color: white !important;cursor:auto !important;" type="text" id="datePicker2" value="" class="edit-record-datepicker" readonly/>
                                                 </div>
                                                 <div class="field-box">
                                                     <label>Description:</label>
@@ -175,7 +174,6 @@
                                 </div>
                             </div>
                         </div>
--->
                         <div id="deleteRecord" class="modal hide fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -302,7 +300,7 @@
                             content+="<td><span>"+msg.recordList[i].category+"</span></td>";
                             content+="<td class='description'><p>"+msg.recordList[i].desc+"</p></td>";
                             content+="<td><ul class='actions'>";
-                            //content+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
+                            content+="<li><a href='#editRecord' title ='Edit' class='editRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-edit'><i class='table-edit'></i></a></li>";
                             content+="<li class='last'><a href='#deleteRecord' title='delete' class='deleteRecordButton' data-toggle='modal' id='"+msg.recordList[i].recordId+"-delete'><i class='table-delete'></i></a></li>";
                             
                             tempContent+="<tr class='first'>";
@@ -416,7 +414,7 @@
                                 })
                             })
                         })
-                        /*
+                        
                         //edit record
                         $('.editRecordButton').click(function(){
                             var temp = $(this).attr('id').split('-');
@@ -427,40 +425,45 @@
                                     console.log(msg.recordList[i].amount);
                                     if(msg.recordList[i].amount >= 0){
                                         $('.editAmount').val(msg.recordList[i].amount);
-                                        //$('#my-checkbox2').bootstrapSwitch('on');
+                                        if (!$('#my-checkbox2').bootstrapSwitch('state'))
+                                            $('#my-checkbox2').bootstrapSwitch('toggleState');
                                     }else{
                                         $('.editAmount').val(0-msg.recordList[i].amount);
-                                        $('#my-checkbox2').bootstrapSwitch('toggleState');
+                                        if ($('#my-checkbox2').bootstrapSwitch('state'))
+                                            $('#my-checkbox2').bootstrapSwitch('toggleState');
                                     }
-                                    $('.editDate').val(msg.recordList[i].dateTime);
+                                    $('select.edit-record-category>option[value=' + msg.recordList[i].category + ']').attr("selected", "selected");
+                                    $('.edit-record-datepicker').val(msg.recordList[i].dateTime);
                                     $('.editDesc').val(msg.recordList[i].desc);
                                     break;
                                 }
                             }
                             $('#editRecordConfirm').click(function(){
-                                var valueEdit
-                                $('#my-checkbox2').on('switchChange.bootstrapSwitch',function(event, state){
-                                    valueEdit = state;
-                                }) 
-                                $('.edit-record-submit').click(function(){
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "record/new",
-                                        data: {amount: valueEdit?$('.add-amount').val():0-$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), dateTime: $('.add-record-datepicker').val()},
-                                        dataType: "json",
-                                        success:function(msg){
-                                            console.log(msg.error);
-                                            if(msg.error){
-                                                alert("error");
-                                            }else{
-                                                location.reload();
-                                            }
+                                console.log('clicked')
+                                var valueEdit = $('#my-checkbox2').bootstrapSwitch('state')
+                                $.ajax({
+                                    type: "PUT",
+                                    url: "/record",
+                                    data: {
+                                        recordId: rec,
+                                        amount: valueEdit?$('.editAmount').val():0-$('.editAmount').val(),
+                                        category: $('select.edit-record-category').val(),
+                                        desc: $('.editDesc').val(),
+                                        dateTime: $('.edit-record-datepicker').val()
+                                    },
+                                    dataType: "json",
+                                    success:function(msg){
+                                        console.log(msg.error);
+                                        if(msg.error){
+                                            alert("error");
+                                        }else{
+                                            location.reload();
                                         }
-                                    })
+                                    }
                                 })
                             })
                         })
-                        */
+                        
                         
                     }
                     

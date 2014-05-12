@@ -22,7 +22,7 @@ exports.info = function(req, res) {
 
 exports.update = function(req, res) {
 	// update profile information
-	db.updateUserInfo(req.cookies.user, validator.striptags(req.body.username), req.body.dob, validator.striptags(req.body.gender), function(ret) {
+	db.updateUserInfo(req.cookies.user, validator.striptags(req.body.username), validator.striptags(req.body.dob), validator.striptags(req.body.gender), function(ret) {
 		if (ret == "success") {
 			res.redirect('/')
 		}

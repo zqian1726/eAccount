@@ -532,8 +532,7 @@ exports.deleteRecord = function(email,recordId,amount,callback){
 					callback(err);
 				}else{
 					amount=0-amount;
-					updateBalance(email,amount,function(result){});
-					callback("success");
+					updateBalance(email,amount, callback);
 				}
 		});
 		

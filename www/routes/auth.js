@@ -50,7 +50,7 @@ exports.signup = function(req, res, next) {
 	validator.availableEmail(req.body.email, function(flag) {
 		if (flag) {
 			// register
-			db.registerUser(req.body.email, validator.striptags(req.body.username), sha1(req.body.password), req.body.dob, validator.striptags(req.body.gender), function(ret) {
+			db.registerUser(req.body.email, validator.striptags(req.body.username), sha1(req.body.password), validator.striptags(req.body.dob), validator.striptags(req.body.gender), function(ret) {
 				if (ret == "success") {
 					// succeed
 					res.cookie('user', req.body.email, { maxAge: default_cookie_time })
@@ -89,7 +89,7 @@ exports.google = function(req, res) {
 	validator.availableEmail(email, function(flag) {
 		// new user: sign up
 		if (flag) {
-			db.registerUser(email, validator.striptags(req.body.username), password, req.body.dob, validator.striptags(req.body.gender), function(ret) {
+			db.registerUser(email, validator.striptags(req.body.username), password, validator.striptags(req.body.dob), validator.striptags(req.body.gender), function(ret) {
 				if (ret == "success") {
 					// succeed
 					res.cookie('user', email, { maxAge: default_cookie_time })
