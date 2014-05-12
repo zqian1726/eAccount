@@ -233,7 +233,7 @@
                     alert.push([msg.lineList.length, msg.line])
                     lineSettings.xaxis.ticks = label
                     $.plot($("#statsChart"),
-                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Expense"}],
                         lineSettings
                     );
                 }
@@ -256,7 +256,7 @@
                     alert.push([msg.lineList.length, msg.line])
                     lineSettings.xaxis.ticks = label
                     $.plot($("#statsChartMonth"),
-                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Expense"}],
                         lineSettings
                     );
                 }
@@ -279,7 +279,7 @@
                     alert.push([msg.lineList.length, msg.line])
                     lineSettings.xaxis.ticks = label
                     $.plot($("#statsChartYear"),
-                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Expense"}],
                         lineSettings
                     );
                 }

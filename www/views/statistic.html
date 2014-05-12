@@ -32,7 +32,7 @@
                 <div class="row-fluid section">
                     <h4 class="title">Monthly Category View</h4>
                     <div class="span6 chart">
-                        <h5>Alter and Expense</h5>
+                        <h5>Budget and Expense</h5>
                         <div id="hero-bar" style="height: 250px;"></div>
                     </div>
                     <div class="span5 chart">
@@ -98,7 +98,7 @@
                         data: msg.barList,
                         xkey: 'category',
                         ykeys: ['line', 'amount'],
-                        labels: ['Lines', 'Amount'],
+                        labels: ['Budget', 'Amount'],
                         barRatio: 0.4,
                         xLabelMargin: 10,
                         hideHover: 'auto',
@@ -194,7 +194,7 @@
                     alert.push([msg.lineList.length, msg.line])
                     lineSettings.xaxis.ticks = label
                     $.plot($("#statsChart"),
-                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Expense"}],
                         lineSettings
                     );
                 }
@@ -217,7 +217,7 @@
                     alert.push([msg.lineList.length, msg.line])
                     lineSettings.xaxis.ticks = label
                     $.plot($("#statsChartMonth"),
-                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Expense"}],
                         lineSettings
                     );
                 }
@@ -240,7 +240,7 @@
                     alert.push([msg.lineList.length, msg.line])
                     lineSettings.xaxis.ticks = label
                     $.plot($("#statsChartYear"),
-                        [ { data: alert, label: "Budget"}, { data: value, label: "Cost"}],
+                        [ { data: alert, label: "Budget"}, { data: value, label: "Expense"}],
                         lineSettings
                     );
                 }

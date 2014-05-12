@@ -373,10 +373,19 @@
                         }) 
                         
                         $('.add-record-submit').click(function(){
+                            var now = new Date(), month = now.getMonth() + 1, day = now.getDate(), hour = now.getHours(), minute = now.getMinutes();
+                            var date = now.getFullYear() + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day) + ' ' + (hour < 10 ? '0' + hour : hour) + ':' + (minute < 10 ? '0' + minute : minute);
+                            console.log(date)
+                            date = $('.add-record-datepicker').val() != '' ? $('.add-record-datepicker').val() : date;
                             $.ajax({
                                 type: "POST",
                                 url: "record/new",
-                                data: {amount: valueAdd?$('.add-amount').val():0-$('.add-amount').val(), category: $('select.add-record-category').val(), desc: $('.add-record-desc').val(), dateTime: $('.add-record-datepicker').val()},
+                                data: {
+                                    amount: valueAdd?$('.add-amount').val():0-$('.add-amount').val(),
+                                    category: $('select.add-record-category').val(),
+                                    desc: $('.add-record-desc').val(),
+                                    dateTime: date
+                                },
                                 dataType: "json",
                                 success:function(msg){
                                     if(msg.error){
